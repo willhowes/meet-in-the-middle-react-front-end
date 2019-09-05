@@ -122,6 +122,7 @@ class LocationFinder extends React.Component {
         </form>
         <input
           onClick={this.props.addMidlMarker}
+          id="find_midl"
           className="myButton"
           type="submit"
           value="Find Midl"
