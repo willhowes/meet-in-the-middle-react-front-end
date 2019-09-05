@@ -2,6 +2,10 @@
   "name": "meet-in-the-middle-react-front-end",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "6.9.0",
+    "node": "10.16.0"
+  },
   "dependencies": {
     "cypress": "^3.4.1",
     "google-maps-react": "^2.0.2",
