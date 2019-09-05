@@ -87,7 +87,7 @@ class LocationFinder extends React.Component {
         >
           <input
             id="address_text_box1"
-            class="address_text_box1"
+            className="address_text_box1"
             className="address_text_box"
             type="text"
             placeholder={"Where are you?"}
