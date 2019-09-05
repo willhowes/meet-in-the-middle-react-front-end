@@ -9,6 +9,11 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
+it('tests the middle point constructor is working', () => {
+  const middlePoint = new MiddlePoint();
+  expect(middlePoint.props)
+})
+
 // it('returns the middle location', () => {
 //     const markers = [{
 //     name: "test",
@@ -21,3 +26,18 @@ it('renders without crashing', () => {
 //   const value = MidlLocation.midlLocation();
 //   expect(value).toBe(1)
 // });
+
+class MidlLocation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ""
+    };
+    this.midlLocation = this.midlLocation.bind(this);
+  }
+
+  midlLocation() {
+    if (this.props.markers[2]) {
+      return `lat: ${this.props.markers[2].position.lat}, lng: ${this.props.markers[2].position.lng}`;
+    }
+  }
