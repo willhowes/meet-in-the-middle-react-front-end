@@ -25,7 +25,6 @@ class App extends React.Component {
     this.findYMidl = this.findYMidl.bind(this);
     this.midlLocation = this.midlLocation.bind(this);
     this.getPlaces = this.getPlaces.bind(this);
-    this.setAsyncState = this.setAsyncState.bind(this);
   }
 
   updateMarkers(position, index) {
@@ -70,9 +69,6 @@ class App extends React.Component {
       });
     }
   }
-
-  setAsyncState = (newState) =>
-    new Promise((resolve) => this.setState(newState, () => resolve()));
 
   addMidlMarker() {
     let newMarker = {
