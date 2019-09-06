@@ -1,14 +1,15 @@
 import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
-import axios from 'axios';
+import axios from "axios";
 import MidlPlaces from "./MidlPlaces";
 
 class MidlLocation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ""
+      value: "",
+      midlPlacesLng:
     };
     this.midlLocation = this.midlLocation.bind(this);
   }
@@ -19,13 +20,21 @@ class MidlLocation extends React.Component {
     }
   }
 
-  midlPlaces() {
+  midlPlacesLat() {
     if (this.props.markers[2]) {
-      return `${this.props.markers[2].position.lat}, ${this.props.markers[2].position.lng}`;
+      return `${this.props.markers[2].position.lat}`;
+    }
+  }
+
+  midlPlacesLng() {
+    if (this.props.markers[2]) {
+      return `${this.props.markers[2].position.lng}`;
     }
   }
 
   render() {
+    console.log(this.midlPlacesLat());
+    console.log(this.midlPlacesLng());
     return (
       <div style={{ margin: 10 }}>
         <p
@@ -33,8 +42,11 @@ class MidlLocation extends React.Component {
         >
           Your Midl point is: {this.midlLocation()}
         </p>
-        <div><MidlPlaces
-              places={this.midlPlaces}/>
+        <div>
+          <MidlPlaces
+            midlPlacesLat={this.midlPlacesLat()}
+            midlPlacesLng={this.midlPlacesLng()}
+          />
         </div>
       </div>
     );

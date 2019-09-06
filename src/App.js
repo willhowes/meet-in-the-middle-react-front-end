@@ -12,7 +12,8 @@ class App extends React.Component {
       value: "",
       mapCenterLat: 51.517432,
       mapCenterLng: -0.073262,
-      markers: []
+      markers: [],
+      midlMarker: [{ marker }]
     };
     this.updateMarkers = this.updateMarkers.bind(this);
     this.updateMarkersSearch = this.updateMarkersSearch.bind(this);
