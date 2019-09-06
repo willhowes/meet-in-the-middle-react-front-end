@@ -1,13 +1,12 @@
 language: node_js
 node_js:
-- "stable"
+  - "stable"
 cache:
-- bundler
-services:
-- postgresql
+  directories:
+    - node_modules
 before_script:
-- bundle exec rake db:create
-- bundle exec rake db:migrate
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
 deploy:
   provider: heroku
   api_key:
