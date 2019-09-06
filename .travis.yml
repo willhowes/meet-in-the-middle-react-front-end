@@ -1,18 +1,9 @@
 language: node_js
-node_js:
-  - "stable"
+node_js: node
 cache:
   directories:
-    - node_modules
-script:
-  - npm test
-  - npm run build
+  - node_modules
 deploy:
-  provider: heroku
-    skip_cleanup: true
-  api_key:
-    secure: QC3nReQKJofTH307OHFGP74yiezbY6LzgHU3VynpP2X77TMIWLsFUD0ZCS2x2wP74gRl6RdAfE7e2NCZT3i7VeB5A4SxjGhSL1HCdW/Oq5hC0qeueMCD5+jhS4Ph3NWFmBEQhgh1B/sk26gA/mlLAhzatmBzXovjdCogOVQIAv7zcwIm1mcwRYmWCphASDQbnzX5TcQ4a17P0plJtBxI9gVXxcKfXZ84kIB0xEp756x+F4g8Y6Com4YT3BamVICELe7v089lN3/2gSEJ12OMuvmLoxhWnAH76j8sU06S4tAWlDXwCgd0wi5XPeTJCgZ3Cva7Gt9KEMr0GUNi4rdYjfKU/Ms+qFsq9MdFBWs9bVvW6rChcjPAz+IUGDZfUjYYiizamS1Cp7sN7tvq74/yBXVEUZHHJWfH5FFTM1mHFiHEiFaVC1JgzNo7tGv9Mp7dbjxtWEpSY6yMgx2FQt4DYZZgvxpEB7RLTnX9tMORH89RIfdmUKXofyuxK4NSg7hpkb8z8t8SF2TzuTtJH18SiZhWWG6hwo7CYYX5/ltQI5EePfYfw5DPJOyfdRGIcCH/ORKP6KKqrHYpiyj4N33CuzmxLW5DMUwOZXDy88/ss/ic6l/1mRSDtpcOLI8o5YtNzLE+wx+B299ANjOPOPLGnyfCkbWBOMeMSMXz9KDQ+nM=
   app: meet-in-the-middle-frontend
-  local_dir: build
-  on:
-    branch: master
+  api_key:
+    secure: Q2lG3YQteH++JAGKyp7bQYTEPUrUtVgFc9ueR5RLkyn5uI7J317+Dmk5bGQykLIgtSix+smkubBp7RFMnZO2kt+uxq5QmyQ/zuzBaI0N4RjneLiRkJrgujuu/ByJNLbzwQaXumM3Lm0OeoJeoDSli4Rtg0m0wn8md4E2ZfbCAYDnYO/D+hk2AyZ5w5m6wXJnRilmlAcLakeXtEzzIFwHiHXGnqtsYMdsYRgUOSGP7eyll3mFBCxe4tJ1sU5Kd9aKKIdG1QaiLfG71b+DsDqutR173n/aKJ4MPhyWajr3ikrygU+gEA3SW36gzS5LxL06obmJqZmAu/1OiCRsHAw35jGWStjvRmc/i3S5XQ/w0suAg2WW2zV9EIOmC14rsfX/CAv54MDya1GuKRlquI4kKnjM//zpp4ysQKwGJ0P/Lz4m4ngJf5+B8T9YwwXxeNrROb/MWtEdcXTXTyyyfa0mFRMA8IJZW4/QkGYBBBe4/lcOgQT95E/eAXp1kqIIPimvcx8INdilp6tdB3I1ppNtfhOmxZ3OxYxuLSTNRwn+vCoZeP58GvGbjbO19XZ/vCwG73H1D7WikIVohxbm+iT4bA8jXEvAE0xPxt4lP23SwTMkZ+E6FLpOYlYD6ETAnRf3/QggqkW9zjrW305Y6ao310Qj0vJQDLiH63mgOPvsQWE=
