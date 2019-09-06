@@ -4,6 +4,7 @@ cache:
   directories:
   - node_modules
 deploy:
+  provider: heroku
   app: meet-in-the-middle-frontend
   api_key:
     secure: Q2lG3YQteH++JAGKyp7bQYTEPUrUtVgFc9ueR5RLkyn5uI7J317+Dmk5bGQykLIgtSix+smkubBp7RFMnZO2kt+uxq5QmyQ/zuzBaI0N4RjneLiRkJrgujuu/ByJNLbzwQaXumM3Lm0OeoJeoDSli4Rtg0m0wn8md4E2ZfbCAYDnYO/D+hk2AyZ5w5m6wXJnRilmlAcLakeXtEzzIFwHiHXGnqtsYMdsYRgUOSGP7eyll3mFBCxe4tJ1sU5Kd9aKKIdG1QaiLfG71b+DsDqutR173n/aKJ4MPhyWajr3ikrygU+gEA3SW36gzS5LxL06obmJqZmAu/1OiCRsHAw35jGWStjvRmc/i3S5XQ/w0suAg2WW2zV9EIOmC14rsfX/CAv54MDya1GuKRlquI4kKnjM//zpp4ysQKwGJ0P/Lz4m4ngJf5+B8T9YwwXxeNrROb/MWtEdcXTXTyyyfa0mFRMA8IJZW4/QkGYBBBe4/lcOgQT95E/eAXp1kqIIPimvcx8INdilp6tdB3I1ppNtfhOmxZ3OxYxuLSTNRwn+vCoZeP58GvGbjbO19XZ/vCwG73H1D7WikIVohxbm+iT4bA8jXEvAE0xPxt4lP23SwTMkZ+E6FLpOYlYD6ETAnRf3/QggqkW9zjrW305Y6ao310Qj0vJQDLiH63mgOPvsQWE=
