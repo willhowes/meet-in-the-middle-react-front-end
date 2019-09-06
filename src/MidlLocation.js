@@ -1,6 +1,8 @@
 import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import GooglePlacesSuggest from "react-google-places-suggest";
 
 class MidlLocation extends React.Component {
   constructor(props) {
@@ -25,6 +27,24 @@ class MidlLocation extends React.Component {
         >
           Your Midl point is: {this.midlLocation()}
         </p>
+        <div>
+          <Map
+            params={{
+              key: "AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY",
+              libraries: "places,geocode"
+            }}
+            render={googleMaps =>
+              googleMaps && (
+                <GooglePlacesSuggest
+                  googleMaps={googleMaps}
+                  autocompletionRequest={{
+                    input: this.midlLocation()
+                  }}
+                ></GooglePlacesSuggest>
+              )
+            }
+          />
+        </div>
       </div>
     );
   }

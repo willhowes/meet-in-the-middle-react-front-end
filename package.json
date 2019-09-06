@@ -12,6 +12,7 @@
     "google-maps-react": "^2.0.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-google-places-suggest": "^3.8.0",
     "react-load-script": "0.0.6",
     "react-scripts": "3.1.1"
   },
@@ -40,14 +41,14 @@
     "babel-plugin-transform-es2015-modules-amd": "^6.24.1"
   },
   "babel": {
-      "presets": [
-          [
-            "env",
-            {
-              "modules": false
-            }
-          ],
-          "react"
-      ]
+    "presets": [
+      [
+        "env",
+        {
+          "modules": false
+        }
+      ],
+      "react"
+    ]
   }
 }
