@@ -19,10 +19,11 @@ class NavBar extends React.Component {
 
   _onButtonClick(e) {
     e.preventDefault();
-    this.setState({
-      showComponent: true,
-    });
+    this.setState(state => ({
+      showComponent: !state.showComponent
+    }));
   }
+
 
   // handleSubmit(query, event) {
   // }
