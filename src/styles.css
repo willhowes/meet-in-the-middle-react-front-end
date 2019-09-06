@@ -10,6 +10,13 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.NavBarContainer {
+  margin: 4px !important;
+  top: 0px;
+  position: fixed;
+  right: 5px;
+}
+
 .midlLocationContainer {
   display: block;
   padding: 0px;
@@ -81,4 +88,8 @@
 .myButton:active {
   position: relative;
   top: 1px;
+}
+
+.mapContainer {
+  margin-top: 50px;
 }

@@ -40,14 +40,14 @@
     "babel-plugin-transform-es2015-modules-amd": "^6.24.1"
   },
   "babel": {
-      "presets": [
-          [
-            "env",
-            {
-              "modules": false
-            }
-          ],
-          "react"
-      ]
+    "presets": [
+      [
+        "env",
+        {
+          "modules": false
+        }
+      ],
+      "react"
+    ]
   }
 }

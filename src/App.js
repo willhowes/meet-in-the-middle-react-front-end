@@ -4,6 +4,7 @@ import LocationFinder from "./LocationFinder";
 import PropTypes from "prop-types";
 import "./styles.css";
 import MidlLocation from "./MidlLocation";
+import NavBar from "./NavBar";
 
 class App extends React.Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class App extends React.Component {
         <div className="midlLocationContainer">
           <MidlLocation markers={this.state.markers} />
         </div>
-        <div>
+        <div className="mapContainer">
           <MapContainer
             updateMarkers={this.updateMarkers}
             mapCenterLat={this.state.mapCenterLat}
@@ -86,6 +87,11 @@ class App extends React.Component {
             markers={this.state.markers}
           />
         </div>
+        <div className="NavBarContainer">
+          <NavBar
+          />
+        </div>
+
       </div>
     );
   }
