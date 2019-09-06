@@ -92,7 +92,7 @@ class LocationForm extends React.Component {
           }}
         >
           <input
-            id="address_text_box1"
+            id={`address_text_box${this.props.formNum + 1}`}
             className="address_text_box"
             type="text"
             placeholder={this.props.placeholder}

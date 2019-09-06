@@ -12,6 +12,7 @@ class MidlLocation extends React.Component {
     return (
       <div style={{ margin: 10 }}>
         <p
+          id="MidlLocation"
           style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
         >
           Your Midl point is: {this.props.midlLocation}
