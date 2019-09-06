@@ -1,6 +1,5 @@
-/*global google*/
 import React from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import "./styles.css";
 
 const google = (window.google = window.google ? window.google : {});

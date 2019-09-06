@@ -1,5 +1,3 @@
-/*global google*/
-
 import React from "react";
 import "./styles.css";
 import LocationForm from "./LocationForm.js"
@@ -52,6 +50,13 @@ class LocationFinder extends React.Component {
           className="myButton"
           type="submit"
           value="Add Location"
+        />
+        <input
+          onClick={this.props.reset}
+          id="add_location"
+          className="myButton"
+          type="submit"
+          value="Reset"
         />
       </div>
     );

@@ -1,15 +1,9 @@
 import React from "react";
-import Script from "react-load-script";
-import PropTypes from "prop-types";
-import axios from "axios";
 import MidlPlaces from "./MidlPlaces";
 
 class MidlLocation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: ""
-    };
   }
 
   render() {

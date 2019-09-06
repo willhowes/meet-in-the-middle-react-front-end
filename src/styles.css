@@ -29,6 +29,7 @@
 }
 
 .myButton {
+  margin-right: 3px;
   -moz-box-shadow: inset 0px 1px 0px 0px #dcecfb;
   -webkit-box-shadow: inset 0px 1px 0px 0px #dcecfb;
   box-shadow: inset 0px 1px 0px 0px #dcecfb;
