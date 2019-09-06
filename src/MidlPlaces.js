@@ -5,28 +5,38 @@ import MidlLocation from "./MidlLocation";
 class MidlPlaces extends React.Component {
   constructor() {
     super();
-    this.state = {
-      places: [],
-      midlLat: this.props.midlLat
-    };
+    this.state = { places: [] };
+    this.getPlaces = this.getPlaces.bind(this);
   }
 
-  componentDidMount() {
-    console.log("MidlPlacesCall");
-    console.log(this.props.midlPlacesLng);
-    axios
-      .get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.midlPlacesLat}, ${this.props.midlPlacesLng}&radius=500&type=restaurant&key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY`
-      )
+  getPlaces() {
+    console.log("Frothmaster");
+    console.log(this.props.midlMarker);
+    if (this.props.midlMarker[0] !== undefined) {
+      return axios
+        .get(
+          `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.midlMarker[0].position.lat}, ${this.props.midlMarker[0].position.lng}&radius=500&type=restaurant&key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY`
+        )
+        .then(res => this.setState({ places: [res.data.results] }));
+    }
+  }
 
-      .then(res => console.log(res.data));
-    // .then(res => this.setState({ places: res.data }))
-
-    // .then(res => console.log(this.state.places));
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      this.props.midlMarker !== nextProps.midlMarker ||
+      this.state.places !== nextState.places
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   render() {
-    return <div>Hello</div>;
+    this.getPlaces();
+    console.log("render Places");
+    console.log(this.state.places);
+    return <div>{`${this.state.places}`}</div>;
   }
 }
 

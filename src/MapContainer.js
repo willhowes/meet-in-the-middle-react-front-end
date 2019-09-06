@@ -1,6 +1,5 @@
 /*global google*/
 import React from "react";
-import PropTypes from "prop-types";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import "./styles.css";
 
@@ -13,10 +12,26 @@ export class MapContainer extends React.Component {
   }
 
   render() {
+
+    function placeMarker(marker, i){
+      return (
+        <Marker
+          key={i}
+          title={marker.name}
+          name={marker.name}
+          position={{
+            lat: marker.position.lat,
+            lng: marker.position.lng
+          }}
+        >
+        </Marker>
+      );
+    }
+    console.log(this.props.midlMarker)
     return (
       <div id="map">
         <Map
-          google={this.props.google}
+          google={google}
           zoom={18}
           initialCenter={{
             lat: this.props.mapCenterLat,
@@ -35,31 +50,8 @@ export class MapContainer extends React.Component {
             fullscreenControl: false
           }}
         >
-          {this.props.markers.map(
-            function(marker, i) {
-              return (
-                <Marker
-                  onClick={this.onMarkerClick}
-                  key={i}
-                  title={marker.name}
-                  name={marker.name}
-                  position={{
-                    lat: marker.position.lat,
-                    lng: marker.position.lng
-                  }}
-                >
-                  <InfoWindow visible={true} style={{ zIndex: "500" }}>
-                    <div>
-                      <p>
-                        Click on the map or drag the marker to select location
-                        where the incident occurred
-                      </p>
-                    </div>
-                  </InfoWindow>
-                </Marker>
-              );
-            }.bind(this)
-          )}
+          {this.props.markers.map(placeMarker)}
+          {this.props.midlMarker.map(placeMarker)}
         </Map>
       </div>
     );
