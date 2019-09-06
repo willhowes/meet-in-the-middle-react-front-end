@@ -1,4 +1,6 @@
-language: ruby
+language: node_js
+node_js:
+- "stable"
 cache:
 - bundler
 services:
