@@ -2,6 +2,7 @@ import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
 import axios from 'axios';
+import MidlPlaces from "./MidlPlaces";
 
 class MidlLocation extends React.Component {
   constructor(props) {
@@ -18,10 +19,10 @@ class MidlLocation extends React.Component {
     }
   }
 
-  componentDidMount() {
-    console.log("LOOK HERE")
-    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=51.516716, -0.072870&radius=1500&type=restaurant&key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY`)
-    .then(res => console.log(res.data))
+  midlPlaces() {
+    if (this.props.markers[2]) {
+      return `${this.props.markers[2].position.lat}, ${this.props.markers[2].position.lng}`;
+    }
   }
 
   render() {
@@ -32,6 +33,9 @@ class MidlLocation extends React.Component {
         >
           Your Midl point is: {this.midlLocation()}
         </p>
+        <div><MidlPlaces
+              places={this.midlPlaces}/>
+        </div>
       </div>
     );
   }
