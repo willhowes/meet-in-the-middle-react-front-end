@@ -11,17 +11,28 @@ class SignUp extends React.Component {
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // handleSubmit(query, event) {
-  // }
+  handleSignIn(query, event) {
+    event.preventDefault();
+    $.ajax({
+          type: 'POST',
+          url: 'https://meet-in-the-middle-backend-api.herokuapp.com/',
+          dataType: 'json',
+          data: {"user": {"name": "test data", "email": "test@email.com", "password": "123456", "password_confirmation": "123456"} },
+          success: function() {
+            return "working"
+       }
+     })
+  }
+
 
   render() {
     return (
       <div style={{ margin: 10 }}>
       <div className="signUpContainer">
         <form
-          // onSubmit={e => {
-          //   this.handleSubmit(query, e);
-          // }}
+          onSubmit={e => {
+            this.handleSubmit(query, e);
+          }}
         >
         <p
           style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
