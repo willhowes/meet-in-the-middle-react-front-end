@@ -27,7 +27,6 @@ export class MapContainer extends React.Component {
         </Marker>
       );
     }
-    console.log(this.props.midlMarker)
     return (
       <div id="map">
         <Map

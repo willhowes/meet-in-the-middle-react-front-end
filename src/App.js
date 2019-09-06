@@ -25,6 +25,7 @@ class App extends React.Component {
     this.findYMidl = this.findYMidl.bind(this);
     this.midlLocation = this.midlLocation.bind(this);
     this.getPlaces = this.getPlaces.bind(this);
+    this.setAsyncState = this.setAsyncState.bind(this);
   }
 
   updateMarkers(position, index) {
@@ -70,35 +71,34 @@ class App extends React.Component {
     }
   }
 
+  setAsyncState = (newState) =>
+    new Promise((resolve) => this.setState(newState, () => resolve()));
+
   addMidlMarker() {
-    (async () => new Promise(resolve => this.setState(state => {
-      let newMarker = {
-        name: "Midl",
-        position: {
-          lat: this.findXMidl(),
-          lng: this.findYMidl()
-        }
-      };
-      return {
-        value: "",
-        midlLocation: this.midlLocation(),
-        mapCenterLat: this.findXMidl(),
-        mapCenterLng: this.findYMidl(),
-        markers: this.state.markers,
-        midlMarker: [newMarker]
+    let newMarker = {
+      name: "Midl",
+      position: {
+        lat: this.findXMidl(),
+        lng: this.findYMidl()
       }
-    }), resolve)().then(() => { console.log('state:') })
+    };
+    this.setState((state) => ({
+      value: "",
+      midlLocation: this.midlLocation(),
+      mapCenterLat: this.findXMidl(),
+      mapCenterLng: this.findYMidl(),
+      markers: this.state.markers,
+      midlMarker: [newMarker],
+      places: []
+    }), (state) => this.getPlaces())
   }
 
   getPlaces() {
-    console.log("Frothmaster");
-    console.log(this.props.midlMarker);
     if (this.state.midlMarker[0] !== undefined) {
-      return axios 
-      .get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.midlMarker[0].position.lat}, ${this.state.midlMarker[0].position.lng}&radius=500&type=restaurant&key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY`
-      )
-      .then(res => this.setState({places: update(this.state.places, {$set: [res.data]})}));
+      fetch(
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.midlMarker[0].position.lat}, ${this.state.midlMarker[0].position.lng}&radius=500&type=restaurant&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4`)
+      .then(res => res.json())
+      .then(res => this.setState({places: res.results}))
     }
   }
 
