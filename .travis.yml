@@ -4,11 +4,15 @@ node_js:
 cache:
   directories:
     - node_modules
-before_script:
-  - bundle exec rake db:create
-  - bundle exec rake db:migrate
+script:
+  - npm test
+  - npm run build
 deploy:
   provider: heroku
+    skip_cleanup: true
   api_key:
     secure: QC3nReQKJofTH307OHFGP74yiezbY6LzgHU3VynpP2X77TMIWLsFUD0ZCS2x2wP74gRl6RdAfE7e2NCZT3i7VeB5A4SxjGhSL1HCdW/Oq5hC0qeueMCD5+jhS4Ph3NWFmBEQhgh1B/sk26gA/mlLAhzatmBzXovjdCogOVQIAv7zcwIm1mcwRYmWCphASDQbnzX5TcQ4a17P0plJtBxI9gVXxcKfXZ84kIB0xEp756x+F4g8Y6Com4YT3BamVICELe7v089lN3/2gSEJ12OMuvmLoxhWnAH76j8sU06S4tAWlDXwCgd0wi5XPeTJCgZ3Cva7Gt9KEMr0GUNi4rdYjfKU/Ms+qFsq9MdFBWs9bVvW6rChcjPAz+IUGDZfUjYYiizamS1Cp7sN7tvq74/yBXVEUZHHJWfH5FFTM1mHFiHEiFaVC1JgzNo7tGv9Mp7dbjxtWEpSY6yMgx2FQt4DYZZgvxpEB7RLTnX9tMORH89RIfdmUKXofyuxK4NSg7hpkb8z8t8SF2TzuTtJH18SiZhWWG6hwo7CYYX5/ltQI5EePfYfw5DPJOyfdRGIcCH/ORKP6KKqrHYpiyj4N33CuzmxLW5DMUwOZXDy88/ss/ic6l/1mRSDtpcOLI8o5YtNzLE+wx+B299ANjOPOPLGnyfCkbWBOMeMSMXz9KDQ+nM=
   app: meet-in-the-middle-frontend
+  local_dir: build
+  on:
+    branch: master
