@@ -107,10 +107,8 @@ class App extends React.Component {
             addSignUpForm={this.showSignUpForm}
           />
         </div>
-        <div className="signUpContainer">
-          <SignUp
-          />
-        </div>
+
+
 
       </div>
     );

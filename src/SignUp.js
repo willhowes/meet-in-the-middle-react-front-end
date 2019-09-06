@@ -8,15 +8,16 @@ class SignUp extends React.Component {
     super(props);
     this.state = {
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(query, event) {
-  }
+  // handleSubmit(query, event) {
+  // }
 
   render() {
     return (
       <div style={{ margin: 10 }}>
+      <div className="signUpContainer">
         <form
           // onSubmit={e => {
           //   this.handleSubmit(query, e);
@@ -72,7 +73,7 @@ class SignUp extends React.Component {
                 />
         </form>
       </div>
-
+      </div>
     );
   }
 }

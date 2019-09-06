@@ -4,18 +4,28 @@ import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
 import "./styles.css";
+import SignUp from "./SignUp";
+
 
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loggedIn: false,
+      showComponent: false,
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this._onButtonClick = this._onButtonClick.bind(this);
   }
 
-  handleSubmit(query, event) {
+  _onButtonClick(e) {
+    e.preventDefault();
+    this.setState({
+      showComponent: true,
+    });
   }
+
+  // handleSubmit(query, event) {
+  // }
 
   render() {
     return (
@@ -26,12 +36,16 @@ class NavBar extends React.Component {
           // }}
         >
         <input
-          onClick={this.props.addSignUpForm}
+          onClick={this._onButtonClick}
           id="sign_up_button"
           className="myButton"
           type="submit"
           value="Sign up"
         />
+        {this.state.showComponent ?
+          <SignUp /> :
+          null
+        }
         </form>
 
       </div>
