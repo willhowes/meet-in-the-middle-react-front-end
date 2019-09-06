@@ -8,11 +8,23 @@ describe("user can sign up", () => {
         "have.value",
         "Test User"
       );
-      cy.get('input[id="user_email"]')
-        .type("test@user.com")
-        .should(
-          "have.value",
-          "test@user.com"
-        );
+    cy.get('input[id="user_email"]')
+      .type("test@user.com")
+      .should(
+        "have.value",
+        "test@user.com"
+      );
+    cy.get('input[id="user_password"]')
+      .type("123456")
+      .should(
+        "have.value",
+        "123456"
+      );
+    cy.get('input[id="user_password_confirmation"]')
+      .type("123456")
+      .should(
+        "have.value",
+        "123456"
+      );
   });
 });

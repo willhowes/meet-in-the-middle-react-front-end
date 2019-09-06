@@ -44,8 +44,32 @@ class SignUp extends React.Component {
               id="user_email"
               type="text"
               placeholder={"Email address"}
-              value={this.state.address}
+              value={this.state.email}
             />
+            <p
+              style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
+            >
+            Password
+            </p>
+
+              <input
+                id="user_password"
+                type="password"
+                placeholder={"Password"}
+                value={this.state.password}
+              />
+              <p
+                style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
+              >
+              Confirm Password
+              </p>
+
+                <input
+                  id="user_password_confirmation"
+                  type="password"
+                  placeholder={"Confirm password"}
+                  value={this.state.passwordConfirmation}
+                />
         </form>
       </div>
 
