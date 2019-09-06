@@ -39,23 +39,15 @@ class App extends React.Component {
         };
         const markers = [...state.markers, newMarker];
         return {
-          value: "",
-          midlLocation: "",
           mapCenterLat: position.lat,
           mapCenterLng: position.lng,
-          markers,
-          midlMarker: [],
-          places: []
+          markers
         };
       });
     } else {
       this.setState({
-        mapCenterLat: update(this.state.mapCenterLat, {
-          $set: position.lat
-        }),
-        mapCenterLng: update(this.state.mapCenterLng, {
-          $set: position.lng
-        }),
+        mapCenterLat: position.lat,
+        mapCenterLng: position.lng,
         markers: update(this.state.markers, {
           [index]: {
             position: {
@@ -79,13 +71,10 @@ class App extends React.Component {
       }
     };
     this.setState((state) => ({
-      value: "",
       midlLocation: this.midlLocation(),
       mapCenterLat: this.findXMidl(),
       mapCenterLng: this.findYMidl(),
-      markers: this.state.markers,
       midlMarker: [newMarker],
-      places: []
     }), (state) => this.getPlaces())
   }
 
