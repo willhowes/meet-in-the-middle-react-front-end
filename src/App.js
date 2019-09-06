@@ -1,5 +1,6 @@
 import React from "react";
 import update from "immutability-helper";
+import axios from "axios";
 import MapContainer from "./MapContainer";
 import LocationFinder from "./LocationFinder";
 import MidlLocation from "./MidlLocation";
@@ -15,13 +16,15 @@ class App extends React.Component {
       mapCenterLat: 51.517432,
       mapCenterLng: -0.073262,
       markers: [],
-      midlMarker: []
+      midlMarker: [],
+      places: []
     };
     this.addMidlMarker = this.addMidlMarker.bind(this);
     this.updateMarkers = this.updateMarkers.bind(this);
     this.findXMidl = this.findXMidl.bind(this);
     this.findYMidl = this.findYMidl.bind(this);
     this.midlLocation = this.midlLocation.bind(this);
+    this.getPlaces = this.getPlaces.bind(this);
   }
 
   updateMarkers(position, index) {
@@ -41,7 +44,8 @@ class App extends React.Component {
           mapCenterLat: position.lat,
           mapCenterLng: position.lng,
           markers,
-          midlMarker: []
+          midlMarker: [],
+          places: []
         };
       });
     } else {
@@ -67,7 +71,7 @@ class App extends React.Component {
   }
 
   addMidlMarker() {
-    this.setState(state => {
+    (async () => new Promise(resolve => this.setState(state => {
       let newMarker = {
         name: "Midl",
         position: {
@@ -82,8 +86,20 @@ class App extends React.Component {
         mapCenterLng: this.findYMidl(),
         markers: this.state.markers,
         midlMarker: [newMarker]
-      };
-    });
+      }
+    }), resolve)().then(() => { console.log('state:') })
+  }
+
+  getPlaces() {
+    console.log("Frothmaster");
+    console.log(this.props.midlMarker);
+    if (this.state.midlMarker[0] !== undefined) {
+      return axios 
+      .get(
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.midlMarker[0].position.lat}, ${this.state.midlMarker[0].position.lng}&radius=500&type=restaurant&key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY`
+      )
+      .then(res => this.setState({places: update(this.state.places, {$set: [res.data]})}));
+    }
   }
 
   midlLocation() {
@@ -123,7 +139,7 @@ class App extends React.Component {
             <MidlLocation
               markers={this.state.markers}
               midlLocation={this.state.midlLocation}
-              midlMarker={this.state.midlMarker}
+              places={this.state.places}
             />{" "}
           </div>{" "}
         </div>{" "}

@@ -3,12 +3,10 @@ import axios from "axios";
 import MidlLocation from "./MidlLocation";
 
 class MidlPlaces extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props.places)
-    this.state = { 
-      places: this.props.places
-    };
+  constructor() {
+    super();
+    this.state = { places: this.props.places };
+    this.getPlaces = this.getPlaces.bind(this);
   }
 
   // getPlaces() {
@@ -40,7 +38,7 @@ class MidlPlaces extends React.Component {
 
   render() {
     console.log("render Places");
-    console.log(this.props.places);
+    console.log(this.state.places);
     return <div>{`${this.state.places}`}</div>;
   }
 }

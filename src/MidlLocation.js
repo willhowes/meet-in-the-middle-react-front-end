@@ -13,7 +13,6 @@ class MidlLocation extends React.Component {
   }
 
   render() {
-    console.log(this.props.midlMarker);
     return (
       <div style={{ margin: 10 }}>
         <p
@@ -22,7 +21,7 @@ class MidlLocation extends React.Component {
           Your Midl point is: {this.props.midlLocation}
         </p>
         <div>
-          <MidlPlaces midlMarker={this.props.midlMarker} />
+          <MidlPlaces places={this.props.places} />
         </div>
       </div>
     );
