@@ -8,5 +8,11 @@ describe("user can sign up", () => {
         "have.value",
         "Test User"
       );
+      cy.get('input[id="user_email"]')
+        .type("test@user.com")
+        .should(
+          "have.value",
+          "test@user.com"
+        );
   });
 });

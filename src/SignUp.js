@@ -17,22 +17,35 @@ class SignUp extends React.Component {
   render() {
     return (
       <div style={{ margin: 10 }}>
-        <p
-          style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
-        >
-          Name
-        </p>
         <form
           // onSubmit={e => {
           //   this.handleSubmit(query, e);
           // }}
         >
+        <p
+          style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
+        >
+        Name
+        </p>
+
           <input
             id="user_name"
             type="text"
             placeholder={"Name"}
             value={this.state.name}
           />
+          <p
+            style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
+          >
+          Email
+          </p>
+
+            <input
+              id="user_email"
+              type="text"
+              placeholder={"Email address"}
+              value={this.state.address}
+            />
         </form>
       </div>
 
