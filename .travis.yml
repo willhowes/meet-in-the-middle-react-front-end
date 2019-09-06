@@ -7,6 +7,6 @@ deploy:
   provider: heroku
   api_key:
     secure: 2g2Drj6VQA6AfHLEBG6I3md1j1fbNZLe9NExEZPQg65iCLSA+6ZGBZFvk4h6KsDD8TvQ6lJ7YtADB+T8QUw2yqL5dOkm6CW8HYPggpVpplqnVyeuWGoONMSo3Ovw3A7NoFeX8RRyqeQZVxG4ChtatPLnY8yJgKcIOPjYYULuc32bjsRiZrdyYaezgXlKHggiI+rR+mbl0QqbEzU/aPKRU8Lm88cGWrXVV4gsMGkVRO7wtinviHErT48vJ5jRNpbNGEAOTDnq0FfCcsimiJwi1ZTdfrHYZ2bDjEkGKDM60kcDzzPoYSHg23qdPu2FSsbg3+4GA2/o7/Fi52lg0OBksismMSbSFPoV+NIm0hBIBLomC8vuhWJMSZOqfN+csUJexIRkuIUZdXRu0yizQ2Mz11Pmv8kv2Le+xYOllu8tsk0Ko9vA2+3rfEyUh1+xqEiIxfFag2K3WB3b0K3NhMMcZEFUKGwiv9+UMJAvNtk84RPfajVIfT+fXk8PI3u2TOxcA/inAEWVYrxR0ATSPeYWz1RM8M/dwX4V/6NwF8fOpweXw+Uhahg7xv1W64RVl5rPqZm9FwBZqOHwY5I3Wi+iI6F31k3mxsV/GMrNkUiZmp6pLzIotrTcjkRIQxGEbPe9SiR3DMsMlRMJrUL38/5Gr5MbrMEHPzo4RV30q27iCcY=
-  app: meet-in-the-middle-react-front-end
+  app: meet-in-the-middle-react-frontend
   on:
     repo: gennyallcroft/meet-in-the-middle-react-front-end
