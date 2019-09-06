@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import "./styles.css";
 import MidlLocation from "./MidlLocation";
 import NavBar from "./NavBar";
+import SignUp from "./SignUp";
 
 class App extends React.Component {
   constructor(props) {
@@ -67,6 +68,20 @@ class App extends React.Component {
     });
   }
 
+  showSignUpForm() {
+    this.setState(state => {
+      let newUser = {
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: ""
+      };
+      return {
+        newUser
+      };
+  });
+}
+
   render() {
     return (
       <div style={{ margin: "0px" }}>
@@ -89,6 +104,11 @@ class App extends React.Component {
         </div>
         <div className="NavBarContainer">
           <NavBar
+            addSignUpForm={this.showSignUpForm}
+          />
+        </div>
+        <div className="signUpContainer">
+          <SignUp
           />
         </div>
 

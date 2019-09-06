@@ -1,15 +1,12 @@
-/*global google*/
-
 import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
 import "./styles.css";
 
-class NavBar extends React.Component {
+class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -19,24 +16,28 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ margin: 10 }}>
+        <p
+          style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
+        >
+          Name
+        </p>
         <form
           // onSubmit={e => {
           //   this.handleSubmit(query, e);
           // }}
         >
-        <input
-          onClick={this.props.addSignUpForm}
-          id="sign_up_button"
-          className="myButton"
-          type="submit"
-          value="Sign up"
-        />
+          <input
+            id="user_name"
+            type="text"
+            placeholder={"Name"}
+            value={this.state.name}
+          />
         </form>
-
       </div>
+
     );
   }
 }
 
-export default NavBar;
+export default SignUp;
