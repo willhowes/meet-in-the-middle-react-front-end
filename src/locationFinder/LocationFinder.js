@@ -9,7 +9,7 @@ class LocationFinder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      locationForms: 1
+      locationForms: 2
     };
     this.addForm = this.addForm.bind(this);
   }

@@ -5,7 +5,7 @@ class MidlLocation extends React.Component {
 
   render() {
     return (
-      <div style={{margin: 10}}>
+      <div id='midlLocation' style={{margin: 10}}>
         <p className="greeting" >
           Your Midl point is: {this.props.midlLocation}
         </p>

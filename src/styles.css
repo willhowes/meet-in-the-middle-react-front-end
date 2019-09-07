@@ -39,8 +39,6 @@
 }
 
 .midlLocationContainer {
-  opacity: 1;
-  transition: opacity .25s ease-in-out;
   display: block;
   padding: 0px;
   background-color: #ebf2ff;
@@ -89,7 +87,7 @@
   font-family: Arial;
   font-size: 15px;
   font-weight: bold;
-  padding: 6px 24px;
+  padding: 6px 15px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #528ecc;
   margin-top: 5px;

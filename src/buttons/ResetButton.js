@@ -10,7 +10,7 @@ class ResetButton extends React.Component {
         id="add_location"
         className="myButton"
         type="submit"
-        value="RESET"
+        value="DO NOT USE"
       />
     );
   }

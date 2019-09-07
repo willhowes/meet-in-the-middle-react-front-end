@@ -146,7 +146,7 @@ class App extends React.Component {
             updateMarkers={this.updateMarkers}
             reset={this.reset}
           />
-          <div className="midlLocationContainer" style={this.getStyle()}>
+          <div className="midlLocationContainer" >
             <MidlLocation
               markers={this.state.markers}
               midlLocation={this.state.midlLocation}
