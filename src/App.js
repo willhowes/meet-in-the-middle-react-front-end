@@ -119,9 +119,9 @@ class App extends React.Component {
       {
         value: "",
         midlLocation: "",
+        markers: [],
         mapCenterLat: 51.517432,
         mapCenterLng: -0.073262,
-        markers: [],
         midlMarker: [],
         places: []
       }
