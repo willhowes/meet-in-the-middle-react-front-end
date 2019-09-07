@@ -3,6 +3,7 @@ import update from "immutability-helper";
 import MapContainer from "./mapContainer/MapContainer";
 import LocationFinder from "./locationFinder/LocationFinder";
 import MidlLocation from "./midlLocation/MidlLocation";
+import JourneyTime from "./JourneyTimes/JourneyTime";
 import "./styles.css";
 
 class App extends React.Component {
@@ -18,6 +19,7 @@ class App extends React.Component {
       places: []
     };
     this.addMidlMarker = this.addMidlMarker.bind(this);
+    this.addMidlMarkerJourneyTime = this.addMidlMarkerJourneyTime.bind(this);
     this.updateMarkers = this.updateMarkers.bind(this);
     this.findXMidl = this.findXMidl.bind(this);
     this.findYMidl = this.findYMidl.bind(this);
@@ -64,6 +66,15 @@ class App extends React.Component {
         }
       })
     });
+  }
+
+  addMidlMarkerJourneyTime(newMarker) {
+    this.setState(() => ({
+      midlLocation: this.midlLocation(),
+      mapCenterLat: this.findXMidl(),
+      mapCenterLng: this.findYMidl(),
+      midlMarker: [newMarker],
+    }), () => this.getPlaces())
   }
 
   addMidlMarker() {
@@ -139,6 +150,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <div className="journeyTime" >
+          <JourneyTime
+            markers={this.state.markers}
+            addMidlMarkerJourneyTime={this.addMidlMarkerJourneyTime}
+          />
+        </div>
         <div className="locationFormContainer">
           <LocationFinder
             markers={this.state.markers}
