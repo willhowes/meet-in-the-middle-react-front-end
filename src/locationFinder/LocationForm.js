@@ -1,8 +1,6 @@
-/*global google*/
-
 import React from "react";
 import Script from "react-load-script";
-import "./styles.css";
+import "../styles.css";
 
 const google = (window.google = window.google ? window.google : {});
 
@@ -42,7 +40,6 @@ class LocationForm extends React.Component {
     autocomplete.addListener("place_changed", () =>
       this._setAddress(autocomplete, event),
     );
-    this.nameInput.focus();
   }
 
   _setAddress(autocomplete, event) {
@@ -61,49 +58,36 @@ class LocationForm extends React.Component {
     let sw = new google.maps.LatLng(51.425564, -0.330801);
     let ne = new google.maps.LatLng(51.681786, 0.301162);
     let london = new google.maps.LatLngBounds(sw, ne);
-    var options = {
-      bounds: london
-    };
-    return options;
+    return { bounds: london };
   }
 
   handleKeyPress = (event) => {
     if(event.key === 'Enter'){
-      console.log('enter press here! ');
       this.handleSubmit(event)
     }
   }
 
   render() {
     return (
-      <div style={{ margin: 10 }}>
+      <div className="slider" style={{ margin: 10 }}>
         <Script
           url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY&libraries=places"
-          onLoad={this.handleScriptLoad}
         />
-        <p
-          style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
-        >
+        <p className="greeting" >
           {this.props.greeting}
         </p>
-        <form
-          onSubmit={e => {
-            this.handleSubmit(e);
-          }}
-        >
           <input
             id={`address_text_box${this.props.formNum + 1}`}
             className="address_text_box"
             type="text"
             placeholder={this.props.placeholder}
-            value={this.state.query1}
+            value={this.state.query}
             onChange={e => {
               this.loadAutocomplete(e);
             }}
             onKeyPress={this.handleKeyPress}
             ref={(input) => { this.nameInput = input; }}
           />
-        </form>
       </div>
     );
   }

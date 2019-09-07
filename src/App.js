@@ -1,8 +1,8 @@
 import React from "react";
-import update from 'immutability-helper';
-import MapContainer from "./MapContainer";
-import LocationFinder from "./LocationFinder";
-import MidlLocation from "./MidlLocation";
+import update from "immutability-helper";
+import MapContainer from "./mapContainer/MapContainer";
+import LocationFinder from "./locationFinder/LocationFinder";
+import MidlLocation from "./midlLocation/MidlLocation";
 import "./styles.css";
 
 class App extends React.Component {
@@ -10,80 +10,88 @@ class App extends React.Component {
     super(props);
     this.state = {
       value: "",
-      midlLocation: '',
+      midlLocation: "",
       mapCenterLat: 51.517432,
       mapCenterLng: -0.073262,
       markers: [],
-      midlMarker: []
+      midlMarker: [],
+      places: []
     };
     this.addMidlMarker = this.addMidlMarker.bind(this);
     this.updateMarkers = this.updateMarkers.bind(this);
     this.findXMidl = this.findXMidl.bind(this);
     this.findYMidl = this.findYMidl.bind(this);
     this.midlLocation = this.midlLocation.bind(this);
+    this.getPlaces = this.getPlaces.bind(this);
+    this.reset = this.reset.bind(this);
+    this.updateMarker = this.updateMarker.bind(this);
+    this.addMarker = this.addMarker.bind(this);
   }
-
 
   updateMarkers(position, index) {
     if (this.state.markers[index] === undefined) {
-      this.setState(state => {
-        let newMarker = {
-          name: `Location ${index + 1}`,
-          position: {
-            lat: position.lat,
-            lng: position.lng
-          }
-        };
-        const markers = [...state.markers, newMarker];
-        return {
-          value: "",
-          midlLocation: '',
-          mapCenterLat: position.lat,
-          mapCenterLng: position.lng,
-          markers,
-          midlMarker: []
-        };
-      });
+      this.addMarker(position, index)
     } else {
-      this.setState({
-        mapCenterLat: update(this.state.mapCenterLat, {
-          $set: position.lat
-        }),
-        mapCenterLng: update(this.state.mapCenterLng, {
-          $set: position.lng
-        }),
-        markers: update(this.state.markers, {
-          [index]: {
-            position: {
-              $set: {
-                lat: position.lat,
-                lng: position.lng
-              }
-            }
-          }
-        })
-      })
+      this.updateMarker(position, index)
     }
   }
 
-  addMidlMarker() {
+  addMarker(position, index) {
     this.setState(state => {
       let newMarker = {
-        name: "Midl",
+        name: `Location ${index + 1}`,
         position: {
-          lat: this.findXMidl(),
-          lng: this.findYMidl()
+          lat: position.lat,
+          lng: position.lng
         }
       };
+      const markers = [...state.markers, newMarker];
       return {
-        value: "",
-        midlLocation: this.midlLocation(),
-        mapCenterLat: this.findXMidl(),
-        mapCenterLng: this.findYMidl(),
-        markers: this.state.markers,
-        midlMarker: [newMarker]
+        mapCenterLat: position.lat,
+        mapCenterLng: position.lng,
+        markers
       };
     });
+  }
+
+  updateMarker(position, index) {
+    this.setState({
+      mapCenterLat: position.lat,
+      mapCenterLng: position.lng,
+      markers: update(this.state.markers, {
+        [index]: {position: {$set: {lat: position.lat, lng: position.lng}
+          }
+        }
+      })
+    });
+  }
+
+  addMidlMarker() {
+    let newMarker = {
+      name: "Midl",
+      position: {
+        lat: this.findXMidl(),
+        lng: this.findYMidl()
+      }
+    };
+    this.setState(() => ({
+      midlLocation: this.midlLocation(),
+      mapCenterLat: this.findXMidl(),
+      mapCenterLng: this.findYMidl(),
+      midlMarker: [newMarker],
+    }), () => this.getPlaces())
+  }
+
+  getPlaces() {
+    if (this.state.midlMarker[0] !== undefined) {
+      let url =
+        "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
+        `${this.state.midlMarker[0].position.lat}, ${this.state.midlMarker[0].position.lng}` +
+        "&radius=500&type=restaurant&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4"
+      fetch(url)
+      .then(res => res.json())
+      .then(res => this.setState({places: res.results}))
+    }
   }
 
   midlLocation() {
@@ -91,71 +99,70 @@ class App extends React.Component {
   }
 
   findXMidl() {
-    let xSum =
-      this.state.markers.reduce(function(total, marker) {
-        return marker.position.lat + total;
-      }, 0)
+    let xSum = this.state.markers.reduce(function(total, marker) {
+      return marker.position.lat + total;
+    }, 0);
     let x3 = xSum / this.state.markers.length;
     return x3;
   }
 
   findYMidl() {
-    let ySum =
-      this.state.markers.reduce(function(total, marker) {
-        return marker.position.lng + total;
-      }, 0)
+    let ySum = this.state.markers.reduce(function(total, marker) {
+      return marker.position.lng + total;
+    }, 0);
     let y3 = ySum / this.state.markers.length;
     return y3;
   }
 
+  reset() {
+    this.setState(
+      {
+        value: "",
+        midlLocation: "",
+        markers: [],
+        mapCenterLat: 51.517432,
+        mapCenterLng: -0.073262,
+        midlMarker: [],
+        places: []
+      }
+    )
+  }
+
+  getStyle() {
+    if (this.state.places[0] !== undefined) {
+      return { }
+    } else {
+      return { opacity: 0 }
+    }
+  }
+
   render() {
-    return ( <
-      div style = {
-        {
-          margin: "0px"
-        }
-      } >
-      <
-      div className = "locationFormContainer" >
-      <
-      LocationFinder markers = {
-        this.state.markers
-      }
-      addMidlMarker = {
-        this.addMidlMarker
-      }
-      updateMarkers = {
-        this.updateMarkers
-      }
-      /> <
-      div className = "midlLocationContainer" >
-      <
-      MidlLocation markers = {
-        this.state.markers
-      }
-      midlLocation = {
-        this.state.midlLocation
-      }
-      /> <
-      /div> <
-      /div> <
-      div >
-      <
-      MapContainer mapCenterLat = {
-        this.state.mapCenterLat
-      }
-      mapCenterLng = {
-        this.state.mapCenterLng
-      }
-      markers = {
-        this.state.markers
-      }
-      midlMarker = {
-        this.state.midlMarker
-      }
-      /> <
-      /div> <
-      /div>
+    return (
+      <div>
+        <div className="locationFormContainer">
+          <LocationFinder
+            markers={this.state.markers}
+            addMidlMarker={this.addMidlMarker}
+            updateMarkers={this.updateMarkers}
+            reset={this.reset}
+          />
+          <div className="midlLocationContainer" style={this.getStyle()}>
+            <MidlLocation
+              markers={this.state.markers}
+              midlLocation={this.state.midlLocation}
+              places={this.state.places}
+            />
+          </div>
+        </div>
+        <div>
+          <MapContainer
+            mapCenterLat={this.state.mapCenterLat}
+            mapCenterLng={this.state.mapCenterLng}
+            markers={this.state.markers}
+            midlMarker={this.state.midlMarker}
+          />
+        </div>
+      </div>
     );
   }
 }

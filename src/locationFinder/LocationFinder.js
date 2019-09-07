@@ -1,14 +1,15 @@
-/*global google*/
-
 import React from "react";
-import "./styles.css";
+import "../styles.css";
 import LocationForm from "./LocationForm.js"
+import FindMidlButton from "../buttons/FindMidlButton.js"
+import AddLocationButton from "../buttons/AddLocationButton.js"
+import ResetButton from "../buttons/ResetButton.js"
 
 class LocationFinder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      locationForms: 2
+      locationForms: 1
     };
     this.addForm = this.addForm.bind(this);
   }
@@ -39,20 +40,9 @@ class LocationFinder extends React.Component {
               />
           }
         }, this)}
-        <input
-          onClick={this.props.addMidlMarker}
-          id="find_midl"
-          className="myButton"
-          type="submit"
-          value="Find Midl"
-        />
-        <input
-          onClick={this.addForm}
-          id="add_location"
-          className="myButton"
-          type="submit"
-          value="Add Location"
-        />
+        <FindMidlButton onClick={this.props.addMidlMarker}/>
+        <AddLocationButton onClick={this.addForm}/>
+        <ResetButton onClick={this.props.reset}/>
       </div>
     );
   }

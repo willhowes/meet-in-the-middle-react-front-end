@@ -1,3 +1,31 @@
+.greeting {
+  margin-left: "10px";
+  font-family: "Verdana";
+  padding: "5px"
+}
+
+.slider {
+  animation: 0.5s ease-out 0s 1 opacity;
+}
+
+@keyframes slideDownFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .locationFormContainer {
   display: block;
   padding: 0px;
@@ -11,6 +39,8 @@
 }
 
 .midlLocationContainer {
+  opacity: 1;
+  transition: opacity .25s ease-in-out;
   display: block;
   padding: 0px;
   background-color: #ebf2ff;
@@ -26,9 +56,12 @@
   width: 350px;
   margin-right: 10px;
   border-radius: 10px;
+  outline:0
 }
 
 .myButton {
+  outline:0;
+  margin-right: 3px;
   -moz-box-shadow: inset 0px 1px 0px 0px #dcecfb;
   -webkit-box-shadow: inset 0px 1px 0px 0px #dcecfb;
   box-shadow: inset 0px 1px 0px 0px #dcecfb;
