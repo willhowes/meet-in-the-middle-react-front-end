@@ -29,7 +29,7 @@ class LogIn extends React.Component {
     })
     .catch(error => {
       console.log("nooo");
-        console.log(error.response)
+      console.log(error.response)
     });
   }
 
