@@ -130,9 +130,9 @@ class App extends React.Component {
 
   getStyle() {
     if (this.state.places[0] !== undefined) {
-      return { visibility: 'visible' }
+      return { }
     } else {
-      return { visibility: 'hidden' }
+      return { opacity: 0 }
     }
   }
 

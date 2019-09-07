@@ -17,6 +17,8 @@
 }
 
 .midlLocationContainer {
+  opacity: 1;
+  transition: opacity .25s ease-in-out;
   display: block;
   padding: 0px;
   background-color: #ebf2ff;
