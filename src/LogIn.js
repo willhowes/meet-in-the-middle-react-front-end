@@ -9,7 +9,6 @@ class LogIn extends React.Component {
     super(props);
     this.state =
     {
-		"name": "",
 		"email": "",
 		"password": "",
     };
@@ -22,16 +21,16 @@ class LogIn extends React.Component {
   }
 
   onSubmit(e) {
-    // e.preventDefault();
-    // axios.post('https://meet-in-the-middle-backend-api.herokuapp.com/users', { user: this.state })
-    // .then(response => {
-    //   console.log("THIS WORKS");
-    // 	console.log(response)
-    // })
-    // .catch(error => {
-    //   console.log("nooo");
-    //     console.log(error.response)
-    // });
+    e.preventDefault();
+    axios.post('https://meet-in-the-middle-backend-api.herokuapp.com/sessions', { session: this.state })
+    .then(response => {
+      console.log("THIS WORKS");
+    	console.log(response)
+    })
+    .catch(error => {
+      console.log("nooo");
+        console.log(error.response)
+    });
   }
 
 
