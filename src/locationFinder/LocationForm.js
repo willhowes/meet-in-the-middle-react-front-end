@@ -1,6 +1,6 @@
 import React from "react";
 import Script from "react-load-script";
-import "./styles.css";
+import "../styles.css";
 
 const google = (window.google = window.google ? window.google : {});
 
@@ -73,13 +73,11 @@ class LocationForm extends React.Component {
         <Script
           url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY&libraries=places"
         />
-        <p
-          style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
-        >
+        <p className="greeting" >
           {this.props.greeting}
         </p>
           <input
-            id="address_text_box1"
+            id={`address_text_box${this.props.formNum}`}
             className="address_text_box"
             type="text"
             placeholder={this.props.placeholder}

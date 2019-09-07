@@ -1,3 +1,9 @@
+.greeting {
+  margin-left: "10px";
+  font-family: "Verdana";
+  padding: "5px"
+}
+
 .locationFormContainer {
   display: block;
   padding: 0px;
@@ -26,9 +32,11 @@
   width: 350px;
   margin-right: 10px;
   border-radius: 10px;
+  outline:0
 }
 
 .myButton {
+  outline:0;
   margin-right: 3px;
   -moz-box-shadow: inset 0px 1px 0px 0px #dcecfb;
   -webkit-box-shadow: inset 0px 1px 0px 0px #dcecfb;

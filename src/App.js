@@ -1,8 +1,8 @@
 import React from "react";
 import update from "immutability-helper";
-import MapContainer from "./MapContainer";
-import LocationFinder from "./LocationFinder";
-import MidlLocation from "./MidlLocation";
+import MapContainer from "./mapContainer/MapContainer";
+import LocationFinder from "./locationFinder/LocationFinder";
+import MidlLocation from "./midlLocation/MidlLocation";
 import "./styles.css";
 
 class App extends React.Component {
@@ -128,6 +128,14 @@ class App extends React.Component {
     )
   }
 
+  getStyle() {
+    if (this.state.places[0] !== undefined) {
+      return { visibility: 'visible' }
+    } else {
+      return { visibility: 'hidden' }
+    }
+  }
+
   render() {
     return (
       <div>
@@ -138,7 +146,7 @@ class App extends React.Component {
             updateMarkers={this.updateMarkers}
             reset={this.reset}
           />
-          <div className="midlLocationContainer">
+          <div className="midlLocationContainer" style={this.getStyle()}>
             <MidlLocation
               markers={this.state.markers}
               midlLocation={this.state.midlLocation}

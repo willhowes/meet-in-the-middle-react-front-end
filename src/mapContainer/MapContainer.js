@@ -1,6 +1,6 @@
 import React from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
-import "./styles.css";
+import "../styles.css";
 
 const google = (window.google = window.google ? window.google : {});
 
@@ -8,24 +8,26 @@ export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.placeMarker = this.placeMarker.bind(this)
+  }
+
+  placeMarker(marker, i) {
+    return (
+      <Marker
+        key={i}
+        title={marker.name}
+        name={marker.name}
+        position={{
+          lat: marker.position.lat,
+          lng: marker.position.lng
+        }}
+      >
+      </Marker>
+    );
   }
 
   render() {
 
-    function placeMarker(marker, i){
-      return (
-        <Marker
-          key={i}
-          title={marker.name}
-          name={marker.name}
-          position={{
-            lat: marker.position.lat,
-            lng: marker.position.lng
-          }}
-        >
-        </Marker>
-      );
-    }
     return (
       <div id="map">
         <Map
@@ -48,8 +50,8 @@ export class MapContainer extends React.Component {
             fullscreenControl: false
           }}
         >
-          {this.props.markers.map(placeMarker)}
-          {this.props.midlMarker.map(placeMarker)}
+          {this.props.markers.map(this.placeMarker)}
+          {this.props.midlMarker.map(this.placeMarker)}
         </Map>
       </div>
     );
