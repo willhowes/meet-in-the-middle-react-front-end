@@ -7,11 +7,13 @@ import "./styles.css";
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: '',
-      email: '',
-      password: '',
-      passwordConfirmation: ''
+    this.state =
+    {
+		"name": "",
+		"email": "",
+		"password": "",
+		"passwordConfirmation": ""
+
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -23,11 +25,15 @@ class SignUp extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    axios.post('https://meet-in-the-middle-backend-api.herokuapp.com/', { user: this.state })
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-})
+    axios.post('https://meet-in-the-middle-backend-api.herokuapp.com/users', { user: this.state })
+    .then(response => {
+      console.log("yay");
+    	console.log(response)
+    })
+    .catch(error => {
+      console.log("nooo");
+        console.log(error.response)
+    });
   }
 
 
