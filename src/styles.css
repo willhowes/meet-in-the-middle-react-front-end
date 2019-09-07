@@ -4,6 +4,28 @@
   padding: "5px"
 }
 
+.slider {
+  animation: 0.5s ease-out 0s 1 opacity;
+}
+
+@keyframes slideDownFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .locationFormContainer {
   display: block;
   padding: 0px;

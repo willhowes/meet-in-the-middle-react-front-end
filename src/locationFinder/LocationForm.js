@@ -69,7 +69,7 @@ class LocationForm extends React.Component {
 
   render() {
     return (
-      <div style={{ margin: 10 }}>
+      <div className="slider" style={{ margin: 10 }}>
         <Script
           url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY&libraries=places"
         />
