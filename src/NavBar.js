@@ -36,10 +36,11 @@ class NavBar extends React.Component {
           //   this.handleSubmit(query, e);
           // }}
         >
+        <img className="logo" src="midl-logo.png" />
         <input
           onClick={this._onButtonClick}
           id="sign_up_button"
-          className="myButton"
+          className="navBarButton"
           type="submit"
           value="Sign up"
         />

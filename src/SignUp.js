@@ -38,49 +38,40 @@ class SignUp extends React.Component {
 
 
   render() {
-    return (
-      <div style={{ margin: 10 }}>
-      <div className="signUpContainer">
-        <form
-          onSubmit={e => {
-            this.onSubmit(e);
-          }}
-        >
-        <p
-          style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
-        >
-        Name
-        </p>
+  return (
+    <div className="signUpContainer">
+      <form
+        onSubmit={e => {
+          this.onSubmit(e);
+        }}
+      >
 
-          <input
+    <center> <div className="signUpForm">
+      <img className="formLogo" src="midl-logo.png" />
+        <div className="formHeading">
+          Create your meet in the midl account
+        </div>
+          <center><input
+            className="formFillIn"
             id="user_name"
             type="text"
             name="name"
             placeholder={"Name"}
             value={this.state.name}
             onChange={this.onChange}
-          />
-          <p
-            style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
-          >
-          Email
-          </p>
-
+          /></center>
             <input
+              className="formFillIn"
               id="user_email"
               type="text"
               placeholder={"Email address"}
               name="email"
               value={this.state.email}
               onChange={this.onChange}
-            />
-            <p
-              style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
-            >
-            Password
-            </p>
 
+            />
               <input
+                className="formFillIn"
                 id="user_password"
                 type="password"
                 placeholder={"Password"}
@@ -88,13 +79,8 @@ class SignUp extends React.Component {
                 value={this.state.password}
                 onChange={this.onChange}
               />
-              <p
-                style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}
-              >
-              Confirm Password
-              </p>
-
                 <input
+                  className="formFillIn"
                   id="user_password_confirmation"
                   type="password"
                   name="passwordConfirmation"
@@ -104,12 +90,12 @@ class SignUp extends React.Component {
                 />
               <input
                 id="sign_up_button"
-                className="myButton"
+                className="enterButton"
                 type="submit"
                 value="Sign up"
               />
+            </div> </center>
         </form>
-      </div>
       </div>
     );
   }
