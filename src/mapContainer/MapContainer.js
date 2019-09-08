@@ -13,7 +13,7 @@ export class MapContainer extends React.Component {
     this.getCenter = this.getCenter.bind(this)
   }
 
-  placeMarker(marker, i) {
+  placeMarker(marker, i = 0) {
     return (
       <Marker
         key={i}
@@ -33,12 +33,10 @@ export class MapContainer extends React.Component {
       var points = this.props.markers.map(function(marker, i){
         return { lat: marker.position.lat, lng: marker.position.lng}
       })
-
       var bounds = new this.props.google.maps.LatLngBounds();
         for (var i = 0; i < points.length; i++) {
           bounds.extend(points[i]);
         }
-
       return bounds
     }
   }
@@ -58,7 +56,6 @@ export class MapContainer extends React.Component {
   }
 
   render() {
-
     return (
       <div id="map">
         <Map

@@ -15,7 +15,13 @@ class App extends React.Component {
       mapCenterLat: 51.517432,
       mapCenterLng: -0.073262,
       markers: [],
-      midlMarker: [],
+      midlMarker: [{
+        name: "",
+        position: {
+          lat: '',
+          lng: ''
+        }
+      }],
       places: []
     };
     this.addMidlMarkerGeographic = this.addMidlMarkerGeographic.bind(this);
@@ -40,20 +46,21 @@ class App extends React.Component {
 
   addMarker(position, index) {
     this.setState(state => {
-      let newMarker = {
-        name: `Location ${index + 1}`,
-        position: {
-          lat: position.lat,
-          lng: position.lng
-        }
-      };
-      const markers = [...state.markers, newMarker];
+      const markers = [...state.markers, this._createMarker(position, `Location ${index + 1}`)];
       return {
         mapCenterLat: position.lat,
         mapCenterLng: position.lng,
         markers
       };
     });
+  }
+
+  _createMarker(position, name){
+    return { name: name,
+      position: {
+        lat: position.lat,
+        lng: position.lng
+      }}
   }
 
   updateMarker(position, index) {
@@ -78,18 +85,14 @@ class App extends React.Component {
   }
 
   addMidlMarkerGeographic() {
-    let newMarker = {
-      name: "Midl",
-      position: {
-        lat: this.findXMidl(),
-        lng: this.findYMidl()
-      }
-    };
     this.setState(() => ({
       midlLocation: this.midlLocation(),
       mapCenterLat: this.findXMidl(),
       mapCenterLng: this.findYMidl(),
-      midlMarker: [newMarker],
+      midlMarker: [this._createMarker({
+        lat: this.findXMidl(),
+        lng: this.findYMidl()
+      }, "Midl")],
     }), () => this.getPlaces())
   }
 
@@ -130,9 +133,9 @@ class App extends React.Component {
       {
         value: "",
         midlLocation: "",
-        markers: [],
         mapCenterLat: 51.517432,
         mapCenterLng: -0.073262,
+        markers: [],
         midlMarker: [],
         places: []
       }
@@ -154,6 +157,7 @@ class App extends React.Component {
           <JourneyTime
             markers={this.state.markers}
             addMidlMarkerJourneyTime={this.addMidlMarkerJourneyTime}
+            midlMarker={this.state.midlMarker}
           />
         </div>
         <div className="locationFormContainer">

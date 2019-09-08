@@ -11,13 +11,7 @@ class JourneyTime extends React.Component {
       request: false,
       journeyTimeA: '',
       journeyTimeB: '',
-      midlMarker: {
-        name: "",
-        position: {
-          lat: '',
-          lng: ''
-        }
-      }
+      midlMarker: this.props.midlMarker
     };
     this.requestRouteMidl = this.requestRouteMidl.bind(this);
     this.requestBody = this.requestBody.bind(this);
@@ -26,21 +20,16 @@ class JourneyTime extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if (prevProps.markers.length > 1 && !this.state.request) {
-      requestRouteMidl(coords)
+    if (this.props.markers.length > 1 && !this.state.request) {
+      this.requestRouteMidl()
     }
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    // console.log(this.state.midlMarker)
-    // console.log(nextState.midlMarker)
-    // console.log(this.props.markers)
-    // console.log(nextProps.markers)
-    // console.log(nextState.route.length)
-    // console.log(this.state.route.length)
-    // console.log(this.state.journeyTimeA)
-    // console.log(nextState.journeyTimeA)
-    if (this.state.midlMarker.position.lat !== nextState.midlMarker.position.lat || this.props.markers !== nextProps.markers || nextState.route.length !== this.state.route.length || this.state.journeyTimeA !== nextState.journeyTimeA ) {
+    if (this.state.midlMarker[0].position.lat !== nextState.midlMarker[0].position.lat
+      || this.props.markers !== nextProps.markers
+      || nextState.route.length !== this.state.route.length
+      || this.state.journeyTimeA !== nextState.journeyTimeA ) {
       return true
     } else {
       return false
@@ -84,7 +73,8 @@ class JourneyTime extends React.Component {
     })
   }
 
-  middleOfRoute(callback) {
+  middleOfRoute() {
+    // checks to see if
     if (this.state.request) {
       let halfWay = this.state.route.travel_time / 2
       let halfWaySet = this.state.route.travel_time / 2
@@ -94,54 +84,69 @@ class JourneyTime extends React.Component {
       let travelTimeBeginningOfHalfWay = 0
       let travelTimeEndOfHalfWay = 0
       let journeySplitRatio = 0
+      // Iterates through journey to find middle point by travel time
       journey.forEach(function(segment, i){
+        // checks to see if middle point reached
         if (halfWay <= 0 && middleRoute.length === 0) {
+          // Picks the previous segment as the middle route
           middleRoute = journey[i-1]
+          // Sets the travel time for the end of previous segment
           travelTimeEndOfHalfWay = timeSoFar
+          // Set the travel time for the beginning of previous segment
           travelTimeBeginningOfHalfWay = travelTimeEndOfHalfWay - journey[i-1].travel_time
+          // Calculates the ratio of middle distance within the segment
           journeySplitRatio = (halfWaySet - travelTimeBeginningOfHalfWay) / (travelTimeEndOfHalfWay - travelTimeBeginningOfHalfWay)
         } else {
-          halfWay = halfWay - segment.travel_time
+          // removes segment time from half the total travel time until it reaches 0
+          halfWay -= segment.travel_time
+          // calculates the travel time so far
           timeSoFar += segment.travel_time
         }
       })
-      let midlMarker = {}
-      let index = Math.round( (middleRoute.coords.length - 1) * journeySplitRatio )
-      if (journeySplitRatio < 0.5) {
-        midlMarker = {
-          name: "Midl",
-          position: {
-            lat: middleRoute.coords[index === 0 ? 1 : index - 1].lat,
-            lng: middleRoute.coords[index === 0 ? 1 : index - 1].lng
-          }
-        };
-        this.setState({
-          journeyTimeA: travelTimeBeginningOfHalfWay + (journeySplitRatio * middleRoute.travel_time),
-          journeyTimeB: (this.state.route.travel_time - travelTimeEndOfHalfWay) + ((1 - journeySplitRatio) * middleRoute.travel_time)
-        })
-      } else {
-        midlMarker = {
-          name: "Midl",
-          position: {
-            lat: middleRoute.coords[index === (middleRoute.coords.length - 1) ? index - 1 : index ].lat,
-            lng: middleRoute.coords[index].lng
-          }
-        };
-        this.setState({
-          journeyTimeA: travelTimeBeginningOfHalfWay + (journeySplitRatio * middleRoute.travel_time),
-          journeyTimeB: (this.state.route.travel_time - travelTimeEndOfHalfWay) + ((1 - journeySplitRatio) * middleRoute.travel_time)
-        })
-      }
-      this.props.addMidlMarkerJourneyTime(midlMarker)
-      this.setState({midlMarker: midlMarker})
-      return callback
+      // creates a Midl Marker at the nearest stop in the middle segment
+      this.props.addMidlMarkerJourneyTime(this._setMidlMarker(journeySplitRatio, middleRoute))
+      // sets journey times from each direction towards the Midl Marker (not very accurate!)
+      this.setState(this._journeySet())
     } else {
       return null
     }
   }
 
-  requestRouteMidl(coords) {
-    console.log('ROUTE REQUEST')
+  _setMidlMarker(journeySplitRatio, middleRoute){
+    // roughly works out at which stop in the middle segment to set the middle marker
+    let index = Math.round( (middleRoute.coords.length - 1) * journeySplitRatio )
+    // rules out edge cases
+    if (journeySplitRatio < 0.5) {
+      index = index === 0 ? 1 : index - 1
+    } else {
+      index = (middleRoute.coords.length - 1) ? index - 1 : index
+    }
+    // returns new middle marker at correct coordinate 
+    return this._createMarker(
+        "Midl",
+        middleRoute.coords[index].lat,
+        middleRoute.coords[index].lng
+    )
+  }
+
+  _createMarker(name, lat, lng){
+    return {
+      name: name,
+      position: {
+        lat: lat,
+        lng: lng
+      }
+    };
+  }
+
+  _journeySet(){
+    return {
+      journeyTimeA: this.state.route.travel_time / 2,
+      journeyTimeB: this.state.route.travel_time / 2
+    }
+  }
+
+  requestRouteMidl() {
     fetch('http://api.traveltimeapp.com/v4/routes', {
       method: 'POST',
       headers: {
@@ -158,6 +163,7 @@ class JourneyTime extends React.Component {
       })),
     }).then(json => json.json())
     .then(response => this.setState({ route: response.results[0].locations[0].properties[0], request: true }))
+    .then(test => this.middleOfRoute())
   }
 
   renderJourneyTime() {
@@ -175,7 +181,7 @@ class JourneyTime extends React.Component {
 
   render() {
     return (
-      this.middleOfRoute(this.renderJourneyTime())
+      this.renderJourneyTime()
     );
   }
 }
