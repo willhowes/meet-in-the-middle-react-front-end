@@ -42,7 +42,6 @@ class LocationFinder extends React.Component {
         }, this)}
         <FindMidlButton onClick={this.props.addMidlMarker}/>
         <AddLocationButton onClick={this.addForm}/>
-        <ResetButton onClick={this.props.reset}/>
       </div>
     );
   }

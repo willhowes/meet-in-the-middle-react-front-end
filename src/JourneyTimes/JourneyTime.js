@@ -1,4 +1,5 @@
 import React from "react";
+import JourneyTimes from './JourneyTimes'
 import "../styles.css";
 
 class JourneyTime extends React.Component {
@@ -7,23 +8,40 @@ class JourneyTime extends React.Component {
     this.state = {
       markers: this.props.markers,
       route: '',
-      request: false
+      request: false,
+      journeyTimeA: '',
+      journeyTimeB: '',
+      midlMarker: {
+        name: "",
+        position: {
+          lat: '',
+          lng: ''
+        }
+      }
     };
-    this.requestRoute = this.requestRoute.bind(this);
+    this.requestRouteMidl = this.requestRouteMidl.bind(this);
     this.requestBody = this.requestBody.bind(this);
     this.renderJourneyTime = this.renderJourneyTime.bind(this);
     this.middleOfRoute = this.middleOfRoute.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if (this.props.markers !== nextProps.markers || nextState.route.length !== this.state.route.length) {
+    console.log(this.state.midlMarker)
+    console.log(nextState.midlMarker)
+    console.log(this.props.markers)
+    console.log(nextProps.markers)
+    console.log(nextState.route.length)
+    console.log(this.state.route.length)
+    console.log(this.state.journeyTimeA)
+    console.log(nextState.journeyTimeA)
+    if (this.state.midlMarker.position.lat !== nextState.midlMarker.position.lat || this.props.markers !== nextProps.markers || nextState.route.length !== this.state.route.length || this.state.journeyTimeA !== nextState.journeyTimeA ) {
       return true
     } else {
       return false
     }
   }
 
-  requestBody(){
+  requestBody(coords){
     let now = new Date()
     let formatted_date = now.toISOString()
     return ({
@@ -31,15 +49,15 @@ class JourneyTime extends React.Component {
         {
           "id": "Marker 1",
           "coords": {
-            "lat": this.props.markers[0].position.lat,
-            "lng": this.props.markers[0].position.lng
+            "lat": coords.lat1,
+            "lng": coords.lng1
           }
         },
         {
           "id": "Marker 2",
           "coords": {
-            "lat": this.props.markers[1].position.lat,
-            "lng": this.props.markers[1].position.lng
+            "lat": coords.lat2,
+            "lng": coords.lng2
           }
         }
       ],
@@ -60,49 +78,79 @@ class JourneyTime extends React.Component {
     })
   }
 
-  middleOfRoute() {
-    let halfWay = this.state.route.travel_time / 2
-    let halfWaySet = this.state.route.travel_time / 2
-    let journey = this.state.route.route.parts
-    let middleRoute = []
-    let timeSoFar = 0
-    let travelTimeBeginningOfHalfWay = 0
-    let travelTimeEndOfHalfWay = 0
-    let journeySplitRatio = 0
-    journey.forEach(function(segment, i){
-      if (halfWay <= 0 && middleRoute.length === 0) {
-        middleRoute = journey[i-1]
-        travelTimeEndOfHalfWay = timeSoFar
-        travelTimeBeginningOfHalfWay = travelTimeEndOfHalfWay - journey[i-1].travel_time
-        journeySplitRatio = (halfWaySet - travelTimeBeginningOfHalfWay) / (travelTimeEndOfHalfWay - travelTimeBeginningOfHalfWay)
+  middleOfRoute(callback) {
+    if (this.state.request) {
+      let halfWay = this.state.route.travel_time / 2
+      let halfWaySet = this.state.route.travel_time / 2
+      let journey = this.state.route.route.parts
+      let middleRoute = []
+      let timeSoFar = 0
+      let travelTimeBeginningOfHalfWay = 0
+      let travelTimeEndOfHalfWay = 0
+      let journeySplitRatio = 0
+      journey.forEach(function(segment, i){
+        if (halfWay <= 0 && middleRoute.length === 0) {
+          middleRoute = journey[i-1]
+          travelTimeEndOfHalfWay = timeSoFar
+          travelTimeBeginningOfHalfWay = travelTimeEndOfHalfWay - journey[i-1].travel_time
+          journeySplitRatio = (halfWaySet - travelTimeBeginningOfHalfWay) / (travelTimeEndOfHalfWay - travelTimeBeginningOfHalfWay)
+        } else {
+          halfWay = halfWay - segment.travel_time
+          timeSoFar += segment.travel_time
+        }
+      })
+      let midlMarker = {}
+      let index = Math.round( (middleRoute.coords.length - 1) * journeySplitRatio )
+      if (journeySplitRatio < 0.5) {
+        midlMarker = {
+          name: "Midl",
+          position: {
+            lat: middleRoute.coords[index === 0 ? 1 : index - 1].lat,
+            lng: middleRoute.coords[index === 0 ? 1 : index - 1].lng
+          }
+        };
+        this.setState({
+          journeyTimeA: travelTimeBeginningOfHalfWay + (journeySplitRatio * middleRoute.travel_time),
+          journeyTimeB: (this.state.route.travel_time - travelTimeEndOfHalfWay) + ((1 - journeySplitRatio) * middleRoute.travel_time)
+        })
       } else {
-        halfWay = halfWay - segment.travel_time
-        timeSoFar += segment.travel_time
+        midlMarker = {
+          name: "Midl",
+          position: {
+            lat: middleRoute.coords[index === (middleRoute.coords.length - 1) ? index - 1 : index ].lat,
+            lng: middleRoute.coords[index].lng
+          }
+        };
+        this.setState({
+          journeyTimeA: travelTimeBeginningOfHalfWay + (journeySplitRatio * middleRoute.travel_time),
+          journeyTimeB: (this.state.route.travel_time - travelTimeEndOfHalfWay) + ((1 - journeySplitRatio) * middleRoute.travel_time)
+        })
       }
-    })
-    let xMore = (middleRoute.coords[0].lat - middleRoute.coords[middleRoute.coords.length-1].lat) * journeySplitRatio
-    let yMore = (middleRoute.coords[0].lng - middleRoute.coords[middleRoute.coords.length-1].lng) * journeySplitRatio
-    let midlMarker = {
-      name: "Midl",
-      position: {
-        lat: middleRoute.coords[0].lat - xMore,
-        lng: middleRoute.coords[0].lng - yMore
-      }
-    };
-    this.props.addMidlMarkerJourneyTime(midlMarker)
+      this.props.addMidlMarkerJourneyTime(midlMarker)
+      this.setState({midlMarker: midlMarker})
+      return callback
+    } else {
+      return null
+    }
   }
 
-  requestRoute() {
-    if (this.props.markers.length > 1) {
+  requestRouteMidl(coords) {
+    if (this.props.markers.length > 1 && !this.state.request) {
+      console.log('ROUTE REQUEST')
       fetch('http://api.traveltimeapp.com/v4/routes', {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'X-Application-Id': 'b573c4f9',
             'X-Api-Key': '5e65e4fca602a52427f48d2f235bf088',
           },
-        body: JSON.stringify(this.requestBody()), // body data type must match "Content-Type" header
+        body: JSON.stringify(this.requestBody({
+            lat1: this.props.markers[0].position.lat,
+            lng1: this.props.markers[0].position.lng,
+            lat2: this.props.markers[1].position.lat,
+            lng2: this.props.markers[1].position.lng
+        })),
       }).then(json => json.json())
       .then(response => this.setState({ route: response.results[0].locations[0].properties[0], request: true }))
     }
@@ -110,20 +158,11 @@ class JourneyTime extends React.Component {
 
   renderJourneyTime() {
     if (this.state.request) {
-      this.middleOfRoute()
-      function secondsToHms(d) {
-        d = Number(d);
-        var h = Math.floor(d / 3600);
-        var m = Math.floor(d % 3600 / 60);
-        var s = Math.floor(d % 3600 % 60);
-
-        var hDisplay = h > 0 ? h + (h === 1 ? " hour, " : " hours, ") : "";
-        var mDisplay = m > 0 ? m + (m === 1 ? " minute, " : " minutes, ") : "";
-        var sDisplay = s > 0 ? s + (s === 1 ? " second" : " seconds") : "";
-        return hDisplay + mDisplay + sDisplay;
-      }
       return (
-        <h2>Journey time: {secondsToHms(this.state.route.travel_time)}</h2>
+        <div>
+          <JourneyTimes num={"A"} journeyTime={this.state.journeyTimeA}/>
+          <JourneyTimes num={"B"} journeyTime={this.state.journeyTimeB}/>
+        </div>
       );
     } else {
       return null
@@ -131,9 +170,9 @@ class JourneyTime extends React.Component {
   }
 
   render() {
-    this.requestRoute()
+    this.requestRouteMidl()
     return (
-      this.renderJourneyTime()
+      this.middleOfRoute(this.renderJourneyTime())
     );
   }
 }
