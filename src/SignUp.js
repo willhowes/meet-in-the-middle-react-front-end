@@ -70,6 +70,7 @@ class SignUp extends React.Component {
               onChange={this.onChange}
 
             />
+              <div className="passwordInfo" > Password must be at least 6 letters </div>
               <input
                 className="formFillIn"
                 id="user_password"

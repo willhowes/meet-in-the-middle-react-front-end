@@ -15,6 +15,7 @@ class NavBar extends React.Component {
       showComponent: false,
     };
     this._onButtonClick = this._onButtonClick.bind(this);
+    this._hidePopUps = this._hidePopUps.bind(this);
   }
 
   _onButtonClick(e) {
@@ -23,6 +24,13 @@ class NavBar extends React.Component {
       showComponent: !state.showComponent
     }));
   }
+
+  _hidePopUps(e) {
+    e.preventDefault();
+    this.setState(state => ({showComponent: false}));
+  }
+
+
 
 
   // handleSubmit(query, event) {
@@ -36,7 +44,7 @@ class NavBar extends React.Component {
           //   this.handleSubmit(query, e);
           // }}
         >
-        <img className="logo" src="midl-logo.png" />
+        <img className="logo" src="midl-logo.png" onClick={this._hidePopUps} />
         <input
           onClick={this._onButtonClick}
           id="sign_up_button"

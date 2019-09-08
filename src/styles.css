@@ -73,12 +73,16 @@
 .formHeading {
   margin-top: 107px;
   font-size: 22px;
-  font-family: roboto;
   font-family: 'Roboto Condensed', sans-serif;
   position: absolute;
   top: -2px;
   right: 20px;
   left: 76px;
+}
+
+.passwordInfo {
+  font-size: 12px;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .midlLocationContainer {
