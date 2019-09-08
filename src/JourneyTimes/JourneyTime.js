@@ -8,7 +8,6 @@ class JourneyTime extends React.Component {
     this.state = {
       markers: this.props.markers,
       route: '',
-      request: false,
       journeyTimeA: '',
       journeyTimeB: '',
       midlMarker: this.props.midlMarker
@@ -20,7 +19,7 @@ class JourneyTime extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if (this.props.markers.length > 1 && !this.state.request) {
+    if (this.props.findMidl) {
       this.requestRouteMidl()
     }
   }
@@ -29,7 +28,9 @@ class JourneyTime extends React.Component {
     if (this.state.midlMarker[0].position.lat !== nextState.midlMarker[0].position.lat
       || this.props.markers !== nextProps.markers
       || nextState.route.length !== this.state.route.length
-      || this.state.journeyTimeA !== nextState.journeyTimeA ) {
+      || this.state.journeyTimeA !== nextState.journeyTimeA
+      || this.props.findMidl !== nextProps.findMidl
+    ) {
       return true
     } else {
       return false
@@ -74,8 +75,9 @@ class JourneyTime extends React.Component {
   }
 
   middleOfRoute() {
-    // checks to see if
-    if (this.state.request) {
+    // checks to see if middle marker has been requested
+    if (this.props.findMidl) {
+      // creates many many holding variables
       let halfWay = this.state.route.travel_time / 2
       let halfWaySet = this.state.route.travel_time / 2
       let journey = this.state.route.route.parts
@@ -84,9 +86,9 @@ class JourneyTime extends React.Component {
       let travelTimeBeginningOfHalfWay = 0
       let travelTimeEndOfHalfWay = 0
       let journeySplitRatio = 0
-      // Iterates through journey to find middle point by travel time
+      // Iterates through journey array to find middle point by travel time
       journey.forEach(function(segment, i){
-        // checks to see if middle point reached
+        // checks to see if middle point reached and returned
         if (halfWay <= 0 && middleRoute.length === 0) {
           // Picks the previous segment as the middle route
           middleRoute = journey[i-1]
@@ -121,7 +123,7 @@ class JourneyTime extends React.Component {
     } else {
       index = (middleRoute.coords.length - 1) ? index - 1 : index
     }
-    // returns new middle marker at correct coordinate 
+    // returns new middle marker at correct coordinate
     return this._createMarker(
         "Midl",
         middleRoute.coords[index].lat,
@@ -162,12 +164,12 @@ class JourneyTime extends React.Component {
           lng2: this.props.markers[1].position.lng
       })),
     }).then(json => json.json())
-    .then(response => this.setState({ route: response.results[0].locations[0].properties[0], request: true }))
+    .then(response => this.setState({ route: response.results[0].locations[0].properties[0] }))
     .then(test => this.middleOfRoute())
   }
 
   renderJourneyTime() {
-    if (this.state.request) {
+    if (this.props.findMidl) {
       return (
         <div>
           <JourneyTimes num={"A"} journeyTime={this.state.journeyTimeA}/>

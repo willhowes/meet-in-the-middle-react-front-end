@@ -22,7 +22,8 @@ class App extends React.Component {
           lng: ''
         }
       }],
-      places: []
+      places: [],
+      findMidl: false
     };
     this.addMidlMarkerGeographic = this.addMidlMarkerGeographic.bind(this);
     this.addMidlMarkerJourneyTime = this.addMidlMarkerJourneyTime.bind(this);
@@ -34,6 +35,7 @@ class App extends React.Component {
     this.reset = this.reset.bind(this);
     this.updateMarker = this.updateMarker.bind(this);
     this.addMarker = this.addMarker.bind(this);
+    this.requestMidleMarker = this.requestMidleMarker.bind(this);
   }
 
   updateMarkers(position, index) {
@@ -53,6 +55,12 @@ class App extends React.Component {
         markers
       };
     });
+  }
+
+  requestMidleMarker(){
+    this.setState({
+      findMidl: true
+    })
   }
 
   _createMarker(position, name){
@@ -137,7 +145,8 @@ class App extends React.Component {
         mapCenterLng: -0.073262,
         markers: [],
         midlMarker: [],
-        places: []
+        places: [],
+        findMidl: false
       }
     )
   }
@@ -158,12 +167,13 @@ class App extends React.Component {
             markers={this.state.markers}
             addMidlMarkerJourneyTime={this.addMidlMarkerJourneyTime}
             midlMarker={this.state.midlMarker}
+            findMidl={this.state.findMidl}
           />
         </div>
         <div className="locationFormContainer">
           <LocationFinder
             markers={this.state.markers}
-            addMidlMarker={this.addMidlMarkerGeographic}
+            addMidlMarker={this.requestMidleMarker}
             updateMarkers={this.updateMarkers}
             reset={this.reset}
           />
