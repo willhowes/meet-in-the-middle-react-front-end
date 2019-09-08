@@ -6,11 +6,7 @@ class JourneyTime extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      markers: this.props.markers,
       route: '',
-      journeyTimeA: '',
-      journeyTimeB: '',
-      midlMarker: this.props.midlMarker
     };
     this.requestRouteMidl = this.requestRouteMidl.bind(this);
     this.requestBody = this.requestBody.bind(this);
@@ -25,11 +21,8 @@ class JourneyTime extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if (this.state.midlMarker[0].position.lat !== nextState.midlMarker[0].position.lat
-      || this.props.markers !== nextProps.markers
-      || nextState.route.length !== this.state.route.length
-      || this.state.journeyTimeA !== nextState.journeyTimeA
-      || this.props.findMidl !== nextProps.findMidl
+    if (this.props.findMidl !== nextProps.findMidl
+    || nextProps.midlMarker[0].name !== this.props.midlMarker[0].name
     ) {
       return true
     } else {
@@ -108,7 +101,6 @@ class JourneyTime extends React.Component {
       // creates a Midl Marker at the nearest stop in the middle segment
       this.props.addMidlMarkerJourneyTime(this._setMidlMarker(journeySplitRatio, middleRoute))
       // sets journey times from each direction towards the Midl Marker (not very accurate!)
-      this.setState(this._journeySet())
     } else {
       return null
     }
@@ -141,13 +133,6 @@ class JourneyTime extends React.Component {
     };
   }
 
-  _journeySet(){
-    return {
-      journeyTimeA: this.state.route.travel_time / 2,
-      journeyTimeB: this.state.route.travel_time / 2
-    }
-  }
-
   requestRouteMidl() {
     fetch('http://api.traveltimeapp.com/v4/routes', {
       method: 'POST',
@@ -169,11 +154,19 @@ class JourneyTime extends React.Component {
   }
 
   renderJourneyTime() {
-    if (this.props.findMidl) {
+    if (this.props.midlMarker[0].name === 'Midl') {
       return (
         <div>
-          <JourneyTimes num={"A"} journeyTime={this.state.journeyTimeA}/>
-          <JourneyTimes num={"B"} journeyTime={this.state.journeyTimeB}/>
+          <JourneyTimes
+            marker={this.props.markers[0]}
+            midlMarker={this.props.midlMarker}
+            num={"A"}
+            />
+          <JourneyTimes
+            marker={this.props.markers[1]}
+            midlMarker={this.props.midlMarker}
+            num={"B"}
+            />
         </div>
       );
     } else {

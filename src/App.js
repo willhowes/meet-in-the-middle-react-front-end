@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       value: "",
-      midlLocation: "",
+      midlLocation: false,
       mapCenterLat: 51.517432,
       mapCenterLng: -0.073262,
       markers: [],
@@ -43,6 +43,16 @@ class App extends React.Component {
       this.addMarker(position, index)
     } else {
       this.updateMarker(position, index)
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if (this.state.markers !== nextState.markers ||
+      this.state.findMidl !== nextState.findMidl ||
+      this.state.midlMarker !== nextState.midlMarker) {
+      return true
+    } else {
+      return false
     }
   }
 
@@ -177,7 +187,7 @@ class App extends React.Component {
             updateMarkers={this.updateMarkers}
             reset={this.reset}
           />
-          <div className="midlLocationContainer" >
+          <div >
             <MidlLocation
               markers={this.state.markers}
               midlLocation={this.state.midlLocation}

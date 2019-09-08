@@ -5,7 +5,7 @@ class FindMidlButton extends React.Component {
 
   render() {
     return (
-      <input
+      <input style={{position:'relative', left:'100px'}}
         onClick={this.props.onClick}
         id="find_midl"
         className="myButton"

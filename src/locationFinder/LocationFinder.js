@@ -2,8 +2,6 @@ import React from "react";
 import "../styles.css";
 import LocationForm from "./LocationForm.js"
 import FindMidlButton from "../buttons/FindMidlButton.js"
-import AddLocationButton from "../buttons/AddLocationButton.js"
-import ResetButton from "../buttons/ResetButton.js"
 
 class LocationFinder extends React.Component {
   constructor(props) {
@@ -11,11 +9,10 @@ class LocationFinder extends React.Component {
     this.state = {
       locationForms: 2
     };
-    this.addForm = this.addForm.bind(this);
   }
 
-  addForm() {
-    this.setState({ locationForms: (this.state.locationForms + 1)})
+  shouldComponentUpdate(nextProps, nextState){
+    return false
   }
 
   render() {
@@ -27,7 +24,7 @@ class LocationFinder extends React.Component {
               key={i}
               formNum={i}
               placeholder={'Where are you?'}
-              greeting={'First Enter Your Location'}
+              greeting={'First enter your location'}
               updateMarkers={this.props.updateMarkers}
               />
           } else {
@@ -35,13 +32,12 @@ class LocationFinder extends React.Component {
               key={i}
               formNum={i}
               placeholder={'Enter another location'}
-              greeting={'Enter Another Location'}
+              greeting={'Then enter another location'}
               updateMarkers={this.props.updateMarkers}
               />
           }
         }, this)}
         <FindMidlButton onClick={this.props.addMidlMarker}/>
-        <AddLocationButton onClick={this.addForm}/>
       </div>
     );
   }

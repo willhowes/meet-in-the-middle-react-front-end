@@ -2,14 +2,38 @@ import React from "react";
 import MidlPlaces from "./MidlPlaces";
 
 class MidlLocation extends React.Component {
+  constructor(props) {
+    super(props)
+    this.style = this.style.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if (this.props.places !== nextProps.places) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  style(){
+    if (this.props.midlLocation) {
+      return {
+        visibility: "visible"
+      }
+    } else {
+      return {
+        visibility: "hidden"
+      }
+    }
+  }
 
   render() {
     return (
-      <div id='midlLocation' style={{margin: 10}}>
-        <p className="greeting" >
+      <div className="midlLocationContainer" id='midlLocation' style={this.style()}>
+        <p style={{ margin: '10px' }} className="greeting" >
           Your Midl point is: {this.props.midlLocation}
         </p>
-        <div style={{ overflowY: "scroll", maxHeight:"250px" }}>
+        <div style={{ margin: '10px', overflowY: "scroll", maxHeight:"250px" }}>
           <MidlPlaces places={this.props.places} />
         </div>
       </div>
