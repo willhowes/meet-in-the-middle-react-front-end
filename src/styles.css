@@ -44,10 +44,10 @@
   background-color: white;
   width: 500px;
   text-align: center;
-  height: 500px;
+  height: 647px;
   border: 3px solid;
   border-radius: 73px;
-  margin-top: 53px;
+  margin-top: 38px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -59,14 +59,14 @@
 }
 
 .formFillIn {
-  top: 0px;
+  top: 122px;
   position: relative;
   border-radius: 10px;
   height: 35px;
   font-size: 16px;
   font-family: 'Roboto Condensed', sans-serif;
   text-align: center;
-  margin: 18px auto;
+  margin: 11px auto;
   width: 80%;
 }
 
@@ -74,15 +74,55 @@
   margin-top: 107px;
   font-size: 22px;
   font-family: 'Roboto Condensed', sans-serif;
-  position: absolute;
-  top: -2px;
-  right: 20px;
-  left: 76px;
+  position: relative;
+  top: -58px;
+  left: -27px;
 }
+
+.signUpAvatar {
+  height: 130px;
+  margin: 10px;
+  position: absolute;
+  top: 138px;
+  left: 443px;
+}
+
+.selectAvatar {
+  position: relative;
+  top: 100px;
+  margin: 0 auto;
+  left: 94px;
+}
+
+.uploadAvatarButton {
+  top: 133px;
+  text-align: center;
+  height: 17px;
+  font-size: 12px;
+  width: 13%;
+  left: -119px;
+  border: 2px solid;
+  border-color: #f3cad0;
+  border-radius: 26px;
+  margin: 16px;
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: black;
+  color: #f3cad0;
+  position: relative;
+}
+
+
 
 .passwordInfo {
   font-size: 12px;
   font-family: 'Roboto Condensed', sans-serif;
+  position: relative;
+  top: 128px;
+  left: -116px;
+}
+
+.avatarInfo {
+
 }
 
 .midlLocationContainer {
@@ -108,6 +148,8 @@
   font-family: 'Roboto Condensed', sans-serif;
   background-color: black;
   color: #f3cad0;
+  position: relative;
+  top: 114px;
 }
 
 .address_text_box {

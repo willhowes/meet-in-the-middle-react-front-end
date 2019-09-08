@@ -2,41 +2,29 @@ import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
 import axios from "axios";
-import ImageUploader from 'react-images-upload';
 import "./styles.css";
 
-
-class SignUp extends React.Component {
+class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state =
     {
-    "avatar": "",
-		"name": "",
-		"email": "",
-		"password": "",
-		"passwordConfirmation": "",
-    "avatar": "default-image.jpeg"
-
+    isEditing: false,
+    user: this.props.user,
+		// "photo": "",
+    // "name": "",
+		// "email": "",
+		// "password": "",
     };
+
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onDrop = this.onDrop.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
   }
 
-  onDrop(picture) {
-        this.setState({
-            pictures: this.state.pictures.concat(picture),
-        });
-    }
-
-    fileChangedHandler = event => {
-  this.setState({ selectedFile: event.target.files[0] })
-}
-
-uploadHandler = () => {
-  console.log(this.state.selectedFile)
-}
+  toggleEdit() {
+    this.setState({isEditing: !this.state.isEditing})
+  }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -68,14 +56,38 @@ uploadHandler = () => {
     <center> <div className="signUpForm">
       <img className="formLogo" src="midl-logo.png" />
         <div className="formHeading">
-          Create your meet in the midl account
+          View and edit your account details
         </div>
-        <img className="signUpAvatar" src={this.state.avatar}/>
+
+        <div align="center">
+            <button
+              onClick={() => {
+                this.setState({ editing: true });
+              }}
+            >
+              Edit
+            </button>
+          </div>
+
+        <div className="formLabel">Name</div>
+        {this.state.editing ? (
+          <div className="userInfo">{this.state.name}</div>
+        ) : (
+          <input
+            type="text"
+            defaultValue={this.state.name}
+            className="formFillIn"
+            id="user_name"
+            type="text"
+            name="name"
+            onChange={this.onChange}
+          />
+        )}
 
 
 
-        <input className="selectAvatar" type="file" onChange={this.fileChangedHandler}/>
-        <input className="uploadAvatarButton" value="Upload" onClick={this.uploadHandler}/>
+
+
 
           <center><input
             className="formFillIn"
@@ -106,15 +118,7 @@ uploadHandler = () => {
                 value={this.state.password}
                 onChange={this.onChange}
               />
-                <input
-                  className="formFillIn"
-                  id="user_password_confirmation"
-                  type="password"
-                  name="passwordConfirmation"
-                  placeholder={"Confirm password"}
-                  value={this.state.passwordConfirmation}
-                  onChange={this.onChange}
-                />
+
               <input
                 id="sign_up_button"
                 className="enterButton"
@@ -128,4 +132,4 @@ uploadHandler = () => {
   }
 }
 
-export default SignUp;
+export default UserProfile;

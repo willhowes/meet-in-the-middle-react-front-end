@@ -5,6 +5,7 @@ import Script from "react-load-script";
 import PropTypes from "prop-types";
 import "./styles.css";
 import SignUp from "./SignUp";
+import UserProfile from "./UserProfile"
 
 
 class NavBar extends React.Component {
@@ -12,26 +13,33 @@ class NavBar extends React.Component {
     super(props);
     this.state = {
       loggedIn: false,
-      showComponent: false,
+      showUserProfile: false,
+      showSignUp: false,
     };
-    this._onButtonClick = this._onButtonClick.bind(this);
+    this._onProfileButtonClick = this._onProfileButtonClick.bind(this);
+    this._onSignUpButtonClick = this._onSignUpButtonClick.bind(this);
     this._hidePopUps = this._hidePopUps.bind(this);
   }
 
-  _onButtonClick(e) {
+  _onProfileButtonClick(e) {
     e.preventDefault();
     this.setState(state => ({
-      showComponent: !state.showComponent
+      showUserProfile: !state.showUserProfile
+    }));
+  }
+
+  _onSignUpButtonClick(e) {
+    e.preventDefault();
+    this.setState(state => ({
+      showSignUpForm: !state.showSignUpForm
     }));
   }
 
   _hidePopUps(e) {
     e.preventDefault();
-    this.setState(state => ({showComponent: false}));
+    this.setState(state => ({showSignUpForm: false}));
+    this.setState(state => ({showUserProfile: false}));
   }
-
-
-
 
   // handleSubmit(query, event) {
   // }
@@ -46,14 +54,26 @@ class NavBar extends React.Component {
         >
         <img className="logo" src="midl-logo.png" onClick={this._hidePopUps} />
         <input
-          onClick={this._onButtonClick}
+          onClick={this._onSignUpButtonClick}
           id="sign_up_button"
           className="navBarButton"
           type="submit"
           value="Sign up"
+          style={{right: "160px"}}
         />
-        {this.state.showComponent ?
+        {this.state.showSignUpForm ?
           <SignUp /> :
+          null
+        }
+        <input
+          onClick={this._onProfileButtonClick}
+          id="sign_up_button"
+          className="navBarButton"
+          type="submit"
+          value="Profile"
+        />
+        {this.state.showUserProfile ?
+          <UserProfile /> :
           null
         }
         </form>
