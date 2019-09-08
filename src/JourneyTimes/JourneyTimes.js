@@ -19,11 +19,13 @@ class JourneyTimes extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot){
-    this.getDirections()
+    if (prevProps.midlMarker !== this.props.midlMarker) {
+      this.getDirections()
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if (nextProps.midlMarker[0].name !== this.props.midlMarker[0].name
+    if (nextProps.midlMarker !== this.props.midlMarker
     || this.state.route !== nextState.route) {
       return true
     } else {
@@ -32,6 +34,7 @@ class JourneyTimes extends React.Component {
   }
 
   getUrl(){
+    console.log('fetch journey')
     let origin = "origin=" + this.props.marker.position.lat + ',' + this.props.marker.position.lng
     let destination = "&destination=" + this.props.midlMarker[0].position.lat + ',' + this.props.midlMarker[0].position.lng
     let key = "&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4"
@@ -61,6 +64,7 @@ class JourneyTimes extends React.Component {
   }
 
   render() {
+    console.log('render Journey Time')
     if (this.state.route !== false) {
       return <p style={{padding: 10}} >Journey time {this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}</p>
     } else {
