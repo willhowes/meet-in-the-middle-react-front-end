@@ -19,7 +19,7 @@ class MidlPlaces extends React.Component {
         return <div key={i}>
           <Card style={{ width: '18rem' }}>
             <Card.Body>
-              <Card.Title><Card.Link href="https://www.google.com">{place.name}</Card.Link></Card.Title>
+              <Card.Title><Card.Link href={`https://www.google.com/search?q=${place.reference}`}>{place.name}</Card.Link></Card.Title>
             </Card.Body>
             <ListGroup className="list-group-flush">
               <ListGroupItem>{place.rating} ★ ({place.user_ratings_total}) | {`${place.types[0]}, ${place.types[1]}, ${place.types[2]}`}</ListGroupItem>

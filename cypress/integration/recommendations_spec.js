@@ -13,4 +13,3 @@ describe("recommendations", () => {
       cy.get('input[id="find_midl"]').click;
   });
 });
-
