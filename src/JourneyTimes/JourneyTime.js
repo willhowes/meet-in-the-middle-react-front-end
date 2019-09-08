@@ -88,7 +88,7 @@ class JourneyTime extends React.Component {
       let journeySplitRatio = 0
       // Iterates through journey array to find middle point by travel time
       journey.forEach(function(segment, i){
-        // checks to see if middle point reached and returned
+        // checks to see if middle point reached and already returned
         if (halfWay <= 0 && middleRoute.length === 0) {
           // Picks the previous segment as the middle route
           middleRoute = journey[i-1]
