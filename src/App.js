@@ -35,7 +35,7 @@ class App extends React.Component {
     this.reset = this.reset.bind(this);
     this.updateMarker = this.updateMarker.bind(this);
     this.addMarker = this.addMarker.bind(this);
-    this.requestMidleMarker = this.requestMidleMarker.bind(this);
+    this.setMidlRequest = this.setMidlRequest.bind(this);
   }
 
   updateMarkers(position, index) {
@@ -49,7 +49,8 @@ class App extends React.Component {
   shouldComponentUpdate(nextProps, nextState){
     if (this.state.markers !== nextState.markers ||
       this.state.findMidl !== nextState.findMidl ||
-      this.state.midlMarker !== nextState.midlMarker) {
+      this.state.midlMarker !== nextState.midlMarker ||
+      this.state.places !== nextState.places) {
       return true
     } else {
       return false
@@ -67,10 +68,8 @@ class App extends React.Component {
     });
   }
 
-  requestMidleMarker(){
-    this.setState({
-      findMidl: true
-    })
+  setMidlRequest(bol){
+    this.setState({ findMidl: bol })
   }
 
   _createMarker(position, name){
@@ -123,6 +122,7 @@ class App extends React.Component {
       fetch(url)
       .then(res => res.json())
       .then(res => this.setState({places: res.results}))
+      .then(res => console.log(this.state.places))
     }
   }
 
@@ -178,12 +178,13 @@ class App extends React.Component {
             addMidlMarkerJourneyTime={this.addMidlMarkerJourneyTime}
             midlMarker={this.state.midlMarker}
             findMidl={this.state.findMidl}
+            setMidlRequest={this.setMidlRequest}
           />
         </div>
         <div className="locationFormContainer">
           <LocationFinder
             markers={this.state.markers}
-            addMidlMarker={this.requestMidleMarker}
+            addMidlMarker={this.setMidlRequest}
             updateMarkers={this.updateMarkers}
             reset={this.reset}
           />
@@ -192,6 +193,7 @@ class App extends React.Component {
               markers={this.state.markers}
               midlLocation={this.state.midlLocation}
               places={this.state.places}
+              setMidlRequest={this.setMidlRequest}
             />
           </div>
         </div>

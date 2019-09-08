@@ -18,6 +18,10 @@ class JourneyTimes extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot){
+    this.getDirections()
+  }
+
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps.midlMarker[0].name !== this.props.midlMarker[0].name
     || this.state.route !== nextState.route) {

@@ -8,6 +8,8 @@ class MidlLocation extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
+    console.log(this.props.places)
+    console.log(nextProps.places)
     if (this.props.places !== nextProps.places) {
       return true
     } else {
@@ -28,13 +30,14 @@ class MidlLocation extends React.Component {
   }
 
   render() {
+    console.log(this.props.places)
     return (
       <div className="midlLocationContainer" id='midlLocation' style={this.style()}>
         <p style={{ margin: '10px' }} className="greeting" >
           Your Midl point is: {this.props.midlLocation}
         </p>
         <div style={{ margin: '10px', overflowY: "scroll", maxHeight:"250px" }}>
-          <MidlPlaces places={this.props.places} />
+          <MidlPlaces setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
         </div>
       </div>
     );

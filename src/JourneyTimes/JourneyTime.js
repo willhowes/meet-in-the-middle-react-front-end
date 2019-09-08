@@ -158,11 +158,13 @@ class JourneyTime extends React.Component {
       return (
         <div>
           <JourneyTimes
+            setMidlRequest={this.props.setMidlRequest}
             marker={this.props.markers[0]}
             midlMarker={this.props.midlMarker}
             num={"A"}
             />
           <JourneyTimes
+            setMidlRequest={this.props.setMidlRequest}
             marker={this.props.markers[1]}
             midlMarker={this.props.midlMarker}
             num={"B"}
