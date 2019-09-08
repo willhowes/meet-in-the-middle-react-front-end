@@ -25,15 +25,21 @@ class JourneyTime extends React.Component {
     this.middleOfRoute = this.middleOfRoute.bind(this);
   }
 
+  componentDidUpdate(prevProps, prevState){
+    if (prevProps.markers.length > 1 && !this.state.request) {
+      requestRouteMidl(coords)
+    }
+  }
+
   shouldComponentUpdate(nextProps, nextState){
-    console.log(this.state.midlMarker)
-    console.log(nextState.midlMarker)
-    console.log(this.props.markers)
-    console.log(nextProps.markers)
-    console.log(nextState.route.length)
-    console.log(this.state.route.length)
-    console.log(this.state.journeyTimeA)
-    console.log(nextState.journeyTimeA)
+    // console.log(this.state.midlMarker)
+    // console.log(nextState.midlMarker)
+    // console.log(this.props.markers)
+    // console.log(nextProps.markers)
+    // console.log(nextState.route.length)
+    // console.log(this.state.route.length)
+    // console.log(this.state.journeyTimeA)
+    // console.log(nextState.journeyTimeA)
     if (this.state.midlMarker.position.lat !== nextState.midlMarker.position.lat || this.props.markers !== nextProps.markers || nextState.route.length !== this.state.route.length || this.state.journeyTimeA !== nextState.journeyTimeA ) {
       return true
     } else {
@@ -135,25 +141,23 @@ class JourneyTime extends React.Component {
   }
 
   requestRouteMidl(coords) {
-    if (this.props.markers.length > 1 && !this.state.request) {
-      console.log('ROUTE REQUEST')
-      fetch('http://api.traveltimeapp.com/v4/routes', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'X-Application-Id': 'b573c4f9',
-            'X-Api-Key': '5e65e4fca602a52427f48d2f235bf088',
-          },
-        body: JSON.stringify(this.requestBody({
-            lat1: this.props.markers[0].position.lat,
-            lng1: this.props.markers[0].position.lng,
-            lat2: this.props.markers[1].position.lat,
-            lng2: this.props.markers[1].position.lng
-        })),
-      }).then(json => json.json())
-      .then(response => this.setState({ route: response.results[0].locations[0].properties[0], request: true }))
-    }
+    console.log('ROUTE REQUEST')
+    fetch('http://api.traveltimeapp.com/v4/routes', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-Application-Id': 'b573c4f9',
+          'X-Api-Key': '5e65e4fca602a52427f48d2f235bf088',
+        },
+      body: JSON.stringify(this.requestBody({
+          lat1: this.props.markers[0].position.lat,
+          lng1: this.props.markers[0].position.lng,
+          lat2: this.props.markers[1].position.lat,
+          lng2: this.props.markers[1].position.lng
+      })),
+    }).then(json => json.json())
+    .then(response => this.setState({ route: response.results[0].locations[0].properties[0], request: true }))
   }
 
   renderJourneyTime() {
@@ -170,7 +174,6 @@ class JourneyTime extends React.Component {
   }
 
   render() {
-    this.requestRouteMidl()
     return (
       this.middleOfRoute(this.renderJourneyTime())
     );
