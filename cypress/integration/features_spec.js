@@ -21,13 +21,13 @@ describe("visiting the home page", () => {
 
   it("allows two addresses to be entered", () => {
     cy.visit("localhost:3000");
-    cy.get('input[id="address_text_box1"]')
+    cy.get('input[id="address_text_box0"]')
       .type("50 Commercial St, Spitalfields, London E1 6LT, UK")
       .should(
         "have.value",
         "50 Commercial St, Spitalfields, London E1 6LT, UK"
       );
-    cy.get('input[id="address_text_box2"]')
+    cy.get('input[id="address_text_box1"]')
       .type("Vue Cinema London - Islington, Parkfield Street, Angel, London")
       .should(
         "have.value",
@@ -35,26 +35,15 @@ describe("visiting the home page", () => {
       );
   });
 
-  it("allows you to click the find button", () => {
-    cy.visit("localhost:3000");
-    cy.get('input[id="find_yourself"]').click;
-  });
-
-  it("allows you to click the second find button", () => {
-    cy.visit("localhost:3000");
-    cy.get('input[id="find_a_friend"]').click;
-  });
 
   it("allows you to click the find midl button", () => {
     cy.visit("localhost:3000");
-    cy.get('input[id="address_text_box1"]').type(
+    cy.get('input[id="address_text_box0"]').type(
       "50 Commercial St, Spitalfields, London E1 6LT, UK"
-    );
-    cy.get('input[id="find_yourself"]').click;
-    cy.get('input[id="address_text_box2"]').type(
+    ).type('{enter}')
+    cy.get('input[id="address_text_box1"]').type(
       "36 Parkfield St, Islington, London N1 0PS, UK"
-    );
-    cy.get('input[id="find_a_friend"]').click;
+    ).type('{enter}')
     cy.get('input[id="find_midl"]').click;
   });
 });

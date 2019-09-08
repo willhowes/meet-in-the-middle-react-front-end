@@ -18,7 +18,6 @@ class MidlPlaces extends React.Component {
       this.props.places.map(function(place, i){
         return <div key={i}>
           <Card style={{ width: '18rem' }}>
-            <Card.Img width={125} height={75} variant="top" src="https://data.luebeck-tourismus.de/typo3temp/GB/csm_shutterstock_73748515_01_cf1fd34057_519ffe33ac.jpg" />
             <Card.Body>
               <Card.Title><Card.Link href="https://www.google.com">{place.name}</Card.Link></Card.Title>
             </Card.Body>
@@ -29,8 +28,6 @@ class MidlPlaces extends React.Component {
             <Card.Body>
             </Card.Body>
           </Card>
-        
-        
         </div>
       })
     )
