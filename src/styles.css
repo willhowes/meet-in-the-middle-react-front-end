@@ -44,7 +44,6 @@
   background-color: white;
   width: 500px;
   text-align: center;
-  height: 647px;
   border: 3px solid;
   border-radius: 73px;
   margin-top: 38px;
@@ -82,16 +81,14 @@
 .signUpAvatar {
   height: 130px;
   margin: 10px;
-  position: absolute;
-  top: 138px;
-  left: 443px;
 }
 
 .selectAvatar {
   position: relative;
-  top: 100px;
   margin: 0 auto;
-  left: 94px;
+  left: -21px;
+  font-size: 12px;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .uploadAvatarButton {
@@ -117,7 +114,7 @@
   font-size: 12px;
   font-family: 'Roboto Condensed', sans-serif;
   position: relative;
-  top: 128px;
+  top: 9px;
   left: -116px;
 }
 
@@ -149,7 +146,7 @@
   background-color: black;
   color: #f3cad0;
   position: relative;
-  top: 114px;
+  top: -5px;
 }
 
 .address_text_box {

@@ -21,22 +21,13 @@ class SignUp extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onDrop = this.onDrop.bind(this);
   }
 
-  onDrop(picture) {
-        this.setState({
-            pictures: this.state.pictures.concat(picture),
-        });
-    }
 
-    fileChangedHandler = event => {
-  this.setState({ selectedFile: event.target.files[0] })
+fileChangedHandler = event => {
+  this.setState({ avatar: URL.createObjectURL(event.target.files[0]) })
 }
 
-uploadHandler = () => {
-  console.log(this.state.selectedFile)
-}
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -44,7 +35,15 @@ uploadHandler = () => {
 
   onSubmit(e) {
     e.preventDefault();
-    axios.post('https://meet-in-the-middle-backend-api.herokuapp.com/users', { user: this.state })
+    axios({
+      method: 'post',
+      url: 'https://meet-in-the-middle-backend-api.herokuapp.com/users',
+      data:  ({ user: this.state }),
+      header: {
+                'Accept': 'application/json',
+                'Content-Type': 'multipart/form-data',
+              },
+        })
     .then(response => {
       console.log("yay");
     	console.log(response)
@@ -71,11 +70,7 @@ uploadHandler = () => {
           Create your meet in the midl account
         </div>
         <img className="signUpAvatar" src={this.state.avatar}/>
-
-
-
-        <input className="selectAvatar" type="file" onChange={this.fileChangedHandler}/>
-        <input className="uploadAvatarButton" value="Upload" onClick={this.uploadHandler}/>
+          <input className="selectAvatar" type="file" onChange={this.fileChangedHandler}/>
 
           <center><input
             className="formFillIn"
