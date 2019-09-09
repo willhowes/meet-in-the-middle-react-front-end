@@ -30,14 +30,12 @@ class MidlLocation extends React.Component {
   }
 
   render() {
-    console.log('render MidlLocation')
-    console.log(this.props.places)
     return (
       <div className="midlLocationContainer" id='midlLocation' style={this.style()}>
         <p style={{ margin: '10px' }} className="greeting" >
           Your Midl point is: {this.props.midlLocation}
         </p>
-        <div style={{ margin: '10px', overflowY: "scroll", maxHeight:"250px" }}>
+        <div style={{ margin: "10px", overflowY: "scroll", maxHeight:"250px" }}>
           <MidlPlaces setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
         </div>
       </div>

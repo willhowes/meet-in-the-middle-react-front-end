@@ -8,7 +8,6 @@ class JourneyTimes extends React.Component {
       route: false,
     }
 
-    this.secondsToHms = this.secondsToHms.bind(this);
     this.getUrl = this.getUrl.bind(this);
   }
 
@@ -34,7 +33,6 @@ class JourneyTimes extends React.Component {
   }
 
   getUrl(){
-    console.log('fetch journey')
     let origin = "origin=" + this.props.marker.position.lat + ',' + this.props.marker.position.lng
     let destination = "&destination=" + this.props.midlMarker[0].position.lat + ',' + this.props.midlMarker[0].position.lng
     let key = "&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4"
@@ -49,18 +47,6 @@ class JourneyTimes extends React.Component {
       }).then(json => json.json())
       .then(response => this.setState({route: response}))
     }
-  }
-
-  secondsToHms(d) {
-    d = Number(d);
-    var h = Math.floor(d / 3600);
-    var m = Math.floor(d % 3600 / 60);
-    var s = Math.floor(d % 3600 % 60);
-
-    var hDisplay = h > 0 ? h + (h === 1 ? " hour, " : " hours, ") : "";
-    var mDisplay = m > 0 ? m + (m === 1 ? " minute, " : " minutes, ") : "";
-    var sDisplay = s > 0 ? s + (s === 1 ? " second" : " seconds") : "";
-    return hDisplay + mDisplay + sDisplay;
   }
 
   render() {
