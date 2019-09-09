@@ -177,6 +177,8 @@ class JourneyTime extends React.Component {
   }
 
   render() {
+    console.log('renderJourneyTime')
+
     return (
       this.renderJourneyTime()
     );

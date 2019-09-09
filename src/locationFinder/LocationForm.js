@@ -68,6 +68,7 @@ class LocationForm extends React.Component {
   }
 
   render() {
+    console.log('render LocationForm')
     return (
       <div className="slider" >
         <Script

@@ -30,6 +30,7 @@ class MidlLocation extends React.Component {
   }
 
   render() {
+    console.log('render MidlLocation')
     console.log(this.props.places)
     return (
       <div className="midlLocationContainer" id='midlLocation' style={this.style()}>
