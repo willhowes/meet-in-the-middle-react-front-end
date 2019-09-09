@@ -5,11 +5,12 @@ describe("recommendations", () => {
 
   it("brings up recommendations after a search", () => {
     cy.visit("localhost:3000");
-    cy.get('input[id="address_text_box0"]')
+    cy.get("#address_text_box1")
       .type("50 Commercial St, Spitalfields, London E1 6LT, UK").type('{enter}')
 
-    cy.get('input[id="address_text_box1"]')
-      .type("Vue Cinema London - Islington, Parkfield Street, Angel, London").type('{enter}')
-      cy.get('input[id="find_midl"]').click;
+    cy.get("#address_text_box2")
+      .type("40 Commercial St, Spitalfields, London E1 6LP, UK").type('{enter}')
+      cy.get("#find_midl").click()
+      cy.contains("★").contains("5 Commercial Street, London")
   });
 });
