@@ -15,7 +15,7 @@ class MidlPlaces extends React.Component {
     if (this.props.midlMarker[0] !== undefined) {
       return axios
         .get(
-          `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.midlMarker[0].position.lat}, ${this.props.midlMarker[0].position.lng}&radius=500&type=restaurant&key=AIzaSyBFZn8r3CA-KbGZ-vAz5oz7GLcwviIqG7U`
+          `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.midlMarker[0].position.lat}, ${this.props.midlMarker[0].position.lng}&radius=500&type=restaurant&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg`
         )
         .then(res => this.setState({ places: [res.data.results] }));
     }
