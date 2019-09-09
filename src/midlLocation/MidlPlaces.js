@@ -32,13 +32,13 @@ class MidlPlaces extends React.Component {
 
 const listStyle = {
   color: 'orange',
-  fontFamily: 'Century Gothic'
+  fontFamily: 'Roboto Condensed'
 }
 
 const linkStyle = {
     color: '#9B5F8C',
     textDecoration: 'none',
-    fontFamily: 'Century Gothic'
+    fontFamily: 'Roboto Condensed'
 }
 
 export default MidlPlaces;
