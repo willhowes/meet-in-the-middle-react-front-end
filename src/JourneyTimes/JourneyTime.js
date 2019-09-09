@@ -134,7 +134,7 @@ class JourneyTime extends React.Component {
   }
 
   requestRouteMidl() {
-    fetch('http://api.traveltimeapp.com/v4/routes', {
+    fetch('https://api.traveltimeapp.com/v4/routes', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
