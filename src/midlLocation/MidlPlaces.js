@@ -17,7 +17,7 @@ class MidlPlaces extends React.Component {
                       <Card.Title><Card.Link style={linkStyle} href={`https://www.google.com/search?q=${place.reference}`}>{place.name}</Card.Link></Card.Title>
                     </Card.Body>
                     <ListGroup className="list-group-flush">
-                      <ListGroupItem style={listStyle}>{place.rating} ★ ({place.user_ratings_total})</ListGroupItem>
+                      <ListGroupItem style={listStyle}>{`${place.rating} ${'★'.repeat(Math.round(place.rating))} (${place.user_ratings_total})`}</ListGroupItem>
                       <ListGroupItem>{`${place.types[0]}, ${place.types[1]}, ${place.types[2]}`}</ListGroupItem>
                       <ListGroupItem>{place.vicinity}</ListGroupItem><br></br>
                     </ListGroup>
@@ -42,3 +42,5 @@ const linkStyle = {
 }
 
 export default MidlPlaces;
+
+// {`${place.rating} ${'★'.repeat(Math.round(place.rating))} (${place.user_ratings_total})`}
