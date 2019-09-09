@@ -22,7 +22,7 @@ class LogIn extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    axios.post('https://meet-in-the-middle-backend-api.herokuapp.com/sessions', { session: this.state })
+    axios.post('http://localhost:3001', { session: this.state })
     .then(response => {
       console.log("THIS WORKS");
     	console.log(response)
@@ -33,36 +33,35 @@ class LogIn extends React.Component {
     });
   }
 
-
   render() {
-    return (
-      <div className="signUpContainer">
-        <p style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}>
-        Log In</p>
+  return (
+    <div className="signUpContainer">
+      <form
+        onSubmit={e => {
+          this.onSubmit(e);
+        }}
+      >
 
-        <form
-          onSubmit={e => {
-            this.onSubmit(e);
-          }}
-        >
-          <p style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}>
-          Email</p>
+        <center> <div className="signUpForm">
+          <img className="formLogo" src="midl-logo.png" />
+            <div className="formHeading">
+              Log in to your meet in the midl account
+            </div>
 
             <input
               id="log_in_email"
               type="text"
+              className="formFillIn"
               placeholder={"Email address"}
               name="email"
               value={this.state.email}
               onChange={this.onChange}
             />
-            <p style={{ marginLeft: "10px", fontFamily: "Verdana", padding: "5px" }}>
-            Password
-            </p>
 
               <input
                 id="log_in_password"
                 type="password"
+                className="formFillIn"
                 placeholder={"Password"}
                 name="password"
                 value={this.state.password}
@@ -71,11 +70,13 @@ class LogIn extends React.Component {
 
               <input
                 id="log_in_submit"
-                className="myButton"
+                className="enterButton"
                 type="submit"
                 value="Log In"
               />
-        </form>
+
+            </div>
+        </center> </form>
       </div>
     );
   }

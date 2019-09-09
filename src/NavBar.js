@@ -13,33 +13,23 @@ class NavBar extends React.Component {
     super(props);
     this.state = {
       loggedIn: false,
-<<<<<<< HEAD
       showUserProfile: false,
       showSignUp: false,
+      showLogIn: false
     };
     this._onProfileButtonClick = this._onProfileButtonClick.bind(this);
     this._onSignUpButtonClick = this._onSignUpButtonClick.bind(this);
+    this._onButtonClickLogIn = this._onButtonClickLogIn.bind(this);
     this._hidePopUps = this._hidePopUps.bind(this);
   }
 
   _onProfileButtonClick(e) {
     e.preventDefault();
     this.setState(state => ({
-      showUserProfile: !state.showUserProfile
-=======
-      showSignUp: false,
-      showLogIn: false
-    };
-    this._onButtonClickSignUp = this._onButtonClickSignUp.bind(this);
-    this._onButtonClickLogIn = this._onButtonClickLogIn.bind(this);
+      showUserProfile: !state.showUserProfile,
+      showLogIn: false,
+      showSignUp: false
 
-  }
-
-  _onButtonClickSignUp(e) {
-    e.preventDefault();
-    this.setState(state => ({
-      showSignUp: !state.showSignUp,
-      showLogIn: false
     }));
   }
 
@@ -47,31 +37,32 @@ class NavBar extends React.Component {
     e.preventDefault();
     this.setState(state => ({
       showLogIn: !state.showLogIn,
-      showSignUp: false
->>>>>>> origin/user_log_in
+      showSignUp: false,
+      showUserProfile: false
     }));
   }
 
   _onSignUpButtonClick(e) {
     e.preventDefault();
     this.setState(state => ({
-      showSignUpForm: !state.showSignUpForm
+      showSignUp: !state.showSignUp,
+      showLogIn: false,
+      showUserProfile: false
     }));
   }
 
   _hidePopUps(e) {
     e.preventDefault();
-    this.setState(state => ({showSignUpForm: false}));
+    this.setState(state => ({showSignUp: false}));
     this.setState(state => ({showUserProfile: false}));
+    this.setState(state => ({showLogIn: false}));
   }
 
-  // handleSubmit(query, event) {
-  // }
+
 
   render() {
     return (
       <div>
-<<<<<<< HEAD
         <form
           // onSubmit={e => {
           //   this.handleSubmit(query, e);
@@ -86,13 +77,13 @@ class NavBar extends React.Component {
           value="Sign up"
           style={{right: "160px"}}
         />
-        {this.state.showSignUpForm ?
+        {this.state.showSignUp ?
           <SignUp /> :
           null
         }
         <input
           onClick={this._onProfileButtonClick}
-          id="sign_up_button"
+          id="profile_button"
           className="navBarButton"
           type="submit"
           value="Profile"
@@ -102,33 +93,15 @@ class NavBar extends React.Component {
           null
         }
         </form>
-=======
-          <form
-            // onSubmit={e => {
-            //   this.handleSubmit(query, e);
-            // }}
-          >
-          <input
-            onClick={this._onButtonClickSignUp}
-            id="sign_up_button"
-            className="myButton"
-            type="submit"
-            value="Sign up"
-          />
-          {this.state.showSignUp ?
-            <SignUp /> :
-            null
-          }
-          </form>
->>>>>>> origin/user_log_in
 
           <form>
             <input
               onClick={this._onButtonClickLogIn}
               id="log_in_button"
-              className="myButton"
+              className="navBarButton"
               type="submit"
               value="Log In"
+              style={{right: "300px"}}
             />
             {this.state.showLogIn ?
               <LogIn /> :

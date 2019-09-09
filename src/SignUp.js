@@ -16,7 +16,6 @@ class SignUp extends React.Component {
 		"email": "",
 		"password": "",
 		"passwordConfirmation": "",
-    "avatar": "default-image.jpeg"
 
     };
     this.onChange = this.onChange.bind(this);
@@ -25,7 +24,8 @@ class SignUp extends React.Component {
 
 
 fileChangedHandler = event => {
-  this.setState({ avatar: URL.createObjectURL(event.target.files[0]) })
+  console.log(event.target.files[0]);
+  this.setState({ avatar: event.target.files[0] })
 }
 
 
@@ -37,7 +37,8 @@ fileChangedHandler = event => {
     e.preventDefault();
     axios({
       method: 'post',
-      url: 'https://meet-in-the-middle-backend-api.herokuapp.com/users',
+      url: 'http://localhost:3001/users',
+      // url: 'https://meet-in-the-middle-backend-api.herokuapp.com/users',
       data:  ({ user: this.state }),
       header: {
                 'Accept': 'application/json',
@@ -46,10 +47,12 @@ fileChangedHandler = event => {
         })
     .then(response => {
       console.log("yay");
+      console.log(({ user: this.state }));
     	console.log(response)
     })
     .catch(error => {
       console.log("nooo");
+      console.log(({ user: this.state }));
         console.log(error.response)
     });
   }
