@@ -17,19 +17,19 @@ class MidlPlaces extends React.Component {
     return (
       this.props.places.map(function(place, i){
         return <div key={i}>
-          <Card style={{ width: '18rem' }}>
-            <Card.Body>
-              <Card.Title><Card.Link style={linkStyle} href={`https://www.google.com/search?q=${place.reference}`}>{place.name}</Card.Link></Card.Title>
-            </Card.Body>
-            <ListGroup className="list-group-flush">
-              <ListGroupItem style={listStyle}>{place.rating} ★ ({place.user_ratings_total})</ListGroupItem>
-              <ListGroupItem>{`${place.types[0]}, ${place.types[1]}, ${place.types[2]}`}</ListGroupItem>
-              <ListGroupItem>{place.vicinity}</ListGroupItem><br></br>
-            </ListGroup>
-            <Card.Body>
-            </Card.Body>
-          </Card>
-        </div>
+                  <Card style={{ width: '18rem' }}>
+                    <Card.Body>
+                      <Card.Title><Card.Link style={linkStyle} href={`https://www.google.com/search?q=${place.reference}`}>{place.name}</Card.Link></Card.Title>
+                    </Card.Body>
+                    <ListGroup className="list-group-flush">
+                      <ListGroupItem style={listStyle}>{place.rating} ★ ({place.user_ratings_total})</ListGroupItem>
+                      <ListGroupItem>{`${place.types[0]}, ${place.types[1]}, ${place.types[2]}`}</ListGroupItem>
+                      <ListGroupItem>{place.vicinity}</ListGroupItem><br></br>
+                    </ListGroup>
+                    <Card.Body>
+                    </Card.Body>
+                  </Card>
+                </div>
       })
     )
   }
