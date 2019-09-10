@@ -46,6 +46,7 @@ class App extends React.Component {
     this.addMarker = this.addMarker.bind(this);
     this.changeMidlJourneyType = this.changeMidlJourneyType.bind(this);
     this.setMidlRequest = this.setMidlRequest.bind(this);
+    this.updateCurrentUser = this.updateCurrentUser.bind(this)
   }
 
   changeMidlJourneyType(type) {
@@ -237,8 +238,8 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("RENDER CURRENT USER")
-    console.log(this.state.currentUser)
+    console.log("RENDER CURRENT USER ID")
+    console.log(this.state.currentUser.id)
     return (
       <div>
         <div className="journeyTime">
@@ -285,10 +286,6 @@ class App extends React.Component {
         <div className="LogInContainer">
           <LogIn
             updateCurrentUser={this.updateCurrentUser}
-          />
-        </div>
-        <div className="UserProfile">
-          <UserProfile
             currentUser={this.state.currentUser}
           />
         </div>
