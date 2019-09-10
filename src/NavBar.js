@@ -7,6 +7,7 @@ import "./styles.css";
 import SignUp from "./SignUp";
 import UserProfile from "./UserProfile"
 import LogIn from "./LogIn";
+import LogOut from "./LogOut";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -16,8 +17,10 @@ class NavBar extends React.Component {
       showUserProfile: false,
       showSignUp: false,
       showLogIn: false,
+      showLogOut: false,
     };
     this._onProfileButtonClick = this._onProfileButtonClick.bind(this);
+    this._onLogOutButtonClick = this._onLogOutButtonClick.bind(this);
     this._onSignUpButtonClick = this._onSignUpButtonClick.bind(this);
     this._onButtonClickLogIn = this._onButtonClickLogIn.bind(this);
     this._hidePopUps = this._hidePopUps.bind(this);
@@ -29,7 +32,6 @@ class NavBar extends React.Component {
       showUserProfile: !state.showUserProfile,
       showLogIn: false,
       showSignUp: false
-
     }));
   }
 
@@ -51,37 +53,51 @@ class NavBar extends React.Component {
     }));
   }
 
+  _onLogOutButtonClick(e) {
+    e.preventDefault();
+    console.log("showing the log out page");
+    this.setState(state => ({
+      showLogOut: !state.showLogOut,
+      showLogIn: false,
+      showUserProfile: false
+    }));
+  }
+
   _hidePopUps(e) {
     e.preventDefault();
-    this.setState(state => ({showSignUp: false}));
+    this.setState(state => ({showLogOut: false}));
     this.setState(state => ({showUserProfile: false}));
-    this.setState(state => ({showLogIn: false}));
+    // this.setState(state => ({showLogIn: false}));
+  }
+
+  updateLogInStatus = () => {
+      this.setState( {loggedIn: !this.state.loggedIn} )
   }
 
 
 
   render() {
-    return (
-      <div>
-        <form
-          // onSubmit={e => {
-          //   this.handleSubmit(query, e);
-          // }}
-        >
-        <img className="logo" src="midl-logo.png" onClick={this._hidePopUps} />
-        <input
-          onClick={this._onSignUpButtonClick}
-          id="sign_up_button"
-          className="navBarButton"
-          type="submit"
-          value="Sign up"
-        />
-        {this.state.showSignUp ?
-          <SignUp /> :
-          null
-        }
+    console.log(this.state.loggedIn)
 
+      return (
+        <div>
 
+        {!this.state.loggedIn ?
+
+          <form
+          >
+          <img className="logo" src="midl-logo.png" onClick={this._hidePopUps} />
+          <input
+            onClick={this._onSignUpButtonClick}
+            id="sign_up_button"
+            className="navBarButton"
+            type="submit"
+            value="Sign up"
+          />
+          {this.state.showSignUp ?
+            <SignUp /> :
+            null
+          }
 
             <input
               onClick={this._onButtonClickLogIn}
@@ -92,13 +108,53 @@ class NavBar extends React.Component {
               style={{right: "160px"}}
             />
             {this.state.showLogIn ?
-              <LogIn /> :
+              <LogIn updateLogInStatus={this.updateLogInStatus} /> :
               null
             }
           </form>
-      </div>
-    );
-  }
+
+        :  null
+        }
+
+
+        {this.state.loggedIn ?
+
+          <form
+          >
+          <img className="logo" src="midl-logo.png" onClick={this._hidePopUps} />
+          <input
+            onClick={this._onLogOutButtonClick}
+            id="log_out_button"
+            className="navBarButton"
+            type="submit"
+            value="Log Out"
+            style={{right: "160px"}}
+          />
+          console.log(this.state.showLogOut);
+          {this.state.showLogOut ?
+            <LogOut updateLogInStatus={this.updateLogInStatus} /> :
+            null
+          }
+
+          <input
+              onClick={this._onProfileButtonClick}
+              id="profile_button"
+              className="navBarButton"
+              type="submit"
+              value="Profile"
+            />
+            {this.state.showUserProfile ?
+              <UserProfile /> :
+              null
+            }
+          </form>
+          :
+          null
+        }
+
+        </div>
+      );
+    }
 }
 
 export default NavBar;

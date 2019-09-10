@@ -4,14 +4,15 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "./styles.css";
 
-class LogIn extends React.Component {
+class LogOut extends React.Component {
   constructor(props) {
     super(props);
     this.state =
     {
 		"email": "",
 		"password": "",
-    showLogIn: true,
+    showLogOut: true,
+    showLogIn: false,
     loggedIn: false
     };
     this.onChange = this.onChange.bind(this);
@@ -24,14 +25,14 @@ class LogIn extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log({session: this.state.showLogIn});
-    axios.post('http://localhost:3001/sessions', { session: this.state })
+    console.log({session: this.state.showLogOut});
+    axios.delete('http://localhost:3001/sessions/delete')
     .then(response => {
-      console.log("user is logged in");
-      this.setState(state => ({showLogIn: false, loggedIn: true, showLogIn: false}));
+      console.log("user is logged out");
+      this.setState(state => ({showLogIn: false, loggedIn: false, showLogIn: false}));
     }).then(response => this.props.updateLogInStatus())
     .catch(error => {
-      console.log("did not log in");
+      console.log("did not log out");
       console.log(error.response)
     });
   }
@@ -40,8 +41,6 @@ class LogIn extends React.Component {
   return (
 
     <div>
-
-    { this.state.showLogIn ?
 
 
     <div className="signUpContainer">
@@ -56,34 +55,15 @@ class LogIn extends React.Component {
         <center> <div className="signUpForm">
           <img className="formLogo" src="midl-logo.png" />
             <div className="formHeading">
-              Log in to your meet in the midl account
+              Are you sure you would like to log out?
             </div>
-
-            <input
-              id="log_in_email"
-              type="text"
-              className="formFillIn"
-              placeholder={"Email address"}
-              name="email"
-              value={this.state.email}
-              onChange={this.onChange}
-            />
-
-              <input
-                id="log_in_password"
-                type="password"
-                className="formFillIn"
-                placeholder={"Password"}
-                name="password"
-                value={this.state.password}
-                onChange={this.onChange}
-              />
 
               <input
                 id="log_in_submit"
                 className="enterButton"
                 type="submit"
-                value="Log In"
+                value="Yes"
+                style={{top: "-32px"}}
               />
 
             </div>
@@ -91,14 +71,10 @@ class LogIn extends React.Component {
         < /form>
       </div>
 
-        :
-        null
-      }
-
       </div>
 
     );
   }
 }
 
-export default LogIn;
+export default LogOut;

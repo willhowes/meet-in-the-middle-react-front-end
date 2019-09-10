@@ -178,32 +178,7 @@ class App extends React.Component {
     }
   }
 
-  showSignUpForm() {
-    this.setState(state => {
-      let newUser = {
-        name: "",
-        email: "",
-        password: "",
-        password_confirmation: ""
-      };
-      return {
-        newUser
-      };
-    });
-  }
 
-  showLogInForm() {
-    this.setState(state => {
-      let user = {
-        name: "",
-        email: "",
-        password: "",
-      };
-      return {
-        user
-      };
-    });
-  }
 
   render() {
     return (
@@ -245,8 +220,6 @@ class App extends React.Component {
         </div>
         <div className="NavBarContainer">
           <NavBar
-            addSignUpForm={this.showSignUpForm}
-            addLogInForm={this.showLogInForm}
           />
         </div>
 

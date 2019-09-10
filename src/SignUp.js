@@ -128,7 +128,7 @@ fileChangedHandler = event => {
                   onChange={this.onChange}
                 />
               <input
-                id="sign_up_button"
+                id="sign_up_submit"
                 className="enterButton"
                 type="submit"
                 value="Sign up"
