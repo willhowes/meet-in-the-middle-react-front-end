@@ -1,8 +1,6 @@
 import React from "react";
-import Script from "react-load-script";
 import PropTypes from "prop-types";
 import axios from "axios";
-import "../styles.css";
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -22,11 +20,11 @@ class LogIn extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log({ session: this.state.showLogIn });
     axios
       .post("http://localhost:3001/sessions", { session: this.state })
       .then(response => {
-        this.setState(state => ({ showLogIn: false }));
+        console.log("success: ", response)
+        this.setState({ showLogIn: false });
         this.props.updateCurrentUser(response.data.user) 
       })
       .catch(error => {
@@ -87,6 +85,10 @@ class LogIn extends React.Component {
       </div>
     );
   }
+}
+
+LogIn.propTypes = {
+  updateCurrentUser: PropTypes.func.isRequired,
 }
 
 export default LogIn;
