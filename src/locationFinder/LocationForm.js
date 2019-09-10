@@ -20,7 +20,7 @@ class LocationForm extends React.Component {
     let url =
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
       address +
-      "+CA&key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY";
+      "+CA&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
     fetch(url)
       .then(json => json.json())
       .then(response =>
@@ -72,7 +72,7 @@ class LocationForm extends React.Component {
     return (
       <div className="slider" >
         <Script
-          url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY&libraries=places"
+          url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places"
         />
       <center><p className="greeting" >
           {this.props.greeting}

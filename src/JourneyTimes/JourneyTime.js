@@ -12,6 +12,18 @@ class JourneyTime extends React.Component {
     this.requestBody = this.requestBody.bind(this);
     this.renderJourneyTime = this.renderJourneyTime.bind(this);
     this.middleOfRoute = this.middleOfRoute.bind(this);
+    this.journeyType = this.journeyType.bind(this);
+  }
+
+  journeyType(){
+    console.log('journeyType run')
+    if (this.props.journeyType === "public_transport") {
+      return "transit"
+    } else if (this.props.journeyType === "cycling") {
+      return "bicycling"
+    } else {
+      return this.props.journeyType
+    }
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -58,7 +70,7 @@ class JourneyTime extends React.Component {
             "Marker 2"
           ],
           "transportation": {
-            "type": "public_transport"
+            "type": `${this.props.journeyType}`
           },
           "departure_time": `${formatted_date}`,
           "properties": ["travel_time", "distance", "route"]
@@ -136,6 +148,12 @@ class JourneyTime extends React.Component {
   }
 
   requestRouteMidl() {
+    console.log(this.requestBody({
+        lat1: this.props.markers[0].position.lat,
+        lng1: this.props.markers[0].position.lng,
+        lat2: this.props.markers[1].position.lat,
+        lng2: this.props.markers[1].position.lng
+    }))
     fetch('https://api.traveltimeapp.com/v4/routes', {
       method: 'POST',
       headers: {
@@ -153,6 +171,7 @@ class JourneyTime extends React.Component {
     }).then(json => json.json())
     .then(response => this.setState({ route: response.results[0].locations[0].properties[0] }))
     .then(test => this.middleOfRoute())
+    .then(test => console.log(this.state.route))
   }
 
   renderJourneyTime() {
@@ -163,12 +182,14 @@ class JourneyTime extends React.Component {
             setMidlRequest={this.props.setMidlRequest}
             marker={this.props.markers[0]}
             midlMarker={this.props.midlMarker}
+            journeyType={this.journeyType}
             num={"A"}
             />
           <JourneyTimes
             setMidlRequest={this.props.setMidlRequest}
             marker={this.props.markers[1]}
             midlMarker={this.props.midlMarker}
+            journeyType={this.journeyType}
             num={"B"}
             />
         </div>
