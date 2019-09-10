@@ -121,10 +121,30 @@ class App extends React.Component {
         "&radius=500&type=restaurant&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4"
       fetch(url)
       .then(res => res.json())
-      
-      .then(res => this.setState({places: res.results}))
+
+      .then(res => this.setState({places: this.categorisePlaces(res.results)}))
       .then(res => console.log(this.state.places))
     }
+  }
+
+  categorisePlaces(places){
+    let bars = []
+    let restaurants = []
+    let lodgings = []
+    let miscellaneous = []
+
+      places.map(function(element){
+      if(element.types.includes("bar")){
+        return bars.push(element)
+      } else if(element.types.includes("restaurant")) {
+        return restaurants.push(element)
+      } else if(element.types.includes("lodging")){
+        return restaurants.push(element)
+      } else {
+        return miscellaneous.push(element)
+      }
+    })
+    return {bars: bars, restaurants: restaurants, lodgings: lodgings, miscellaneous: miscellaneous}
   }
 
   midlLocation() {
