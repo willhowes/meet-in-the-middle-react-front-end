@@ -171,10 +171,10 @@ class UserProfile extends React.Component {
                   <p className="greeting">{this.props.greeting}</p>
                 </center>
                 <input
-                  id={`address_text_box${this.props.formNum + 1}`}
+                  id="home_location_text_box"
                   className="formFillIn"
                   type="text"
-                  name="home_location"
+                  name="home_location_text_box"
                   placeholder={this.props.placeholder}
                   value={this.state.query}
                   onChange={e => {
