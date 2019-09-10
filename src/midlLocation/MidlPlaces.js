@@ -8,11 +8,12 @@ class MidlPlaces extends React.Component {
   render() {
     console.log('HERE!!!!!!!!!')
     console.log(this.props.places.bars)
-    if (this.props.places.bars.length > 0) {
+    if (this.props.places !== undefined) {
       this.props.setMidlRequest(false)
     }
+    if (this.props.places.bars !== undefined) {
     return (
-      this.props.places.map(function(place, i){
+      this.props.places.bars.map(function(place, i){
         return <div key={i}>
                   <Card style={{ width: '18rem' }}>
                     <Card.Body>
@@ -29,9 +30,11 @@ class MidlPlaces extends React.Component {
                 </div>
       })
     )
+  } else {
+    return 'this is too hacky'
   }
 }
-
+}
 const listStyle = {
   color: 'orange',
   fontFamily: 'Roboto Condensed'
