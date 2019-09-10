@@ -1,10 +1,6 @@
 import React from "react";
-import Script from "react-load-script";
-import PropTypes from "prop-types";
 import axios from "axios";
-// import ImageUploader from 'react-images-upload';
-import "./styles.css";
-// import fs from "fs";
+import "../styles.css";
 import FormData from 'form-data';
 
 class SignUp extends React.Component {
@@ -26,7 +22,6 @@ class SignUp extends React.Component {
 
 
 fileChangedHandler = event => {
-  // console.log(event.target.files[0]);
   this.setState({ avatar: event.target.files[0] })
 }
 
@@ -58,10 +53,8 @@ fileChangedHandler = event => {
         })
     .then(response => {
       this.setState(state => ({showSignUp: false}))
-    	console.log(response)
     })
     .catch(error => {
-        console.log(error.response)
     });
   }
 
@@ -82,12 +75,12 @@ fileChangedHandler = event => {
       >
 
     <center> <div className="signUpForm">
-      <img className="formLogo" src="midl-logo.png" />
+      <img  alt="Hello World" className="formLogo" src="midl-logo.png" />
         <div className="formHeading">
           Create your meet in the midl account
         </div>
-        <img className="signUpAvatar" src={this.state.avatar}/>
-          <input name="avatar" className="selectAvatar" type="file" onChange={this.fileChangedHandler}/>
+        <img  alt="Hello World" className="signUpAvatar" src={this.state.avatar}/>
+          <input  alt="Hello World" name="avatar" className="selectAvatar" type="file" onChange={this.fileChangedHandler}/>
 
           <center><input
             className="formFillIn"

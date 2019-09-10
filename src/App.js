@@ -5,9 +5,7 @@ import LocationFinder from "./locationFinder/LocationFinder";
 import MidlLocation from "./midlLocation/MidlLocation";
 import JourneyTime from "./JourneyTimes/JourneyTime";
 import "./styles.css";
-import NavBar from "./NavBar";
-import SignUp from "./SignUp";
-import LogIn from "./LogIn"
+import NavBar from "./users/NavBar.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -131,7 +129,6 @@ class App extends React.Component {
       fetch(url)
       .then(res => res.json())
       .then(res => this.setState({places: res.results}))
-      .then(res => console.log(this.state.places))
     }
   }
 

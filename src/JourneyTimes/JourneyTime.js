@@ -16,7 +16,6 @@ class JourneyTime extends React.Component {
   }
 
   journeyType(){
-    console.log('journeyType run')
     if (this.props.journeyType === "public_transport") {
       return "transit"
     } else if (this.props.journeyType === "cycling") {
@@ -148,12 +147,6 @@ class JourneyTime extends React.Component {
   }
 
   requestRouteMidl() {
-    console.log(this.requestBody({
-        lat1: this.props.markers[0].position.lat,
-        lng1: this.props.markers[0].position.lng,
-        lat2: this.props.markers[1].position.lat,
-        lng2: this.props.markers[1].position.lng
-    }))
     fetch('https://api.traveltimeapp.com/v4/routes', {
       method: 'POST',
       headers: {
@@ -171,7 +164,6 @@ class JourneyTime extends React.Component {
     }).then(json => json.json())
     .then(response => this.setState({ route: response.results[0].locations[0].properties[0] }))
     .then(test => this.middleOfRoute())
-    .then(test => console.log(this.state.route))
   }
 
   renderJourneyTime() {
@@ -200,7 +192,6 @@ class JourneyTime extends React.Component {
   }
 
   render() {
-    console.log('renderJourneyTime')
 
     return (
       this.renderJourneyTime()

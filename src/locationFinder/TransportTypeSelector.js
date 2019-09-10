@@ -5,12 +5,11 @@ import { IoMdBicycle } from "react-icons/io";
 
 class TransportTypeSelector extends React.Component {
 
-  componentShouldUpdate(){
+  shouldComponentUpdate(){
     return false
   }
 
   render() {
-    console.log('test')
     return (
       <div style={{ margin: 10, position:"relative"}}>
         <form>

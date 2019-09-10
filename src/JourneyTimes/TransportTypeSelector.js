@@ -4,12 +4,8 @@ import { FaWalking, FaSubway, FaCar } from 'react-icons/fa';
 import { IoMdBicycle } from "react-icons/io";
 
 class TransportTypeSelector extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   checked(type){
-    console.log(this.props.journeyType())
     if (this.props.journeyType() === type) {
       return "checked"
     } else {
@@ -18,9 +14,6 @@ class TransportTypeSelector extends React.Component {
   }
 
   render() {
-    console.log('render TransportTypeSelector')
-    console.log(this.checked("transit"))
-    console.log(this.checked("walking"))
     return (
       <div style={{ margin: 10, position:"relative", bottom:"32px", right:"20px"  }}>
         <form>

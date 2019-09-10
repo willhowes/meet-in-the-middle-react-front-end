@@ -62,8 +62,6 @@ class JourneyTimes extends React.Component {
   }
 
   getJourneyType(){
-    console.log('getJourneyType')
-    console.log(this.state.journeyType)
     if (this.state.journeyType === "public_transport" || this.state.journeyType === "transit") {
       return "Public transport"
     } else if (this.state.journeyType === "walking") {
@@ -76,8 +74,6 @@ class JourneyTimes extends React.Component {
   }
 
   render() {
-    console.log('render Journey Time')
-    console.log(this.state.route)
     if (this.state.route !== false) {
       return (
         <div>

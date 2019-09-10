@@ -1,11 +1,6 @@
-/*global google*/
-
 import React from "react";
-import Script from "react-load-script";
-import PropTypes from "prop-types";
-import "./styles.css";
+import "../styles.css";
 import SignUp from "./SignUp";
-import UserProfile from "./UserProfile"
 import LogIn from "./LogIn";
 
 class NavBar extends React.Component {
@@ -68,7 +63,7 @@ class NavBar extends React.Component {
           //   this.handleSubmit(query, e);
           // }}
         >
-        <img className="logo" src="midl-logo.png" onClick={this._hidePopUps} />
+        <img  alt="Hello World" className="logo" src="midl-logo.png" onClick={this._hidePopUps} />
         <input
           onClick={this._onSignUpButtonClick}
           id="sign_up_button"

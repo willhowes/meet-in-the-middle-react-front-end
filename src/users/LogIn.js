@@ -1,8 +1,6 @@
 import React from "react";
-import Script from "react-load-script";
-import PropTypes from "prop-types";
 import axios from "axios";
-import "./styles.css";
+import "../styles.css";
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -23,16 +21,11 @@ class LogIn extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log({session: this.state.showLogIn});
     axios.post('http://localhost:3001/sessions', { session: this.state })
     .then(response => {
-      console.log("THIS WORKS");
       this.setState(state => ({showLogIn: false}))
-    	console.log(response)
     })
     .catch(error => {
-      console.log("nooo");
-      console.log(error.response)
     });
   }
 
@@ -54,7 +47,7 @@ class LogIn extends React.Component {
       >
 
         <center> <div className="signUpForm">
-          <img className="formLogo" src="midl-logo.png" />
+          <img className="formLogo" src="midl-logo.png" alt="Hello World" />
             <div className="formHeading">
               Log in to your meet in the midl account
             </div>

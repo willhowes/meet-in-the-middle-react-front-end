@@ -17,8 +17,6 @@ class LocationFinder extends React.Component {
   }
 
   render() {
-    console.log('render LocationFinder')
-
     return (
       <div style={{ margin: 10 }}>
         {Array(this.state.locationForms).fill().map(Math.random).map(function(item, i){
