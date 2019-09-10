@@ -26,9 +26,7 @@ class LogIn extends React.Component {
     axios
       .post("http://localhost:3001/sessions", { session: this.state })
       .then(response => {
-        console.log("THIS WORKS");
         this.setState(state => ({ showLogIn: false }));
-        console.log(response.data.user);
         this.props.updateCurrentUser(response.data.user) 
       })
       .catch(error => {
