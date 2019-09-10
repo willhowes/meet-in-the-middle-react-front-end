@@ -2,6 +2,7 @@ import React from "react";
 import "../styles.css";
 import LocationForm from "./LocationForm.js"
 import FindMidlButton from "../buttons/FindMidlButton.js"
+import TransportTypeSelector from "./TransportTypeSelector.js"
 
 class LocationFinder extends React.Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class LocationFinder extends React.Component {
               />
           }
         }, this)}
+        <TransportTypeSelector changeMidlJourneyType={this.props.changeMidlJourneyType} />
         <FindMidlButton onClick={this.props.addMidlMarker}/>
       </div>
     );
