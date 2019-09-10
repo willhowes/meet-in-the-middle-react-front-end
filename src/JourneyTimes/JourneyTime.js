@@ -12,6 +12,18 @@ class JourneyTime extends React.Component {
     this.requestBody = this.requestBody.bind(this);
     this.renderJourneyTime = this.renderJourneyTime.bind(this);
     this.middleOfRoute = this.middleOfRoute.bind(this);
+    this.journeyType = this.journeyType.bind(this);
+  }
+
+  journeyType(){
+    console.log('journeyType run')
+    if (this.props.journeyType === "public_transport") {
+      return "transit"
+    } else if (this.props.journeyType === "cycling") {
+      return "bicycling"
+    } else {
+      return this.props.journeyType
+    }
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -58,7 +70,7 @@ class JourneyTime extends React.Component {
             "Marker 2"
           ],
           "transportation": {
-            "type": "public_transport"
+            "type": `${this.props.journeyType}`
           },
           "departure_time": `${formatted_date}`,
           "properties": ["travel_time", "distance", "route"]
@@ -71,15 +83,13 @@ class JourneyTime extends React.Component {
     // checks to see if middle marker has been requested
     if (this.props.findMidl) {
       // creates many many holding variables
-      let halfWay = this.state.route.travel_time / 2
-      let halfWaySet = this.state.route.travel_time / 2
+      let halfWay = this._getHalfWayTime()
       let journey = this.state.route.route.parts
       let middleRoute = []
       let timeSoFar = 0
       let travelTimeBeginningOfHalfWay = 0
       let travelTimeEndOfHalfWay = 0
       let journeySplitRatio = 0
-      // Iterates through journey array to find middle point by travel time
       journey.forEach(function(segment, i){
         // checks to see if middle point reached and already returned
         if (halfWay <= 0 && middleRoute.length === 0) {
@@ -90,20 +100,24 @@ class JourneyTime extends React.Component {
           // Set the travel time for the beginning of previous segment
           travelTimeBeginningOfHalfWay = travelTimeEndOfHalfWay - journey[i-1].travel_time
           // Calculates the ratio of middle distance within the segment
-          journeySplitRatio = (halfWaySet - travelTimeBeginningOfHalfWay) / (travelTimeEndOfHalfWay - travelTimeBeginningOfHalfWay)
+          journeySplitRatio = (this._getHalfWayTime() - travelTimeBeginningOfHalfWay) / (travelTimeEndOfHalfWay - travelTimeBeginningOfHalfWay)
         } else {
           // removes segment time from half the total travel time until it reaches 0
           halfWay -= segment.travel_time
           // calculates the travel time so far
           timeSoFar += segment.travel_time
         }
-      })
+      }, this)
       // creates a Midl Marker at the nearest stop in the middle segment
       this.props.addMidlMarkerJourneyTime(this._setMidlMarker(journeySplitRatio, middleRoute))
       // sets journey times from each direction towards the Midl Marker (not very accurate!)
     } else {
       return null
     }
+  }
+
+  _getHalfWayTime(){
+    return this.state.route.travel_time / 2
   }
 
   _setMidlMarker(journeySplitRatio, middleRoute){
@@ -134,6 +148,12 @@ class JourneyTime extends React.Component {
   }
 
   requestRouteMidl() {
+    console.log(this.requestBody({
+        lat1: this.props.markers[0].position.lat,
+        lng1: this.props.markers[0].position.lng,
+        lat2: this.props.markers[1].position.lat,
+        lng2: this.props.markers[1].position.lng
+    }))
     fetch('https://api.traveltimeapp.com/v4/routes', {
       method: 'POST',
       headers: {
@@ -151,6 +171,7 @@ class JourneyTime extends React.Component {
     }).then(json => json.json())
     .then(response => this.setState({ route: response.results[0].locations[0].properties[0] }))
     .then(test => this.middleOfRoute())
+    .then(test => console.log(this.state.route))
   }
 
   renderJourneyTime() {
@@ -161,12 +182,14 @@ class JourneyTime extends React.Component {
             setMidlRequest={this.props.setMidlRequest}
             marker={this.props.markers[0]}
             midlMarker={this.props.midlMarker}
+            journeyType={this.journeyType}
             num={"A"}
             />
           <JourneyTimes
             setMidlRequest={this.props.setMidlRequest}
             marker={this.props.markers[1]}
             midlMarker={this.props.midlMarker}
+            journeyType={this.journeyType}
             num={"B"}
             />
         </div>

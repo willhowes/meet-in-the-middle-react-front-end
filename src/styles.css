@@ -1,7 +1,80 @@
+/* The container */
+.container {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-left: 32px;
+  margin-right: 32px;
+
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+  position: absolute;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 32px;
+  width: 32px;
+  background-color: #f3cad0;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 50%;
+}
+
+.transportIcon {
+  position: absolute;
+  top:5px;
+  left:5px
+}
+
+/* On mouse-over, add a grey background color */
+.checkmark:hover {
+  background-color: #ebf2sd;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
 .greeting {
   margin-left: "10px";
   font-family: "Verdana";
   padding: "5px"
+}
+
+.transportButton {
+  size: 20px;
 }
 
 h2 {
@@ -77,7 +150,6 @@ h2 {
 
 .myButton {
   outline:0;
-  margin-right: 3px;
   -moz-box-shadow: inset 0px 1px 0px 0px #dcecfb;
   -webkit-box-shadow: inset 0px 1px 0px 0px #dcecfb;
   box-shadow: inset 0px 1px 0px 0px #dcecfb;
@@ -108,7 +180,6 @@ h2 {
   padding: 6px 15px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #528ecc;
-  margin-top: 5px;
 }
 .myButton:hover {
   background: -webkit-gradient(
