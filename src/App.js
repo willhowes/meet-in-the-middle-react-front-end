@@ -8,6 +8,7 @@ import "./styles.css";
 import MidlLocation from "./MidlLocation";
 import NavBar from "./NavBar";
 import SignUp from "./SignUp";
+import LogIn from "./LogIn"
 
 class App extends React.Component {
   constructor(props) {
@@ -189,8 +190,21 @@ class App extends React.Component {
       return {
         newUser
       };
-  });
-}
+    });
+  }
+
+  showLogInForm() {
+    this.setState(state => {
+      let user = {
+        name: "",
+        email: "",
+        password: "",
+      };
+      return {
+        user
+      };
+    });
+  }
 
   render() {
     return (
@@ -233,6 +247,7 @@ class App extends React.Component {
         <div className="NavBarContainer">
           <NavBar
             addSignUpForm={this.showSignUpForm}
+            addLogInForm={this.showLogInForm}
           />
         </div>
 

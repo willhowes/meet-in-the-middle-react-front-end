@@ -109,32 +109,130 @@ h2 {
   padding: 0px;
   background-color: #ebf2ff;
   position: absolute;
-  z-index: 2;
-  top: 100px;
+  z-index: 1;
+  top: 200px;
   left: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .NavBarContainer {
-  margin: 4px !important;
   top: 0px;
-  position: fixed;
-  right: 5px;
+  position: absolute;
+  width: 100%;
+  height: 99px;
+  right: 0px;
+  border-bottom: 3px solid;
+  border-bottom-color: black;
+}
+
+.logo {
+  height: 73px;
+  margin: 12px;
+  position: absolute;
+  left: 27px;
 }
 
 .signUpContainer {
-  right: 5px;
-  position: fixed;
+  top: 102px;
+  position: absolute;
   display: block;
   padding: 0px;
-  background-color: #ebf2ff;
-  border-radius: 20px;
+  background-color: #f3cad0;
+  width: 101%;
+  height: 100vh;
+  z-index: 2;
+  left: 0px;
+  text-align: center;
+}
+
+.signUpForm {
+  background-color: white;
+  width: 500px;
+  text-align: center;
+  border: 3px solid;
+  border-radius: 73px;
+  margin-top: 38px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.formLogo {
+  height: 63px;
+  margin: 28px;
+  float: left;
+  margin-left: 30px;
+}
+
+.formFillIn {
+  top: 4px;
+  position: relative;
+  border-radius: 10px;
+  height: 35px;
+  font-size: 16px;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-align: center;
+  margin: 11px auto;
+  width: 80%;
+}
+
+.formHeading {
+  margin-top: 107px;
+  font-size: 22px;
+  font-family: 'Roboto Condensed', sans-serif;
+  position: relative;
+  top: -58px;
+  left: -27px;
+}
+
+.signUpAvatar {
+  height: 130px;
+  margin: 10px;
+  position: relative;
+  top: -30px;
+  left: 101px;
+}
+
+.selectAvatar {
+  position: relative;
+  margin: 0 auto;
+  left: -21px;
+  font-size: 12px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.uploadAvatarButton {
+  top: 133px;
+  text-align: center;
+  height: 17px;
+  font-size: 12px;
+  width: 13%;
+  left: -119px;
+  border: 2px solid;
+  border-color: #f3cad0;
+  border-radius: 26px;
+  margin: 16px;
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: black;
+  color: #f3cad0;
+  position: relative;
+}
+
+
+
+.passwordInfo {
+  font-size: 12px;
+  font-family: 'Roboto Condensed', sans-serif;
+  position: relative;
+  top: 9px;
+  left: -116px;
+}
+
+.avatarInfo {
+
+}
+
 .midlLocationContainer {
-  display: block;
+  /* display: block; */
   padding: 0px;
   background-color: #ebf2ff;
   position: absolute;
@@ -146,15 +244,31 @@ h2 {
 
 .journeyTime {
   display: block;
-  top: 100px;
   right: 20px;
   padding: 0px;
   background-color: #ebf2ff;
   position: absolute;
-  z-index: 2;
   margin-top: 5px;
+  z-index: 1;
+  top: 430px;
+  left: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.enterButton {
+  height: 39px;
+  width: 16%;
+  border: 2px solid;
+  border-color: #f3cad0;
+  border-radius: 26px;
+  margin: 16px;
+  font-size: 18px;
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: black;
+  color: #f3cad0;
+  position: relative;
+  top: -5px;
 }
 
 .address_text_box {
@@ -219,6 +333,16 @@ h2 {
   top: 1px;
 }
 
+.navBarButton {
+  outline: none;
+  border: none;
+  font-size: 23px;
+  font-family: 'Roboto Condensed', sans-serif;
+  position: absolute;
+  top: 34px;
+  right: 30px;
+}
+
 .mapContainer {
-  margin-top: 50px;
+  margin-top: 99px;
 }

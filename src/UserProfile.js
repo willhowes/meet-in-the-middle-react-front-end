@@ -2,34 +2,29 @@ import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
 import axios from "axios";
-import ImageUploader from 'react-images-upload';
 import "./styles.css";
-// import fs from "fs";
-import FormData from 'form-data';
 
-class SignUp extends React.Component {
+class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state =
     {
-    "avatar": "",
-		"name": "",
-		"email": "",
-		"password": "",
-		"passwordConfirmation": "",
-    showSignUp: true,
-
+    isEditing: false,
+    user: this.props.user,
+		// "photo": "",
+    // "name": "",
+		// "email": "",
+		// "password": "",
     };
+
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
   }
 
-
-fileChangedHandler = event => {
-  // console.log(event.target.files[0]);
-  this.setState({ avatar: event.target.files[0] })
-}
-
+  toggleEdit() {
+    this.setState({isEditing: !this.state.isEditing})
+  }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -37,36 +32,13 @@ fileChangedHandler = event => {
 
   onSubmit(e) {
     e.preventDefault();
-    this.setState(state => ({showLogIn: false}))
-    let data = new FormData();
-    console.log(e.target.avatar.files[0]);
-    data.append('user[avatar]', e.target.avatar.files[0])
-    data.append('user[name]', this.state.name)
-    data.append('user[email]', this.state.email)
-    data.append('user[password]', this.state.password)
-    data.append('user[password_confirmation]', this.state.passwordConfirmation)
-
-    axios({
-      method: 'post',
-      url: 'http://localhost:3001/users',
-      // url: 'https://meet-in-the-middle-backend-api.herokuapp.com/users',
-      data: data,
-      // data:  ({ user: this.state }),
-      header: {
-                'Accept': 'application/json',
-                'Content-Type': 'multipart/form-data',
-                // 'Content-Type': 'image/jpeg',
-              },
-        })
+    axios.post('https://meet-in-the-middle-backend-api.herokuapp.com/users', { user: this.state })
     .then(response => {
       console.log("yay");
-      console.log(({ user: this.state }));
-      this.setState(state => ({showSignUp: false}))
     	console.log(response)
     })
     .catch(error => {
       console.log("nooo");
-      console.log(({ user: this.state }));
         console.log(error.response)
     });
   }
@@ -75,7 +47,6 @@ fileChangedHandler = event => {
   render() {
   return (
     <div className="signUpContainer">
-
       <form
         onSubmit={e => {
           this.onSubmit(e);
@@ -85,10 +56,38 @@ fileChangedHandler = event => {
     <center> <div className="signUpForm">
       <img className="formLogo" src="midl-logo.png" />
         <div className="formHeading">
-          Create your meet in the midl account
+          View and edit your account details
         </div>
-        <img className="signUpAvatar" src={this.state.avatar}/>
-          <input name="avatar" className="selectAvatar" type="file" onChange={this.fileChangedHandler}/>
+
+        <div align="center">
+            <button
+              onClick={() => {
+                this.setState({ editing: true });
+              }}
+            >
+              Edit
+            </button>
+          </div>
+
+        <div className="formLabel">Name</div>
+        {this.state.editing ? (
+          <div className="userInfo">{this.state.name}</div>
+        ) : (
+          <input
+            type="text"
+            defaultValue={this.state.name}
+            className="formFillIn"
+            id="user_name"
+            type="text"
+            name="name"
+            onChange={this.onChange}
+          />
+        )}
+
+
+
+
+
 
           <center><input
             className="formFillIn"
@@ -119,15 +118,7 @@ fileChangedHandler = event => {
                 value={this.state.password}
                 onChange={this.onChange}
               />
-                <input
-                  className="formFillIn"
-                  id="user_password_confirmation"
-                  type="password"
-                  name="passwordConfirmation"
-                  placeholder={"Confirm password"}
-                  value={this.state.passwordConfirmation}
-                  onChange={this.onChange}
-                />
+
               <input
                 id="sign_up_button"
                 className="enterButton"
@@ -141,4 +132,4 @@ fileChangedHandler = event => {
   }
 }
 
-export default SignUp;
+export default UserProfile;
