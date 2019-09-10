@@ -8,7 +8,7 @@ class LocationForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: "",
+      query: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.loadAutocomplete = this.loadAutocomplete.bind(this);
@@ -24,7 +24,10 @@ class LocationForm extends React.Component {
     fetch(url)
       .then(json => json.json())
       .then(response =>
-        this.props.updateMarkers(response.results[0].geometry.location, this.props.formNum)
+        this.props.updateMarkers(
+          response.results[0].geometry.location,
+          this.props.formNum
+        )
       );
   }
 
@@ -38,7 +41,7 @@ class LocationForm extends React.Component {
     );
     autocomplete.setFields(["address_components", "formatted_address"]);
     autocomplete.addListener("place_changed", () =>
-      this._setAddress(autocomplete, event),
+      this._setAddress(autocomplete, event)
     );
   }
 
@@ -50,7 +53,7 @@ class LocationForm extends React.Component {
       this.setState({
         query: addressObject.formatted_address
       });
-      this.handleSubmit(event)
+      this.handleSubmit(event);
     }
   }
 
@@ -61,34 +64,34 @@ class LocationForm extends React.Component {
     return { bounds: london };
   }
 
-  handleKeyPress = (event) => {
-    if(event.key === 'Enter'){
-      this.handleSubmit(event)
+  handleKeyPress = event => {
+    if (event.key === "Enter") {
+      this.handleSubmit(event);
     }
-  }
+  };
 
   render() {
-    console.log('render LocationForm')
+    console.log("render LocationForm");
     return (
-      <div className="slider" >
-        <Script
-          url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places"
+      <div className="slider">
+        <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />
+        <center>
+          <p className="greeting">{this.props.greeting}</p>
+        </center>
+        <input
+          id={`address_text_box${this.props.formNum + 1}`}
+          className="address_text_box"
+          type="text"
+          placeholder={this.props.placeholder}
+          value={this.state.query}
+          onChange={e => {
+            this.loadAutocomplete(e);
+          }}
+          onKeyPress={this.handleKeyPress}
+          ref={input => {
+            this.nameInput = input;
+          }}
         />
-      <center><p className="greeting" >
-          {this.props.greeting}
-        </p></center>
-          <input
-            id={`address_text_box${this.props.formNum + 1}`}
-            className="address_text_box"
-            type="text"
-            placeholder={this.props.placeholder}
-            value={this.state.query}
-            onChange={e => {
-              this.loadAutocomplete(e);
-            }}
-            onKeyPress={this.handleKeyPress}
-            ref={(input) => { this.nameInput = input; }}
-          />
       </div>
     );
   }
