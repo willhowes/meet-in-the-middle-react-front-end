@@ -28,7 +28,7 @@ class Restaurants extends React.Component {
       })
     )
   } else {
-    return 'this is too hacky'
+    return null
   }
 }
 }

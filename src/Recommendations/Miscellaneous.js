@@ -11,7 +11,7 @@ class Miscellaneous extends React.Component {
     if (this.props.places !== undefined) {
       this.props.setMidlRequest(false)
     }
-    if (this.props.places.miscellaneous !== undefined) {
+    if (this.props.places.miscellaneous !== undefined && this.props.places.miscellaneous.length !== 0 ) {
     return (
       this.props.places.miscellaneous.map(function(place, i){
         return <div key={i}>
@@ -27,10 +27,10 @@ class Miscellaneous extends React.Component {
                 </div>
       })
     )
-  } else {
-    return 'this is too hacky'
+  } else if(this.props.places.miscellaneous.length === 0) {
+    return "Sorry, no midl matches found"
   }
-}
+  }
 }
 const listStyle = {
   color: 'orange',
