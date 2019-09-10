@@ -21,7 +21,6 @@ class Bars extends React.Component {
                     </Card.Body>
                     <ListGroup className="list-group-flush">
                       <ListGroupItem style={listStyle}>{`${place.rating} ${'★'.repeat(Math.round(place.rating))} (${place.user_ratings_total})`}</ListGroupItem>
-                      <ListGroupItem>{`${place.types[0]}, ${place.types[1]}, ${place.types[2]}`}</ListGroupItem>
                       <ListGroupItem>{place.vicinity}</ListGroupItem><br></br>
                     </ListGroup>
                     <Card.Body>
