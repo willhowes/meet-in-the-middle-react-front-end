@@ -35,15 +35,6 @@ class MidlLocation extends React.Component {
     }
   }
 
-  openCity(cityName) {
-    var i;
-    var x = document.getElementsByClassName("city");
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-    }
-    document.getElementById(cityName).hidden = false;
-  }
-
   render() {
     return (
       <div className="midlLocationContainer" id='midlLocation' style={this.style()}>

@@ -23,8 +23,6 @@ class Bars extends React.Component {
                       <ListGroupItem style={listStyle}>{`${place.rating} ${'★'.repeat(Math.round(place.rating))} (${place.user_ratings_total})`}</ListGroupItem>
                       <ListGroupItem>{place.vicinity}</ListGroupItem><br></br>
                     </ListGroup>
-                    <Card.Body>
-                    </Card.Body>
                   </Card>
                 </div>
       })
