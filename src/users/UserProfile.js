@@ -1,26 +1,21 @@
 import React from "react";
-import Script from "react-load-script";
 import PropTypes from "prop-types";
 import axios from "axios";
-import "../styles.css";
 import HomeLocation from "./HomeLocation";
 import WorkLocation from "./WorkLocation";
 import FormData from "form-data";
-
-const google = (window.google = window.google ? window.google : {});
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      avatar: "",
-      user: this.props.user,
+      avatar: null,
       photo: "",
-      name: "",
-      email: "",
-      password: "",
-      homeLocation: "",
-      workLocation: ""
+      name: this.props.currentUser.name || "",
+      email: this.props.currentUser.email || "",
+      homeLocation: this.props.currentUser.home_location || "",
+      workLocation: this.props.currentUser.work_location || "",
+      showForm: true,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -42,12 +37,10 @@ class UserProfile extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.setState(state => ({ showLogIn: false }));
     let data = new FormData();
     data.append("user[avatar]", e.target.avatar.files[0]);
     data.append("user[name]", this.state.name);
     data.append("user[email]", this.state.email);
-    data.append("user[password]", this.state.password);
     data.append("user[home_location]", this.state.homeLocation);
     data.append("user[work_location]", this.state.workLocation);
 
@@ -62,94 +55,87 @@ class UserProfile extends React.Component {
     })
       .then(response => {
         console.log("yay");
-        console.log({ user: this.state });
-        this.setState(state => ({ showSignUp: false }));
-        console.log(response);
+        this.setState({ showForm: false });
+        console.log("success: ", response);
       })
       .catch(error => {
-        console.log("nooo");
-        console.log({ user: this.state });
-        console.log(error.response);
+        console.error("nooo");
+        console.error(error.response);
       });
   }
 
 
   render() {
     return (
-      <div className="signUpContainer">
-        <form
-          onSubmit={e => {
-            this.onSubmit(e);
-          }}
-        >
-          <center>
-            {" "}
-            <div className="signUpForm">
-              <img className="formLogo" src="midl-logo.png" />
-              <div className="formHeading">
-                Edit your account details
-              </div>
-              <div align="center">
-              </div>
-              <img className="signUpAvatar" src={this.state.avatar} />
-              <input
-                name="avatar"
-                className="selectAvatar"
-                type="file"
-                onChange={this.fileChangedHandler}
-              />
+      <div>
+        {this.state.showForm ? (
+          <div className="signUpContainer">
+            <form
+              onSubmit={e => {
+                this.onSubmit(e);
+              }}
+            >
               <center>
-                <input
-                  className="formFillIn"
-                  id="user_name"
-                  type="text"
-                  name="name"
-                  placeholder={"Name"}
-                  value={this.state.name}
-                  onChange={this.onChange}
-                />
-              </center>
-              <input
-                className="formFillIn"
-                id="user_email"
-                type="text"
-                placeholder={"Email address"}
-                name="email"
-                value={this.state.email}
-                onChange={this.onChange}
-              />
-              <div className="passwordInfo">
                 {" "}
-                Password must be at least 6 letters{" "}
-              </div>
-              <input
-                className="formFillIn"
-                id="user_password"
-                type="password"
-                placeholder={"Password"}
-                name="password"
-                value={this.state.password}
-                onChange={this.onChange}
-              />
-              <div>
-                <HomeLocation homeLocation={this.state.homeLocation} />
-              </div>
-              <div>
-                <WorkLocation workLocation={this.state.workLocation} />
-              </div>
+                <div className="signUpForm">
+                  <img className="formLogo" src="midl-logo.png" />
+                  <div className="formHeading">
+                    Edit your account details
+                  </div>
+                  <div align="center">
+                  </div>
+                  <img className="signUpAvatar" src={this.state.avatar} />
+                  <input
+                    name="avatar"
+                    className="selectAvatar"
+                    type="file"
+                    onChange={this.fileChangedHandler}
+                  />
+                  <center>
+                    <input
+                      className="formFillIn"
+                      id="user_name"
+                      type="text"
+                      name="name"
+                      placeholder={"Name"}
+                      value={this.state.name}
+                      onChange={this.onChange}
+                    />
+                  </center>
+                  <input
+                    className="formFillIn"
+                    id="user_email"
+                    type="text"
+                    placeholder={"Email address"}
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.onChange}
+                  />
+                  <div>
+                    <HomeLocation homeLocation={this.state.homeLocation} />
+                  </div>
+                  <div>
+                    <WorkLocation workLocation={this.state.workLocation} />
+                  </div>
 
-              <input
-                id="sign_up_button"
-                className="enterButton"
-                type="submit"
-                value="Update"
-              />
-            </div>{" "}
-          </center>
-        </form>
+                  <input
+                    id="sign_up_button"
+                    className="enterButton"
+                    type="submit"
+                    value="Update"
+                  />
+                </div>{" "}
+              </center>
+            </form>
+          </div>
+        ): null}
       </div>
     );
   }
+}
+
+UserProfile.propTypes = {
+  currentUser: PropTypes.object.isRequired,
 }
 
 export default UserProfile;
