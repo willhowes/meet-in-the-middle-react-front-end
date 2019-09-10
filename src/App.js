@@ -5,6 +5,9 @@ import LocationFinder from "./locationFinder/LocationFinder";
 import MidlLocation from "./midlLocation/MidlLocation";
 import JourneyTime from "./JourneyTimes/JourneyTime";
 import "./styles.css";
+import MidlLocation from "./MidlLocation";
+import NavBar from "./NavBar";
+import SignUp from "./SignUp";
 
 class App extends React.Component {
   constructor(props) {
@@ -175,6 +178,20 @@ class App extends React.Component {
     }
   }
 
+  showSignUpForm() {
+    this.setState(state => {
+      let newUser = {
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: ""
+      };
+      return {
+        newUser
+      };
+  });
+}
+
   render() {
     return (
       <div>
@@ -205,7 +222,7 @@ class App extends React.Component {
             />
           </div>
         </div>
-        <div>
+        <div className="mapContainer">
           <MapContainer
             mapCenterLat={this.state.mapCenterLat}
             mapCenterLng={this.state.mapCenterLng}
@@ -213,6 +230,14 @@ class App extends React.Component {
             midlMarker={this.state.midlMarker}
           />
         </div>
+        <div className="NavBarContainer">
+          <NavBar
+            addSignUpForm={this.showSignUpForm}
+          />
+        </div>
+
+
+
       </div>
     );
   }
