@@ -10,7 +10,6 @@
   user-select: none;
   margin-left: 32px;
   margin-right: 32px;
-
 }
 
 /* Hide the browser's default radio button */
@@ -36,8 +35,8 @@
 
 .transportIcon {
   position: absolute;
-  top:5px;
-  left:5px
+  top: 5px;
+  left: 5px;
 }
 
 /* On mouse-over, add a grey background color */
@@ -47,7 +46,7 @@
 
 /* When the radio button is checked, add a blue background */
 .container input:checked ~ .checkmark {
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -59,18 +58,18 @@
 
 /* Style the indicator (dot/circle) */
 .container .checkmark:after {
- 	top: 9px;
-	left: 9px;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: white;
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
 }
 
 .greeting {
   margin-left: "10px";
   font-family: "Verdana";
-  padding: "5px"
+  padding: "5px";
 }
 
 .transportButton {
@@ -79,7 +78,7 @@
 
 h2 {
   padding: 10px;
-  margin: 0px
+  margin: 0px;
 }
 
 .slider {
@@ -122,8 +121,7 @@ h2 {
   width: 100%;
   height: 99px;
   right: 0px;
-  border-bottom: 3px solid;
-  border-bottom-color: black;
+  border-bottom: 3px solid black;
 }
 
 .logo {
@@ -169,7 +167,7 @@ h2 {
   border-radius: 10px;
   height: 35px;
   font-size: 16px;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   text-align: center;
   margin: 11px auto;
   width: 80%;
@@ -178,7 +176,7 @@ h2 {
 .formHeading {
   margin-top: 107px;
   font-size: 22px;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   position: relative;
   top: -58px;
   left: -27px;
@@ -197,7 +195,7 @@ h2 {
   margin: 0 auto;
   left: -21px;
   font-size: 12px;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .uploadAvatarButton {
@@ -211,24 +209,21 @@ h2 {
   border-color: #f3cad0;
   border-radius: 26px;
   margin: 16px;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   background-color: black;
   color: #f3cad0;
   position: relative;
 }
 
-
-
 .passwordInfo {
   font-size: 12px;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   position: relative;
   top: 9px;
   left: -116px;
 }
 
 .avatarInfo {
-
 }
 
 .midlLocationContainer {
@@ -264,7 +259,7 @@ h2 {
   border-radius: 26px;
   margin: 16px;
   font-size: 18px;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   background-color: black;
   color: #f3cad0;
   position: relative;
@@ -276,11 +271,11 @@ h2 {
   width: 300px;
   margin-right: 10px;
   border-radius: 10px;
-  outline:0
+  outline: 0;
 }
 
 .myButton {
-  outline:0;
+  outline: 0;
   -moz-box-shadow: inset 0px 1px 0px 0px #dcecfb;
   -webkit-box-shadow: inset 0px 1px 0px 0px #dcecfb;
   box-shadow: inset 0px 1px 0px 0px #dcecfb;
@@ -337,12 +332,12 @@ h2 {
   outline: none;
   border: none;
   font-size: 23px;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   position: absolute;
   top: 34px;
   right: 30px;
 }
 
 .mapContainer {
-  margin-top: 99px;
+  margin-top: 102px;
 }

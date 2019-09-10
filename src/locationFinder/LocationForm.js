@@ -1,6 +1,5 @@
 import React from "react";
 import Script from "react-load-script";
-import "../styles.css";
 
 const google = (window.google = window.google ? window.google : {});
 

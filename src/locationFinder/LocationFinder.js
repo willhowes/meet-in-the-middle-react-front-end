@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles.css";
 import LocationForm from "./LocationForm.js";
 import FindMidlButton from "../buttons/FindMidlButton.js";
 import TransportTypeSelector from "./TransportTypeSelector.js";
