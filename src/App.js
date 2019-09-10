@@ -29,7 +29,8 @@ class App extends React.Component {
       ],
       places: [],
       findMidl: false,
-      midLJourneyType: "public_transport"
+      midLJourneyType: "public_transport",
+      currentUser: ""
     };
     this.addMidlMarkerGeographic = this.addMidlMarkerGeographic.bind(this);
     this.addMidlMarkerJourneyTime = this.addMidlMarkerJourneyTime.bind(this);
@@ -62,7 +63,8 @@ class App extends React.Component {
       this.state.markers !== nextState.markers ||
       this.state.findMidl !== nextState.findMidl ||
       this.state.midlMarker !== nextState.midlMarker ||
-      this.state.places !== nextState.places
+      this.state.places !== nextState.places ||
+      this.state.currentUser !== nextState.currentUser
     ) {
       return true;
     } else {
@@ -223,7 +225,18 @@ class App extends React.Component {
     });
   }
 
+  updateCurrentUser(user) {
+    console.log("USER")
+    console.log(user)
+    console.log("UPDATE CURRENT USER WORKS")
+    this.setState({
+      currentUser: user
+    });
+  }
+
   render() {
+    console.log("RENDER CURRENT USER")
+    console.log(this.state.currentUser)
     return (
       <div>
         <div className="journeyTime">
@@ -265,6 +278,11 @@ class App extends React.Component {
           <NavBar
             addSignUpForm={this.showSignUpForm}
             addLogInForm={this.showLogInForm}
+          />
+        </div>
+        <div className="LogInContainer">
+          <LogIn
+            updateCurrentUser={this.updateCurrentUser}
           />
         </div>
       </div>

@@ -28,7 +28,8 @@ class LogIn extends React.Component {
       .then(response => {
         console.log("THIS WORKS");
         this.setState(state => ({ showLogIn: false }));
-        console.log(response);
+        console.log(response.data.user);
+        this.props.updateCurrentUser(response.data.user) 
       })
       .catch(error => {
         console.log("nooo");

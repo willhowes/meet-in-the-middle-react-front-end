@@ -5,6 +5,7 @@ import axios from "axios";
 import "../styles.css";
 import HomeLocation from "./HomeLocation";
 import WorkLocation from "./WorkLocation";
+import FormData from "form-data";
 
 const google = (window.google = window.google ? window.google : {});
 
@@ -12,7 +13,7 @@ class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isEditing: false,
+      avatar: "",
       user: this.props.user,
       photo: "",
       name: "",
@@ -27,6 +28,10 @@ class UserProfile extends React.Component {
     this.toggleEdit = this.toggleEdit.bind(this);
   }
 
+  fileChangedHandler = event => {
+    this.setState({ avatar: event.target.files[0] });
+  };
+
   toggleEdit() {
     this.setState({ isEditing: !this.state.isEditing });
   }
@@ -37,13 +42,41 @@ class UserProfile extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    axios
-      .post("https://meet-in-the-middle-backend-api.herokuapp.com/users", {
-        user: this.state
+    this.setState(state => ({ showLogIn: false }));
+    let data = new FormData();
+    console.log(e.target.avatar.files[0]);
+    data.append("user[avatar]", e.target.avatar.files[0]);
+    data.append("user[name]", this.state.name);
+    data.append("user[email]", this.state.email);
+    data.append("user[password]", this.state.password);
+    data.append("user[home_location]", this.state.homeLocation);
+    data.append("user[work_location]", this.state.workLocation);
+
+    axios({
+      method: "patch",
+      url: "http://localhost:3001/users/",
+      // url: 'https://meet-in-the-middle-backend-api.herokuapp.com/users',
+      data: data,
+      // data:  ({ user: this.state }),
+      header: {
+        Accept: "application/json",
+        "Content-Type": "multipart/form-data"
+        // 'Content-Type': 'image/jpeg',
+      }
+    })
+      .then(response => {
+        console.log("yay");
+        console.log({ user: this.state });
+        this.setState(state => ({ showSignUp: false }));
+        console.log(response);
       })
-      .then(response => {})
-      .catch(error => {});
+      .catch(error => {
+        console.log("nooo");
+        console.log({ user: this.state });
+        console.log(error.response);
+      });
   }
+
 
   render() {
     return (
@@ -58,31 +91,17 @@ class UserProfile extends React.Component {
             <div className="signUpForm">
               <img className="formLogo" src="midl-logo.png" />
               <div className="formHeading">
-                View and edit your account details
+                Edit your account details
               </div>
               <div align="center">
-                <button
-                  onClick={() => {
-                    this.setState({ editing: true });
-                  }}
-                >
-                  Edit
-                </button>
               </div>
-              <div className="formLabel">Name</div>
-              {this.state.editing ? (
-                <div className="userInfo">{this.state.name}</div>
-              ) : (
-                <input
-                  type="text"
-                  defaultValue={this.state.name}
-                  className="formFillIn"
-                  id="user_name"
-                  type="text"
-                  name="name"
-                  onChange={this.onChange}
-                />
-              )}
+              <img className="signUpAvatar" src={this.state.avatar} />
+              <input
+                name="avatar"
+                className="selectAvatar"
+                type="file"
+                onChange={this.fileChangedHandler}
+              />
               <center>
                 <input
                   className="formFillIn"
@@ -127,7 +146,7 @@ class UserProfile extends React.Component {
                 id="sign_up_button"
                 className="enterButton"
                 type="submit"
-                value="Sign up"
+                value="Update"
               />
             </div>{" "}
           </center>
