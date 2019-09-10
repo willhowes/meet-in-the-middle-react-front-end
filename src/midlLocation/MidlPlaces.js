@@ -6,7 +6,9 @@ import ListGroupItem from 'react-bootstrap/ListGroupItem';
 class MidlPlaces extends React.Component {
 
   render() {
-    if (this.props.places.length > 0) {
+    console.log('HERE!!!!!!!!!')
+    console.log(this.props.places.bars)
+    if (this.props.places.bars.length > 0) {
       this.props.setMidlRequest(false)
     }
     return (

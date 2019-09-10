@@ -127,7 +127,6 @@ class App extends React.Component {
         "&radius=500&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4"
       fetch(url)
       .then(res => res.json())
-
       .then(res => this.setState({places: this.categorisePlaces(res.results)}))
       .then(res => console.log(this.state.places))
     }
