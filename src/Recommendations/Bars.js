@@ -11,7 +11,7 @@ class Bars extends React.Component {
     if (this.props.places !== undefined) {
       this.props.setMidlRequest(false)
     }
-    if (this.props.places.bars !== undefined) {
+    if (this.props.places.bars !== undefined && this.props.places.bars.length !== 0 ) {
     return (
       this.props.places.bars.map(function(place, i){
         return <div key={i}>
@@ -27,6 +27,8 @@ class Bars extends React.Component {
                 </div>
       })
     )
+  } else if(this.props.places.bars !== undefined && this.props.places.bars.length === 0 ) {
+    return "Sorry, no midl matches found"
   } else {
     return null
   }

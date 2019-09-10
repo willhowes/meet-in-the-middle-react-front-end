@@ -11,7 +11,7 @@ class Cafes extends React.Component {
     if (this.props.places !== undefined) {
       this.props.setMidlRequest(false)
     }
-    if (this.props.places.cafes !== undefined) {
+    if (this.props.places.cafes !== undefined && this.props.places.cafes.length !== 0 ) {
     return (
       this.props.places.cafes.map(function(place, i){
         return <div key={i}>
@@ -27,6 +27,8 @@ class Cafes extends React.Component {
                 </div>
       })
     )
+  } else if (this.props.places.cafes !== undefined && this.props.places.cafes.length === 0 ) {
+    return "Sorry, no midl matches found"
   } else {
     return null
   }

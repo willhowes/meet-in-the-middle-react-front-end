@@ -27,8 +27,10 @@ class Miscellaneous extends React.Component {
                 </div>
       })
     )
-  } else if(this.props.places.miscellaneous.length === 0) {
+  } else if(this.props.places.miscellaneous !== undefined && this.props.places.miscellaneous.length === 0) {
     return "Sorry, no midl matches found"
+  } else {
+    return null
   }
   }
 }

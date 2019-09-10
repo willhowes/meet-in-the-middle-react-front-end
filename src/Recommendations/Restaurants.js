@@ -11,7 +11,7 @@ class Restaurants extends React.Component {
     if (this.props.places !== undefined) {
       this.props.setMidlRequest(false)
     }
-    if (this.props.places.restaurants !== undefined) {
+    if (this.props.places.restaurants !== undefined && this.props.places.restaurants.length !== 0 ) {
     return (
       this.props.places.restaurants.map(function(place, i){
         return <div key={i}>
@@ -27,11 +27,14 @@ class Restaurants extends React.Component {
                 </div>
       })
     )
+  } else if (this.props.places.restaurants !== undefined && this.props.places.restaurants.length === 0 ) {
+    return "Sorry, no midl matches found"
   } else {
     return null
   }
 }
 }
+
 const listStyle = {
   color: 'orange',
   fontFamily: 'Roboto Condensed'

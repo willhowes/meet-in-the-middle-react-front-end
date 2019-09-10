@@ -11,7 +11,7 @@ class Museums extends React.Component {
     if (this.props.places !== undefined) {
       this.props.setMidlRequest(false)
     }
-    if (this.props.places.museums !== undefined) {
+    if (this.props.places.museums !== undefined && this.props.places.museums.length !== 0 ) {
     return (
       this.props.places.museums.map(function(place, i){
         return <div key={i}>
@@ -27,6 +27,8 @@ class Museums extends React.Component {
                 </div>
       })
     )
+  } else if (this.props.places.museums !== undefined && this.props.places.museums.length === 0 ) {
+    return "Sorry, no midl matches found"
   } else {
     return null
   }
