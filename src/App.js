@@ -5,7 +5,6 @@ import LocationFinder from "./locationFinder/LocationFinder";
 import MidlLocation from "./midlLocation/MidlLocation";
 import JourneyTime from "./JourneyTimes/JourneyTime";
 import "./styles.css";
-import MidlLocation from "./MidlLocation";
 import NavBar from "./NavBar";
 import SignUp from "./SignUp";
 import LogIn from "./LogIn"
