@@ -44,7 +44,6 @@ class UserProfile extends React.Component {
     e.preventDefault();
     this.setState(state => ({ showLogIn: false }));
     let data = new FormData();
-    console.log(e.target.avatar.files[0]);
     data.append("user[avatar]", e.target.avatar.files[0]);
     data.append("user[name]", this.state.name);
     data.append("user[email]", this.state.email);
@@ -54,14 +53,11 @@ class UserProfile extends React.Component {
 
     axios({
       method: "patch",
-      url: "http://localhost:3001/users/",
-      // url: 'https://meet-in-the-middle-backend-api.herokuapp.com/users',
+      url: `https://localhost:3001/users/${this.props.currentUser.id}`,
       data: data,
-      // data:  ({ user: this.state }),
       header: {
         Accept: "application/json",
         "Content-Type": "multipart/form-data"
-        // 'Content-Type': 'image/jpeg',
       }
     })
       .then(response => {

@@ -8,6 +8,8 @@ import "./styles.css";
 import NavBar from "./users/NavBar";
 import SignUp from "./users/SignUp";
 import LogIn from "./users/LogIn";
+import UserProfile from "./users/UserProfile";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -283,6 +285,11 @@ class App extends React.Component {
         <div className="LogInContainer">
           <LogIn
             updateCurrentUser={this.updateCurrentUser}
+          />
+        </div>
+        <div className="UserProfile">
+          <UserProfile
+            currentUser={this.state.currentUser}
           />
         </div>
       </div>

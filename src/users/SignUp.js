@@ -58,6 +58,7 @@ class SignUp extends React.Component {
         console.log("yay");
         console.log({ user: this.state });
         this.setState(state => ({ showSignUp: false }));
+        this.props.updateCurrentUser(response.data.user) 
         console.log(response);
       })
       .catch(error => {
