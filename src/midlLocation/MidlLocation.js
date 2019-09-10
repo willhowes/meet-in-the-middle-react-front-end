@@ -1,10 +1,10 @@
 import React from "react";
-import Bars from "./Bars";
-import Restaurants from "./Restaurants";
-import Cafes from "./Cafes";
-import Lodgings from "./Lodgings";
-import Museums from "./Museums";
-import Miscellaneous from "./Miscellaneous";
+import Bars from "../Recommendations/Bars";
+import Restaurants from "../Recommendations/Restaurants";
+import Cafes from "../Recommendations/Cafes";
+import Lodgings from "../Recommendations/Lodgings";
+import Museums from "../Recommendations/Museums";
+import Miscellaneous from "../Recommendations/Miscellaneous";
 
 class MidlLocation extends React.Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class MidlLocation extends React.Component {
     return (
       <div className="midlLocationContainer" id='midlLocation' style={this.style()}>
         <p style={{ margin: '10px' }} className="greeting" >
-          Your Midl point is: {this.props.midlLocation}
+          Your Midl point is: fuck
         </p>
         <div style={{ margin: "10px", overflowY: "scroll", maxHeight:"250px" }}>
           <Bars setMidlRequest={this.props.setMidlRequest} places={this.props.places} />

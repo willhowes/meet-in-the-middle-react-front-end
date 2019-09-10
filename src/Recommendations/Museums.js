@@ -11,9 +11,9 @@ class Museums extends React.Component {
     if (this.props.places !== undefined) {
       this.props.setMidlRequest(false)
     }
-    if (this.props.places.bars !== undefined) {
+    if (this.props.places.museums !== undefined) {
     return (
-      this.props.places.bars.map(function(place, i){
+      this.props.places.museums.map(function(place, i){
         return <div key={i}>
                   <Card style={{ width: '18rem' }}>
                     <Card.Body>
