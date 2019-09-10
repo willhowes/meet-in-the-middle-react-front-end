@@ -34,19 +34,41 @@ class MidlLocation extends React.Component {
     }
   }
 
+  openCity(cityName) {
+    var i;
+    var x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    document.getElementById(cityName).hidden = false;
+  }
+
   render() {
     return (
       <div className="midlLocationContainer" id='midlLocation' style={this.style()}>
-        <p style={{ margin: '10px' }} className="greeting" >
-          Your Midl point is: fuck
-        </p>
         <div style={{ margin: "10px", overflowY: "scroll", maxHeight:"250px" }}>
-          <Bars setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
-          <Restaurants setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
-          <Cafes setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
-          <Lodgings setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
-          <Museums setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
-          <Miscellaneous setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          
+        <div id="London" class="city">
+        <h2>London</h2>
+        <p>London is the capital of England.</p>
+      </div>
+
+      <div id="Paris" className="city" hidden={true}>
+        <h2>Paris</h2>
+        <p>Paris is the capital of France.</p>
+      </div>
+
+      <div id="Tokyo" className="city" hidden={true}>
+        <h2>Tokyo</h2>
+        <p>Tokyo is the capital of Japan.</p>
+      </div>
+
+      <div class="w3-bar w3-black">
+        <button class="w3-bar-item w3-button" onclick={this.openCity("London")}>London</button>
+        <button class="w3-bar-item w3-button" onclick={this.openCity("Paris")}>Paris</button>
+        <button class="w3-bar-item w3-button" onclick={this.openCity("Tokyo")}>Tokyo</button>
+      </div>
+
         </div>
       </div>
     );
@@ -54,3 +76,10 @@ class MidlLocation extends React.Component {
 }
 
 export default MidlLocation;
+
+{/* <Bars setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+<Restaurants setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+<Cafes setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+<Lodgings setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+<Museums setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+<Miscellaneous setMidlRequest={this.props.setMidlRequest} places={this.props.places} /> */}
