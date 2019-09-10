@@ -1,4 +1,5 @@
 import React from "react";
+import Tabs from '../tabs/Tabs'
 import Bars from "../Recommendations/Bars";
 import Restaurants from "../Recommendations/Restaurants";
 import Cafes from "../Recommendations/Cafes";
@@ -48,26 +49,14 @@ class MidlLocation extends React.Component {
       <div className="midlLocationContainer" id='midlLocation' style={this.style()}>
         <div style={{ margin: "10px", overflowY: "scroll", maxHeight:"250px" }}>
           
-        <div id="London" class="city">
-        <h2>London</h2>
-        <p>London is the capital of England.</p>
-      </div>
+        <Tabs>
+          <div label='Bars'>
 
-      <div id="Paris" className="city" hidden={true}>
-        <h2>Paris</h2>
-        <p>Paris is the capital of France.</p>
-      </div>
-
-      <div id="Tokyo" className="city" hidden={true}>
-        <h2>Tokyo</h2>
-        <p>Tokyo is the capital of Japan.</p>
-      </div>
-
-      <div class="w3-bar w3-black">
-        <button class="w3-bar-item w3-button" onclick={this.openCity("London")}>London</button>
-        <button class="w3-bar-item w3-button" onclick={this.openCity("Paris")}>Paris</button>
-        <button class="w3-bar-item w3-button" onclick={this.openCity("Tokyo")}>Tokyo</button>
-      </div>
+          </div>
+          <div label='Parks'>
+            Park 1, Park 2
+          </div>
+        </Tabs>
 
         </div>
       </div>
