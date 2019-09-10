@@ -11,6 +11,7 @@ class LogIn extends React.Component {
     {
 		"email": "",
 		"password": "",
+    showLogIn: true
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -22,9 +23,11 @@ class LogIn extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    axios.post('http://localhost:3001', { session: this.state })
+    console.log({session: this.state.showLogIn});
+    axios.post('http://localhost:3001/sessions', { session: this.state })
     .then(response => {
       console.log("THIS WORKS");
+      this.setState(state => ({showLogIn: false}))
     	console.log(response)
     })
     .catch(error => {
@@ -35,7 +38,15 @@ class LogIn extends React.Component {
 
   render() {
   return (
+
+    <div>
+
+    { this.state.showLogIn ?
+
+
     <div className="signUpContainer">
+
+
       <form
         onSubmit={e => {
           this.onSubmit(e);
@@ -76,8 +87,16 @@ class LogIn extends React.Component {
               />
 
             </div>
-        </center> </form>
+        </center>
+        < /form>
       </div>
+
+        :
+        null
+      }
+
+      </div>
+
     );
   }
 }

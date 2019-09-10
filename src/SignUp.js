@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import ImageUploader from 'react-images-upload';
 import "./styles.css";
-
+// import fs from "fs";
+import FormData from 'form-data';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class SignUp extends React.Component {
 		"email": "",
 		"password": "",
 		"passwordConfirmation": "",
+    showSignUp: true,
 
     };
     this.onChange = this.onChange.bind(this);
@@ -24,7 +26,7 @@ class SignUp extends React.Component {
 
 
 fileChangedHandler = event => {
-  console.log(event.target.files[0]);
+  // console.log(event.target.files[0]);
   this.setState({ avatar: event.target.files[0] })
 }
 
@@ -35,19 +37,31 @@ fileChangedHandler = event => {
 
   onSubmit(e) {
     e.preventDefault();
+    this.setState(state => ({showLogIn: false}))
+    let data = new FormData();
+    console.log(e.target.avatar.files[0]);
+    data.append('user[avatar]', e.target.avatar.files[0])
+    data.append('user[name]', this.state.name)
+    data.append('user[email]', this.state.email)
+    data.append('user[password]', this.state.password)
+    data.append('user[password_confirmation]', this.state.passwordConfirmation)
+
     axios({
       method: 'post',
       url: 'http://localhost:3001/users',
       // url: 'https://meet-in-the-middle-backend-api.herokuapp.com/users',
-      data:  ({ user: this.state }),
+      data: data,
+      // data:  ({ user: this.state }),
       header: {
                 'Accept': 'application/json',
                 'Content-Type': 'multipart/form-data',
+                // 'Content-Type': 'image/jpeg',
               },
         })
     .then(response => {
       console.log("yay");
       console.log(({ user: this.state }));
+      this.setState(state => ({showSignUp: false}))
     	console.log(response)
     })
     .catch(error => {
@@ -61,6 +75,7 @@ fileChangedHandler = event => {
   render() {
   return (
     <div className="signUpContainer">
+
       <form
         onSubmit={e => {
           this.onSubmit(e);
@@ -73,7 +88,7 @@ fileChangedHandler = event => {
           Create your meet in the midl account
         </div>
         <img className="signUpAvatar" src={this.state.avatar}/>
-          <input className="selectAvatar" type="file" onChange={this.fileChangedHandler}/>
+          <input name="avatar" className="selectAvatar" type="file" onChange={this.fileChangedHandler}/>
 
           <center><input
             className="formFillIn"
