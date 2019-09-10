@@ -119,6 +119,9 @@ class UserProfile extends React.Component {
               <div>
                 <HomeLocation homeLocation={this.state.homeLocation} />
               </div>
+              <div>
+                <WorkLocation workLocation={this.state.workLocation} />
+              </div>
 
               <input
                 id="sign_up_button"
