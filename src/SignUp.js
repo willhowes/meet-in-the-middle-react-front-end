@@ -39,7 +39,6 @@ fileChangedHandler = event => {
     e.preventDefault();
     this.setState(state => ({showLogIn: false}))
     let data = new FormData();
-    console.log(e.target.avatar.files[0]);
     data.append('user[avatar]', e.target.avatar.files[0])
     data.append('user[name]', this.state.name)
     data.append('user[email]', this.state.email)
@@ -51,7 +50,6 @@ fileChangedHandler = event => {
       url: 'http://localhost:3001/users',
       // url: 'https://meet-in-the-middle-backend-api.herokuapp.com/users',
       data: data,
-      // data:  ({ user: this.state }),
       header: {
                 'Accept': 'application/json',
                 'Content-Type': 'multipart/form-data',
@@ -59,14 +57,10 @@ fileChangedHandler = event => {
               },
         })
     .then(response => {
-      console.log("yay");
-      console.log(({ user: this.state }));
       this.setState(state => ({showSignUp: false}))
     	console.log(response)
     })
     .catch(error => {
-      console.log("nooo");
-      console.log(({ user: this.state }));
         console.log(error.response)
     });
   }
