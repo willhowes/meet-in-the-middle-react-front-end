@@ -9,8 +9,9 @@ const google = (window.google = window.google ? window.google : {});
 class HomeLocation extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    // };
+    this.state = {
+      homeLocation: ""
+    };
 
     // this.onChange = this.onChange.bind(this);
     // this.onSubmit = this.onSubmit.bind(this);
@@ -67,12 +68,6 @@ class HomeLocation extends React.Component {
       "+CA&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
     fetch(url)
       .then(json => json.json())
-      .then(response =>
-        this.props.updateMarkers(
-          response.results[0].geometry.location,
-          this.props.formNum
-        )
-      );
   }
 
   render() {
@@ -91,7 +86,7 @@ class HomeLocation extends React.Component {
           type="text"
           name="home_location_text_box"
           placeholder="Enter Home Location"
-          value={this.props.homeLocation}
+          value={this.state.homeLocation}
           onChange={e => {
             this.loadAutocomplete(e);
           }}
