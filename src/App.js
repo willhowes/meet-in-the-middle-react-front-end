@@ -5,9 +5,9 @@ import LocationFinder from "./locationFinder/LocationFinder";
 import MidlLocation from "./midlLocation/MidlLocation";
 import JourneyTime from "./JourneyTimes/JourneyTime";
 import "./styles.css";
-import NavBar from "./NavBar";
-import SignUp from "./SignUp";
-import LogIn from "./LogIn"
+import NavBar from "./users/NavBar";
+import SignUp from "./users/SignUp";
+import LogIn from "./users/LogIn";
 
 class App extends React.Component {
   constructor(props) {
@@ -18,13 +18,15 @@ class App extends React.Component {
       mapCenterLat: 51.517432,
       mapCenterLng: -0.073262,
       markers: [],
-      midlMarker: [{
-        name: "",
-        position: {
-          lat: '',
-          lng: ''
+      midlMarker: [
+        {
+          name: "",
+          position: {
+            lat: "",
+            lng: ""
+          }
         }
-      }],
+      ],
       places: [],
       findMidl: false,
       midLJourneyType: "public_transport"
@@ -44,31 +46,36 @@ class App extends React.Component {
   }
 
   changeMidlJourneyType(type) {
-    this.setState({midLJourneyType: type})
+    this.setState({ midLJourneyType: type });
   }
 
   updateMarkers(position, index) {
     if (this.state.markers[index] === undefined) {
-      this.addMarker(position, index)
+      this.addMarker(position, index);
     } else {
-      this.updateMarker(position, index)
+      this.updateMarker(position, index);
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    if (this.state.markers !== nextState.markers ||
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      this.state.markers !== nextState.markers ||
       this.state.findMidl !== nextState.findMidl ||
       this.state.midlMarker !== nextState.midlMarker ||
-      this.state.places !== nextState.places) {
-      return true
+      this.state.places !== nextState.places
+    ) {
+      return true;
     } else {
-      return false
+      return false;
     }
   }
 
   addMarker(position, index) {
     this.setState(state => {
-      const markers = [...state.markers, this._createMarker(position, `Location ${index + 1}`)];
+      const markers = [
+        ...state.markers,
+        this._createMarker(position, `Location ${index + 1}`)
+      ];
       return {
         mapCenterLat: position.lat,
         mapCenterLng: position.lng,
@@ -77,16 +84,18 @@ class App extends React.Component {
     });
   }
 
-  setMidlRequest(bol){
-    this.setState({ findMidl: bol })
+  setMidlRequest(bol) {
+    this.setState({ findMidl: bol });
   }
 
-  _createMarker(position, name){
-    return { name: name,
+  _createMarker(position, name) {
+    return {
+      name: name,
       position: {
         lat: position.lat,
         lng: position.lng
-      }}
+      }
+    };
   }
 
   updateMarker(position, index) {
@@ -94,32 +103,43 @@ class App extends React.Component {
       mapCenterLat: position.lat,
       mapCenterLng: position.lng,
       markers: update(this.state.markers, {
-        [index]: {position: {$set: {lat: position.lat, lng: position.lng}
-          }
+        [index]: {
+          position: { $set: { lat: position.lat, lng: position.lng } }
         }
       })
     });
   }
 
   addMidlMarkerJourneyTime(newMarker) {
-    this.setState(() => ({
-      midlLocation: this.midlLocation(),
-      mapCenterLat: this.findXMidl(),
-      mapCenterLng: this.findYMidl(),
-      midlMarker: [newMarker],
-    }), () => this.getPlaces())
+    this.setState(
+      () => ({
+        midlLocation: this.midlLocation(),
+        mapCenterLat: this.findXMidl(),
+        mapCenterLng: this.findYMidl(),
+        midlMarker: [newMarker]
+      }),
+      () => this.getPlaces()
+    );
   }
 
   addMidlMarkerGeographic() {
-    this.setState(() => ({
-      midlLocation: this.midlLocation(),
-      mapCenterLat: this.findXMidl(),
-      mapCenterLng: this.findYMidl(),
-      midlMarker: [this._createMarker({
-        lat: this.findXMidl(),
-        lng: this.findYMidl()
-      }, "Midl")],
-    }), () => this.getPlaces())
+    this.setState(
+      () => ({
+        midlLocation: this.midlLocation(),
+        mapCenterLat: this.findXMidl(),
+        mapCenterLng: this.findYMidl(),
+        midlMarker: [
+          this._createMarker(
+            {
+              lat: this.findXMidl(),
+              lng: this.findYMidl()
+            },
+            "Midl"
+          )
+        ]
+      }),
+      () => this.getPlaces()
+    );
   }
 
   getPlaces() {
@@ -127,11 +147,11 @@ class App extends React.Component {
       let url =
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
         `${this.state.midlMarker[0].position.lat}, ${this.state.midlMarker[0].position.lng}` +
-        "&radius=500&type=restaurant&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4"
+        "&radius=500&type=restaurant&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4";
       fetch(url)
-      .then(res => res.json())
-      .then(res => this.setState({places: res.results}))
-      .then(res => console.log(this.state.places))
+        .then(res => res.json())
+        .then(res => this.setState({ places: res.results }))
+        .then(res => console.log(this.state.places));
     }
   }
 
@@ -156,25 +176,23 @@ class App extends React.Component {
   }
 
   reset() {
-    this.setState(
-      {
-        value: "",
-        midlLocation: "",
-        mapCenterLat: 51.517432,
-        mapCenterLng: -0.073262,
-        markers: [],
-        midlMarker: [],
-        places: [],
-        findMidl: false
-      }
-    )
+    this.setState({
+      value: "",
+      midlLocation: "",
+      mapCenterLat: 51.517432,
+      mapCenterLng: -0.073262,
+      markers: [],
+      midlMarker: [],
+      places: [],
+      findMidl: false
+    });
   }
 
   getStyle() {
     if (this.state.places[0] !== undefined) {
-      return { }
+      return {};
     } else {
-      return { opacity: 0 }
+      return { opacity: 0 };
     }
   }
 
@@ -197,7 +215,7 @@ class App extends React.Component {
       let user = {
         name: "",
         email: "",
-        password: "",
+        password: ""
       };
       return {
         user
@@ -208,7 +226,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="journeyTime" >
+        <div className="journeyTime">
           <JourneyTime
             markers={this.state.markers}
             addMidlMarkerJourneyTime={this.addMidlMarkerJourneyTime}
@@ -226,7 +244,7 @@ class App extends React.Component {
             reset={this.reset}
             changeMidlJourneyType={this.changeMidlJourneyType}
           />
-          <div >
+          <div>
             <MidlLocation
               markers={this.state.markers}
               midlLocation={this.state.midlLocation}
@@ -249,9 +267,6 @@ class App extends React.Component {
             addLogInForm={this.showLogInForm}
           />
         </div>
-
-
-
       </div>
     );
   }

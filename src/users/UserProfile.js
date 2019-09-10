@@ -2,7 +2,9 @@ import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
 import axios from "axios";
-import "./styles.css";
+import "../styles.css";
+import HomeLocation from "./HomeLocation";
+import WorkLocation from "./WorkLocation";
 
 const google = (window.google = window.google ? window.google : {});
 
@@ -16,8 +18,8 @@ class UserProfile extends React.Component {
       name: "",
       email: "",
       password: "",
-      home_location: "",
-      work_location: ""
+      homeLocation: "",
+      workLocation: ""
     };
 
     this.onChange = this.onChange.bind(this);
@@ -39,63 +41,8 @@ class UserProfile extends React.Component {
       .post("https://meet-in-the-middle-backend-api.herokuapp.com/users", {
         user: this.state
       })
-      .then(response => {
-        console.log("yay");
-        console.log(response);
-      })
-      .catch(error => {
-        console.log("nooo");
-        console.log(error.response);
-      });
-  }
-
-  loadAutocomplete(event) {
-    this.setState({
-      query: event.target.value
-    });
-    let autocomplete = new google.maps.places.Autocomplete(
-      event.target,
-      this.getOptions()
-    );
-    autocomplete.setFields(["address_components", "formatted_address"]);
-    autocomplete.addListener("place_changed", () =>
-      this._setAddress(autocomplete, event)
-    );
-  }
-
-  _setAddress(autocomplete, event) {
-    let addressObject = autocomplete.getPlace();
-    let address = addressObject.address_components;
-
-    if (address) {
-      this.setState({
-        query: addressObject.formatted_address
-      });
-      this.handleSubmit(event);
-    }
-  }
-
-  getOptions() {
-    let sw = new google.maps.LatLng(51.425564, -0.330801);
-    let ne = new google.maps.LatLng(51.681786, 0.301162);
-    let london = new google.maps.LatLngBounds(sw, ne);
-    return { bounds: london };
-  }
-
-  handleSubmit(event) {
-    let address = this.state.query.split(" ").join("+");
-    let url =
-      "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-      address +
-      "+CA&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
-    fetch(url)
-      .then(json => json.json())
-      .then(response =>
-        this.props.updateMarkers(
-          response.results[0].geometry.location,
-          this.props.formNum
-        )
-      );
+      .then(response => {})
+      .catch(error => {});
   }
 
   render() {
@@ -113,7 +60,6 @@ class UserProfile extends React.Component {
               <div className="formHeading">
                 View and edit your account details
               </div>
-
               <div align="center">
                 <button
                   onClick={() => {
@@ -123,7 +69,6 @@ class UserProfile extends React.Component {
                   Edit
                 </button>
               </div>
-
               <div className="formLabel">Name</div>
               {this.state.editing ? (
                 <div className="userInfo">{this.state.name}</div>
@@ -138,7 +83,6 @@ class UserProfile extends React.Component {
                   onChange={this.onChange}
                 />
               )}
-
               <center>
                 <input
                   className="formFillIn"
@@ -172,49 +116,8 @@ class UserProfile extends React.Component {
                 value={this.state.password}
                 onChange={this.onChange}
               />
-
-              <div className="slider">
-                <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />
-                <center>
-                  <p className="greeting">{this.props.greeting}</p>
-                </center>
-                <input
-                  id="home_location_text_box"
-                  className="formFillIn"
-                  type="text"
-                  name="home_location_text_box"
-                  placeholder="Enter Home Location"
-                  value={this.state.query}
-                  onChange={e => {
-                    this.loadAutocomplete(e);
-                  }}
-                  onKeyPress={this.handleKeyPress}
-                  ref={input => {
-                    this.nameInput = input;
-                  }}
-                />
-              </div>
-
-              <div className="slider">
-                <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />
-                <center>
-                  <p className="greeting">{this.props.greeting}</p>
-                </center>
-                <input
-                  id="work_location_text_box"
-                  className="formFillIn"
-                  type="text"
-                  name="work_location_text_box"
-                  placeholder="Enter Work Location"
-                  value={this.state.query}
-                  onChange={e => {
-                    this.loadAutocomplete(e);
-                  }}
-                  onKeyPress={this.handleKeyPress}
-                  ref={input => {
-                    this.nameInput = input;
-                  }}
-                />
+              <div>
+                <HomeLocation homeLocation={this.state.homeLocation} />
               </div>
 
               <input

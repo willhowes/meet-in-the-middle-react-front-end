@@ -3,9 +3,9 @@
 import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
-import "./styles.css";
+import "../styles.css";
 import SignUp from "./SignUp";
-import UserProfile from "./UserProfile"
+import UserProfile from "./UserProfile";
 import LogIn from "./LogIn";
 
 class NavBar extends React.Component {
@@ -29,7 +29,6 @@ class NavBar extends React.Component {
       showUserProfile: !state.showUserProfile,
       showLogIn: false,
       showSignUp: false
-
     }));
   }
 
@@ -53,61 +52,54 @@ class NavBar extends React.Component {
 
   _hidePopUps(e) {
     e.preventDefault();
-    this.setState(state => ({showSignUp: false}));
-    this.setState(state => ({showUserProfile: false}));
-    this.setState(state => ({showLogIn: false}));
+    this.setState(state => ({ showSignUp: false }));
+    this.setState(state => ({ showUserProfile: false }));
+    this.setState(state => ({ showLogIn: false }));
   }
-
-
 
   render() {
     return (
       <div>
         <form
-          // onSubmit={e => {
-          //   this.handleSubmit(query, e);
-          // }}
+        // onSubmit={e => {
+        //   this.handleSubmit(query, e);
+        // }}
         >
-        <img className="logo" src="midl-logo.png" onClick={this._hidePopUps} />
-        <input
-          onClick={this._onSignUpButtonClick}
-          id="sign_up_button"
-          className="navBarButton"
-          type="submit"
-          value="Sign up"
-          style={{right: "160px"}}
-        />
-        {this.state.showSignUp ?
-          <SignUp /> :
-          null
-        }
-        <input
-          onClick={this._onProfileButtonClick}
-          id="profile_button"
-          className="navBarButton"
-          type="submit"
-          value="Profile"
-        />
-        {this.state.showUserProfile ?
-          <UserProfile /> :
-          null
-        }
+          <img
+            className="logo"
+            src="midl-logo.png"
+            onClick={this._hidePopUps}
+          />
+          <input
+            onClick={this._onSignUpButtonClick}
+            id="sign_up_button"
+            className="navBarButton"
+            type="submit"
+            value="Sign up"
+            style={{ right: "160px" }}
+          />
+          {this.state.showSignUp ? <SignUp /> : null}
+          <input
+            onClick={this._onProfileButtonClick}
+            id="profile_button"
+            className="navBarButton"
+            type="submit"
+            value="Profile"
+          />
+          {this.state.showUserProfile ? <UserProfile /> : null}
         </form>
 
-          <form>
-            <input
-              onClick={this._onButtonClickLogIn}
-              id="log_in_button"
-              className="navBarButton"
-              type="submit"
-              value="Log In"
-              style={{right: "300px"}}
-            />
-            {this.state.showLogIn ?
-              <LogIn /> :
-              null
-            }
-          </form>
+        <form>
+          <input
+            onClick={this._onButtonClickLogIn}
+            id="log_in_button"
+            className="navBarButton"
+            type="submit"
+            value="Log In"
+            style={{ right: "300px" }}
+          />
+          {this.state.showLogIn ? <LogIn /> : null}
+        </form>
       </div>
     );
   }
