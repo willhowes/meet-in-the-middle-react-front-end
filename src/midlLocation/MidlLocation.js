@@ -1,5 +1,10 @@
 import React from "react";
-import MidlPlaces from "./MidlPlaces";
+import Bars from "./Bars";
+import Restaurants from "./Restaurants";
+import Cafes from "./Cafes";
+import Lodgings from "./Lodgings";
+import Museums from "./Museums";
+import Miscellaneous from "./Miscellaneous";
 
 class MidlLocation extends React.Component {
   constructor(props) {
@@ -36,7 +41,12 @@ class MidlLocation extends React.Component {
           Your Midl point is: {this.props.midlLocation}
         </p>
         <div style={{ margin: "10px", overflowY: "scroll", maxHeight:"250px" }}>
-          <MidlPlaces setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          <Bars setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          <Restaurants setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          <Cafes setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          <Lodgings setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          <Museums setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          <Miscellaneous setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
         </div>
       </div>
     );
