@@ -118,7 +118,7 @@ class App extends React.Component {
       let url =
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
         `${this.state.midlMarker[0].position.lat}, ${this.state.midlMarker[0].position.lng}` +
-        "&radius=500&type=restaurant&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4"
+        "&radius=500&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4"
       fetch(url)
       .then(res => res.json())
 
@@ -132,6 +132,8 @@ class App extends React.Component {
     let restaurants = []
     let lodgings = []
     let miscellaneous = []
+    let cafes = []
+    let museums = []
 
       places.forEach(function(element){
       if(element.types.includes("bar")){
@@ -143,12 +145,21 @@ class App extends React.Component {
       if(element.types.includes("lodging")){
         lodgings.push(element)
       } 
+      if(element.types.includes("cafe")){
+        cafes.push(element)
+      } 
+      if(element.types.includes("museum")){
+        museums.push(element)
+      } 
         miscellaneous.push(element)
       })
       miscellaneous = miscellaneous.filter(n => !bars.includes(n))
       miscellaneous = miscellaneous.filter(n => !restaurants.includes(n))
       miscellaneous = miscellaneous.filter(n => !lodgings.includes(n))
-    return {bars: bars, restaurants: restaurants, lodgings: lodgings, miscellaneous: miscellaneous}
+      miscellaneous = miscellaneous.filter(n => !parks.includes(n))
+      miscellaneous = miscellaneous.filter(n => !cafes.includes(n))
+      miscellaneous = miscellaneous.filter(n => !museums.includes(n))
+    return {bars: bars, restaurants: restaurants, lodgings: lodgings, cafes: cafes, museums: museums, miscellaneous: miscellaneous}
   }
 
   midlLocation() {
