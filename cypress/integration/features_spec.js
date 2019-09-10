@@ -8,7 +8,9 @@ describe("visiting the home page", () => {
   it("visits the home page", () => {
     cy.visit("localhost:3000");
   });
+});
 
+describe('entering an address', () => {
   it("allows the user to enter an address", () => {
     cy.visit("localhost:3000");
     cy.get("#address_text_box1")
@@ -18,7 +20,9 @@ describe("visiting the home page", () => {
         "50 Commercial St, Spitalfields, London E1 6LT, UK"
       );
   });
+});
 
+describe('entering multiple addresses', () => {
   it("allows two addresses to be entered", () => {
     cy.visit("localhost:3000");
     cy.get("#address_text_box1")
@@ -34,7 +38,9 @@ describe("visiting the home page", () => {
         "Vue Cinema London - Islington, Parkfield Street, Angel, London"
       );
   });
+});
 
+describe('finding midl button', () => {
   it("allows you to click the find midl button", () => {
     cy.visit("localhost:3000");
     cy.get("#address_text_box1").type(
@@ -46,10 +52,12 @@ describe("visiting the home page", () => {
     cy.get('#find_midl').click();
     cy.get('#midlLocation').should(
       "contain",
-      "lat: "
+      "Bars"
     );
   });
+});
 
+describe('selecting transport type', () => {
   it("lets you choose your transport type for the midl Location", () => {
     cy.visit("localhost:3000");
     cy.get("#address_text_box1").type(
@@ -66,7 +74,9 @@ describe("visiting the home page", () => {
       "Cycling"
     );
   });
+});
 
+describe('selecting transport type for journey', ()=> {
   it("lets you choose your transport type for the Journey", () => {
     cy.visit("localhost:3000");
     cy.get("#address_text_box1").type(
@@ -83,5 +93,4 @@ describe("visiting the home page", () => {
       "Cycling"
     );
   });
-
 });
