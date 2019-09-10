@@ -53,8 +53,8 @@ class MidlLocation extends React.Component {
           <div label='Bars'>
             <Bars setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
           </div>
-          <div label='Parks'>
-            Park 1, Park 2
+          <div label='Restaurants'>
+            <Restaurants setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
           </div>
         </Tabs>
 
@@ -66,8 +66,7 @@ class MidlLocation extends React.Component {
 
 export default MidlLocation;
 
-{/* <Restaurants setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
-<Cafes setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+{/* <Cafes setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
 <Lodgings setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
 <Museums setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
 <Miscellaneous setMidlRequest={this.props.setMidlRequest} places={this.props.places} /> */}
