@@ -34,24 +34,24 @@ class DropdownTime extends React.Component {
     const{listOpen, headerTitle, makeSelection} = this.state
     return (
           <div className="ddMenuTime">
-          <FontAwesomeIcon icon="angle-up" />
-          <FontAwesome name="angle-up" size="2x"/>
-            <div className="dd-header" onClick={() => this.toggleList()}>
-              <div className="dd-header-title">{headerTitle}</div>
-              {listOpen
-                ? <FontAwesome name="angle-up" size="2x"/>
-                : <FontAwesome name="angle-down" size="2x"/>
-              }
-              </div>
-              {listOpen && <div className="dd-list">
-              {this.state.options.map((item) => (
-               <div
-               className="dd-list-item"
-               onClick={() => this.makeSelection(item.title)}
-               key={item.id} >
-               {item.title}
-               </div>
-              ))}
+            <FontAwesomeIcon icon="angle-up" />
+            <FontAwesome name="angle-up" size="2x"/>
+              <div className="dd-header" onClick={() => this.toggleList()}>
+                <div className="dd-header-title">{headerTitle}</div>
+                {listOpen
+                  ? <FontAwesome name="angle-up" size="2x"/>
+                  : <FontAwesome name="angle-down" size="2x"/>
+                }
+                </div>
+                {listOpen && <div className="dd-list">
+                {this.state.options.map((item) => (
+                 <div
+                 className="dd-list-item"
+                 onClick={() => this.makeSelection(item.title)}
+                 key={item.id} >
+                 {item.title}
+                 </div>
+                ))}
             </div>}
           </div>
     )

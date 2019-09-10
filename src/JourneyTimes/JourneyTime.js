@@ -83,6 +83,7 @@ class JourneyTime extends React.Component {
     if (this.props.findMidl) {
       // creates many many holding variables
       let halfWay = this._getHalfWayTime()
+      console.log(halfWay)
       let journey = this.state.route.route.parts
       let middleRoute = []
       let timeSoFar = 0
@@ -107,6 +108,8 @@ class JourneyTime extends React.Component {
           timeSoFar += segment.travel_time
         }
       }, this)
+      console.log(middleRoute)
+      console.log(journeySplitRatio)
       // creates a Midl Marker at the nearest stop in the middle segment
       this.props.addMidlMarkerJourneyTime(this._setMidlMarker(journeySplitRatio, middleRoute))
       // sets journey times from each direction towards the Midl Marker (not very accurate!)
@@ -123,11 +126,13 @@ class JourneyTime extends React.Component {
     // roughly works out at which stop in the middle segment to set the middle marker
     let index = Math.round( (middleRoute.coords.length - 1) * journeySplitRatio )
     // rules out edge cases
+    console.log(index)
     if (journeySplitRatio < 0.5) {
       index = index === 0 ? 1 : index - 1
     } else {
-      index = (middleRoute.coords.length - 1) ? index - 1 : index
+      index = (index === middleRoute.coords.length - 1) ? index - 1 : index
     }
+    console.log(index)
     // returns new middle marker at correct coordinate
     return this._createMarker(
         "Midl",
