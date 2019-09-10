@@ -133,17 +133,21 @@ class App extends React.Component {
     let lodgings = []
     let miscellaneous = []
 
-      places.map(function(element){
+      places.forEach(function(element){
       if(element.types.includes("bar")){
-        return bars.push(element)
-      } else if(element.types.includes("restaurant")) {
-        return restaurants.push(element)
-      } else if(element.types.includes("lodging")){
-        return restaurants.push(element)
-      } else {
-        return miscellaneous.push(element)
-      }
-    })
+        bars.push(element)
+      } 
+      if(element.types.includes("restaurant")) {
+        restaurants.push(element)
+      } 
+      if(element.types.includes("lodging")){
+        lodgings.push(element)
+      } 
+        miscellaneous.push(element)
+      })
+      miscellaneous = miscellaneous.filter(n => !bars.includes(n))
+      miscellaneous = miscellaneous.filter(n => !restaurants.includes(n))
+      miscellaneous = miscellaneous.filter(n => !lodgings.includes(n))
     return {bars: bars, restaurants: restaurants, lodgings: lodgings, miscellaneous: miscellaneous}
   }
 
