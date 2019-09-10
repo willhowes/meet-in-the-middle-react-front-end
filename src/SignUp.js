@@ -2,7 +2,7 @@ import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
 import axios from "axios";
-import ImageUploader from 'react-images-upload';
+// import ImageUploader from 'react-images-upload';
 import "./styles.css";
 // import fs from "fs";
 import FormData from 'form-data';

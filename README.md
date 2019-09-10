@@ -15,5 +15,14 @@ To use the app:
 2. `cd meet-in-the-middle-react-front=end`
 3. `npm install`
 4. `npm install --save google-maps-react`
+   `npm install --save form-data`
 5. `npm install react-load-script`
 6. `npm start`
+
+In a separate terminal:
+
+ `git clone https://github.com/Timdavidcole/meet-in-the-middle-backend-api.git`
+ `bundle install`
+ `rails db:create`
+ `rails db:migrate`
+ `rails s -p 3001`
