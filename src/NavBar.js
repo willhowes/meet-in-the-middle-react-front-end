@@ -15,7 +15,7 @@ class NavBar extends React.Component {
       loggedIn: false,
       showUserProfile: false,
       showSignUp: false,
-      showLogIn: false
+      showLogIn: false,
     };
     this._onProfileButtonClick = this._onProfileButtonClick.bind(this);
     this._onSignUpButtonClick = this._onSignUpButtonClick.bind(this);
@@ -75,33 +75,21 @@ class NavBar extends React.Component {
           className="navBarButton"
           type="submit"
           value="Sign up"
-          style={{right: "160px"}}
         />
         {this.state.showSignUp ?
           <SignUp /> :
           null
         }
-        <input
-          onClick={this._onProfileButtonClick}
-          id="profile_button"
-          className="navBarButton"
-          type="submit"
-          value="Profile"
-        />
-        {this.state.showUserProfile ?
-          <UserProfile /> :
-          null
-        }
-        </form>
 
-          <form>
+
+
             <input
               onClick={this._onButtonClickLogIn}
               id="log_in_button"
               className="navBarButton"
               type="submit"
               value="Log In"
-              style={{right: "300px"}}
+              style={{right: "160px"}}
             />
             {this.state.showLogIn ?
               <LogIn /> :

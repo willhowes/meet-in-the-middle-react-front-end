@@ -74,6 +74,11 @@ fileChangedHandler = event => {
 
   render() {
   return (
+
+    <div>
+
+      { this.state.showSignUp ?
+
     <div className="signUpContainer">
 
       <form
@@ -136,6 +141,13 @@ fileChangedHandler = event => {
               />
             </div> </center>
         </form>
+      </div>
+
+
+      :
+      null
+    }
+
       </div>
     );
   }
