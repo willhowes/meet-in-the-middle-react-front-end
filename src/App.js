@@ -225,7 +225,7 @@ class App extends React.Component {
     });
   }
 
-  updateCurrentUser(user) {
+  updateCurrentUser = (user) => {
     console.log("USER:")
     console.log(user)
     console.log("UPDATE CURRENT USER WORKS")
