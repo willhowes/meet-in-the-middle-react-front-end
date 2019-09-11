@@ -1,39 +1,22 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Script from "react-load-script";
 
 const google = (window.google = window.google ? window.google : {});
 
-class LocationForm extends React.Component {
+class HomeLocation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      query: ""
-    };
+    // this.onChange = this.onChange.bind(this);
+    // this.onSubmit = this.onSubmit.bind(this);
+    // this.toggleEdit = this.toggleEdit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.loadAutocomplete = this.loadAutocomplete.bind(this);
     this.getOptions = this.getOptions.bind(this);
   }
 
-  handleSubmit(event) {
-    let address = this.state.query.split(" ").join("+");
-    let url =
-      "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-      address +
-      "+CA&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
-    fetch(url)
-      .then(json => json.json())
-      .then(response =>
-        this.props.updateMarkers(
-          response.results[0].geometry.location,
-          this.props.formNum
-        )
-      );
-  }
-
   loadAutocomplete(event) {
-    this.setState({
-      query: event.target.value
-    });
+    this.props.onHomeLocationChange(event.target.value);
     let autocomplete = new google.maps.places.Autocomplete(
       event.target,
       this.getOptions()
@@ -49,9 +32,7 @@ class LocationForm extends React.Component {
     let address = addressObject.address_components;
 
     if (address) {
-      this.setState({
-        query: addressObject.formatted_address
-      });
+      this.props.onHomeLocationChange(addressObject.formatted_address);
       this.handleSubmit(event);
     }
   }
@@ -69,19 +50,33 @@ class LocationForm extends React.Component {
     }
   };
 
+  handleSubmit(event) {
+    let address = this.props.homeLocation.split(" ").join("+");
+    let url =
+      "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+      address +
+      "+CA&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
+    fetch(url)
+      .then(json => json.json())
+  }
+
   render() {
     return (
+      // <form
+      //   onSubmit={e => {
+      //     this.onSubmit(e);
+      //   }}
+      // >
+
       <div className="slider">
         <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />
-        <center>
-          <p className="greeting">{this.props.greeting}</p>
-        </center>
         <input
-          id={`address_text_box${this.props.formNum + 1}`}
-          className="address_text_box"
+          id="home_location_text_box"
+          className="formFillIn"
           type="text"
-          placeholder={this.props.placeholder}
-          value={this.state.query}
+          name="home_location_text_box"
+          placeholder="Enter Home Location"
+          value={this.props.homeLocation}
           onChange={e => {
             this.loadAutocomplete(e);
           }}
@@ -91,8 +86,14 @@ class LocationForm extends React.Component {
           }}
         />
       </div>
+      // </form>
     );
   }
 }
 
-export default LocationForm;
+HomeLocation.propTypes = {
+  homeLocation: PropTypes.any, 
+  onHomeLocationChange: PropTypes.func.isRequired,
+}
+
+export default HomeLocation;
