@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import update from "immutability-helper";
 import MapContainer from "./mapContainer/MapContainer";
 import LocationFinder from "./locationFinder/LocationFinder";
@@ -26,7 +27,6 @@ class Main extends React.Component {
       places: [],
       findMidl: false,
       midLJourneyType: "public_transport",
-      currentUser: ""
     };
     this.addMidlMarkerGeographic = this.addMidlMarkerGeographic.bind(this);
     this.addMidlMarkerJourneyTime = this.addMidlMarkerJourneyTime.bind(this);
@@ -40,7 +40,6 @@ class Main extends React.Component {
     this.addMarker = this.addMarker.bind(this);
     this.changeMidlJourneyType = this.changeMidlJourneyType.bind(this);
     this.setMidlRequest = this.setMidlRequest.bind(this);
-    this.updateCurrentUser = this.updateCurrentUser.bind(this);
   }
 
   changeMidlJourneyType(type) {
@@ -60,8 +59,7 @@ class Main extends React.Component {
       this.state.markers !== nextState.markers ||
       this.state.findMidl !== nextState.findMidl ||
       this.state.midlMarker !== nextState.midlMarker ||
-      this.state.places !== nextState.places ||
-      this.state.currentUser !== nextState.currentUser
+      this.state.places !== nextState.places
     ) {
       return true;
     } else {
@@ -222,18 +220,10 @@ class Main extends React.Component {
     });
   }
 
-  updateCurrentUser = user => {
-    console.log("USER:");
-    console.log(user);
-    console.log("UPDATE CURRENT USER WORKS");
-    this.setState({
-      currentUser: user
-    });
-  };
-
   render() {
     console.log("RENDER CURRENT USER ID");
-    console.log(this.state.currentUser.id);
+    console.log(this.props.currentUser.id);
+    // USE THIS TO ACCESS HOME LOCATION OF USER FOR MARKER
     return (
       <div>
         <div className="journeyTime">
@@ -274,6 +264,10 @@ class Main extends React.Component {
       </div>
     );
   }
+}
+
+Main.propTypes = {
+  currentUser: PropTypes.object,
 }
 
 export default Main;

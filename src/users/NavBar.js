@@ -74,7 +74,12 @@ class NavBar extends React.Component {
             >
               Profile
             </button>
-            {this.state.showUserProfile ? <UserProfile currentUser={this.props.currentUser} /> : null}
+            {this.state.showUserProfile ? (
+              <UserProfile 
+                currentUser={this.props.currentUser} 
+                updateCurrentUser={this.props.setCurrentUser} 
+              />
+             ) : null}
           </>
         ) : null}
         

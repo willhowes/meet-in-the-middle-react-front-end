@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Script from "react-load-script";
 
 const google = (window.google = window.google ? window.google : {});
@@ -6,10 +7,6 @@ const google = (window.google = window.google ? window.google : {});
 class HomeLocation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      homeLocation: ""
-    };
-
     // this.onChange = this.onChange.bind(this);
     // this.onSubmit = this.onSubmit.bind(this);
     // this.toggleEdit = this.toggleEdit.bind(this);
@@ -19,9 +16,7 @@ class HomeLocation extends React.Component {
   }
 
   loadAutocomplete(event) {
-    this.setState({
-      homeLocation: event.target.value
-    });
+    this.props.onHomeLocationChange(event.target.value);
     let autocomplete = new google.maps.places.Autocomplete(
       event.target,
       this.getOptions()
@@ -37,9 +32,7 @@ class HomeLocation extends React.Component {
     let address = addressObject.address_components;
 
     if (address) {
-      this.setState({
-        homeLocation: addressObject.formatted_address
-      });
+      this.props.onHomeLocationChange(addressObject.formatted_address);
       this.handleSubmit(event);
     }
   }
@@ -58,7 +51,7 @@ class HomeLocation extends React.Component {
   };
 
   handleSubmit(event) {
-    let address = this.state.homeLocation.split(" ").join("+");
+    let address = this.props.homeLocation.split(" ").join("+");
     let url =
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
       address +
@@ -83,7 +76,7 @@ class HomeLocation extends React.Component {
           type="text"
           name="home_location_text_box"
           placeholder="Enter Home Location"
-          value={this.state.homeLocation}
+          value={this.props.homeLocation}
           onChange={e => {
             this.loadAutocomplete(e);
           }}
@@ -96,6 +89,11 @@ class HomeLocation extends React.Component {
       // </form>
     );
   }
+}
+
+HomeLocation.propTypes = {
+  homeLocation: PropTypes.any, 
+  onHomeLocationChange: PropTypes.func.isRequired,
 }
 
 export default HomeLocation;

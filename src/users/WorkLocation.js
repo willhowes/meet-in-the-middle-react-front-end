@@ -1,15 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Script from "react-load-script";
 
 const google = (window.google = window.google ? window.google : {});
 
-class HomeLocation extends React.Component {
+class WorkLocation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      workLocation: ""
-    };
-
     // this.onChange = this.onChange.bind(this);
     // this.onSubmit = this.onSubmit.bind(this);
     // this.toggleEdit = this.toggleEdit.bind(this);
@@ -19,9 +16,7 @@ class HomeLocation extends React.Component {
   }
 
   loadAutocomplete(event) {
-    this.setState({
-      workLocation: event.target.value
-    });
+    this.props.onWorkLocationChange(event.target.value);
     let autocomplete = new google.maps.places.Autocomplete(
       event.target,
       this.getOptions()
@@ -37,9 +32,7 @@ class HomeLocation extends React.Component {
     let address = addressObject.address_components;
 
     if (address) {
-      this.setState({
-        workLocation: addressObject.formatted_address
-      });
+      this.props.onWorkLocationChange(addressObject.formatted_address);
       this.handleSubmit(event);
     }
   }
@@ -58,7 +51,7 @@ class HomeLocation extends React.Component {
   };
 
   handleSubmit(event) {
-    let address = this.state.workLocation.split(" ").join("+");
+    let address = this.props.workLocation.split(" ").join("+");
     let url =
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
       address +
@@ -83,7 +76,7 @@ class HomeLocation extends React.Component {
           type="text"
           name="work_location_text_box"
           placeholder="Enter Work Location"
-          value={this.state.workLocation}
+          value={this.props.workLocation}
           onChange={e => {
             this.loadAutocomplete(e);
           }}
@@ -98,4 +91,9 @@ class HomeLocation extends React.Component {
   }
 }
 
-export default HomeLocation;
+WorkLocation.propTypes = {
+  workLocation: PropTypes.any, 
+  onWorkLocationChange: PropTypes.func.isRequired
+}
+
+export default WorkLocation;

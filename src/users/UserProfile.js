@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import HomeLocation from "./HomeLocation";
 import WorkLocation from "./WorkLocation";
-import FormData from "form-data";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -13,6 +12,7 @@ class UserProfile extends React.Component {
       photo: "",
       name: this.props.currentUser.name || "",
       email: this.props.currentUser.email || "",
+      password: "",
       homeLocation: this.props.currentUser.home_location || "",
       workLocation: this.props.currentUser.work_location || "",
       showForm: true,
@@ -37,17 +37,26 @@ class UserProfile extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    let data = new FormData();
-    data.append("user[avatar]", e.target.avatar.files[0]);
-    data.append("user[name]", this.state.name);
-    data.append("user[email]", this.state.email);
-    data.append("user[home_location]", this.state.homeLocation);
-    data.append("user[work_location]", this.state.workLocation);
+    // let data = new FormData();
+    // data.append("user[avatar]", e.target.avatar.files[0]);
+    // data.append("user[name]", this.state.name);
+    // data.append("user[email]", this.state.email);
+    // data.append("user[home_location]", this.state.homeLocation);
+    // data.append("user[work_location]", this.state.workLocation);
 
+    const { name, email, password, homeLocation, workLocation } = this.state
     axios({
-      method: "patch",
-      url: `https://localhost:3001/users/${this.props.currentUser.id}`,
-      data: data,
+      method: "put",
+      url: `http://localhost:3001/users/${this.props.currentUser.id}`,
+      data: {
+        user: {
+          name,
+          email,
+          password,
+          "work_location": workLocation,
+          "home_location": homeLocation,
+        }
+      },
       header: {
         Accept: "application/json",
         "Content-Type": "multipart/form-data"
@@ -57,6 +66,7 @@ class UserProfile extends React.Component {
         console.log("yay");
         this.setState({ showForm: false });
         console.log("success: ", response);
+        this.props.updateCurrentUser(response.data) 
       })
       .catch(error => {
         console.error("nooo");
@@ -111,11 +121,27 @@ class UserProfile extends React.Component {
                     value={this.state.email}
                     onChange={this.onChange}
                   />
+                  <div className="passwordInfo" > Password must be at least 6 letters </div>
+                  <input
+                    className="formFillIn"
+                    id="user_password"
+                    type="password"
+                    placeholder={"Password"}
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
+                  />
                   <div>
-                    <HomeLocation homeLocation={this.state.homeLocation} />
+                    <HomeLocation 
+                      homeLocation={this.state.homeLocation} 
+                      onHomeLocationChange={(location) => this.setState({ homeLocation: location })}  
+                    />
                   </div>
                   <div>
-                    <WorkLocation workLocation={this.state.workLocation} />
+                    <WorkLocation 
+                      workLocation={this.state.workLocation} 
+                      onWorkLocationChange={(location) => this.setState({ workLocation: location })}
+                    />
                   </div>
 
                   <input
@@ -136,6 +162,7 @@ class UserProfile extends React.Component {
 
 UserProfile.propTypes = {
   currentUser: PropTypes.object.isRequired,
+  updateCurrentUser: PropTypes.func.isRequired,
 }
 
 export default UserProfile;
