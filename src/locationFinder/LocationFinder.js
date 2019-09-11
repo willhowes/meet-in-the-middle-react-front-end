@@ -3,6 +3,7 @@ import "../styles.css";
 import LocationForm from "./LocationForm.js"
 import FindMidlButton from "../buttons/FindMidlButton.js"
 import TransportTypeSelector from "./TransportTypeSelector.js"
+import FadeIn from 'react-fade-in';
 
 class LocationFinder extends React.Component {
   constructor(props) {
@@ -12,13 +13,18 @@ class LocationFinder extends React.Component {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    return false
-  }
-
   render() {
+
+    let midlButton;
+
+    if (this.props.markers.length > 1) {
+      midlButton = <FadeIn><FindMidlButton onClick={this.props.addMidlMarker}/></FadeIn>
+    } else {
+      midlButton = null
+    }
+
     return (
-      <div style={{ margin: 10 }}>
+      <div style={{ margin: 10, height: 250 }}>
         {Array(this.state.locationForms).fill().map(Math.random).map(function(item, i){
           if (i === 0) {
             return <LocationForm
@@ -39,7 +45,7 @@ class LocationFinder extends React.Component {
           }
         }, this)}
         <TransportTypeSelector changeMidlJourneyType={this.props.changeMidlJourneyType} />
-        <FindMidlButton onClick={this.props.addMidlMarker}/>
+        {midlButton}
       </div>
     );
   }
