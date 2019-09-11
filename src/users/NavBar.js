@@ -1,6 +1,10 @@
+/*global google*/
+
 import React from "react";
-import "../styles.css";
+import Script from "react-load-script";
+import PropTypes from "prop-types";
 import SignUp from "./SignUp";
+import UserProfile from "./UserProfile"
 import LogIn from "./LogIn";
 import LogOut from "./LogOut";
 

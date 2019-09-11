@@ -2,7 +2,6 @@ import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
 import axios from "axios";
-import "../styles.css";
 
 class UserProfile extends React.Component {
   constructor(props) {
