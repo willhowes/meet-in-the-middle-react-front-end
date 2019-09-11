@@ -214,6 +214,14 @@ class App extends React.Component {
             setMidlRequest={this.setMidlRequest}
             journeyType={this.state.midLJourneyType}
           />
+          <div >
+            <MidlLocation
+              markers={this.state.markers}
+              midlLocation={this.state.midlLocation}
+              places={this.state.places}
+              setMidlRequest={this.setMidlRequest}
+            />
+          </div>
         </div>
         <div className="locationFormContainer">
           <LocationFinder
@@ -223,14 +231,6 @@ class App extends React.Component {
             reset={this.reset}
             changeMidlJourneyType={this.changeMidlJourneyType}
           />
-          <div >
-            <MidlLocation
-              markers={this.state.markers}
-              midlLocation={this.state.midlLocation}
-              places={this.state.places}
-              setMidlRequest={this.setMidlRequest}
-            />
-          </div>
         </div>
         <div className="mapContainer">
           <MapContainer
@@ -246,9 +246,6 @@ class App extends React.Component {
             addLogInForm={this.showLogInForm}
           />
         </div>
-
-
-
       </div>
     );
   }

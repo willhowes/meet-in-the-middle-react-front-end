@@ -63,7 +63,8 @@ class NavBar extends React.Component {
           //   this.handleSubmit(query, e);
           // }}
         >
-        <img  alt="Hello World" className="logo" src="midl-logo.png" onClick={this._hidePopUps} />
+        <img  alt="Hello World" className="logo" src="midl-logo.png" onClick={this._hidePopUps}   style={{cursor: "pointer"}}
+/>
         <input
           onClick={this._onSignUpButtonClick}
           id="sign_up_button"

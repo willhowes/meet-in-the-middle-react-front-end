@@ -322,13 +322,31 @@ h2 {
 }
 
 .navBarButton {
+  padding: 10px;
   outline: none;
   border: none;
   font-size: 23px;
   font-family: 'Roboto Condensed', sans-serif;
   position: absolute;
-  top: 34px;
+  top: 30px;
   right: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-transition-duration: 0.2s;
+  /* Safari */
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.navBarButton:hover {
+  background-color: #ffebf8
+}
+
+.navBarButton:active {
+  background-color: #ebc3dd;
+  transform: translateY(3px);
+  box-shadow: 0 0px #666;
+
 }
 
 .mapContainer {
