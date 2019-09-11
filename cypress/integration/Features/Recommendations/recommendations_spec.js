@@ -11,6 +11,6 @@ describe("recommendations", () => {
     cy.get("#address_text_box2")
       .type("40 Commercial St, Spitalfields, London E1 6LP, UK").type('{enter}')
       cy.get("#find_midl").click()
-      cy.contains("★").contains("5 Commercial Street, London")
+      cy.contains("★").contains("5 Commercial Street")
   });
 });
