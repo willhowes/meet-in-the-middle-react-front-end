@@ -12,6 +12,20 @@
   margin-right: 32px;
 }
 
+.journey-times {
+  font-family: "Roboto Condensed", sans-serif;
+  color: black;
+}
+
+a:link {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 /* Hide the browser's default radio button */
 .container input {
   position: relative;
@@ -68,8 +82,9 @@
 
 .greeting {
   margin-left: "10px";
-  font-family: "Verdana";
+  font-family: "Roboto Condensed", sans-serif;
   padding: "5px";
+  font-size: 14;
 }
 
 .transportButton {
@@ -113,6 +128,7 @@ h2 {
   left: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .NavBarContainer {
@@ -232,9 +248,10 @@ h2 {
   background-color: #ebf2ff;
   position: absolute;
   z-index: 1;
-  margin-top: 5px;
+  margin-top: 15px;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .journeyTime {
