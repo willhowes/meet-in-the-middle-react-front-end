@@ -5,6 +5,8 @@
 
 ### A [Makers](makers.tech) final project ft. Rianne, Genny, Richie, Tim, Toby and Will
 
+[![Build Status](https://travis-ci.org/riannemcc/meet-in-the-middle.svg?branch=master)](https://travis-ci.org/riannemcc/meet-in-the-middle)
+
 #### An app which allows the user to select the location of themself and a friend, then calculates a middle point between them to meet up based on their respective commute times and makes recommendations as to bars, restaurants and other attractions to visit.
 
 ![Imgur](https://i.imgur.com/QoZvtxz.jpg)
@@ -57,8 +59,7 @@ Locally:
  RSpec  
  Jest  
  Travis CI  
- 
- [![Build Status](https://travis-ci.org/riannemcc/meet-in-the-middle.svg?branch=master)](https://travis-ci.org/riannemcc/meet-in-the-middle)
+
  
 ### Troubleshooting  
 
