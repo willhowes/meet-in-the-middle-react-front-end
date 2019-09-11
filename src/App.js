@@ -159,7 +159,7 @@ class App extends React.Component {
         miscellaneous.push(element)
       })
 
-      let arrays = [bars, restaurants, lodgings, miscellaneous, cafes, museums]
+      let arrays = [bars, restaurants, lodgings, cafes, museums]
       arrays.forEach(function(array) {
         miscellaneous = miscellaneous.filter(n => !array.includes(n))
       })
