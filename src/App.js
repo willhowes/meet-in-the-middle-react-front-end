@@ -25,7 +25,8 @@ class App extends React.Component {
       }],
       places: [],
       findMidl: false,
-      midLJourneyType: "public_transport"
+      midLJourneyType: "public_transport",
+      meetTime: ''
     };
     this.addMidlMarkerGeographic = this.addMidlMarkerGeographic.bind(this);
     this.addMidlMarkerJourneyTime = this.addMidlMarkerJourneyTime.bind(this);
@@ -39,6 +40,7 @@ class App extends React.Component {
     this.addMarker = this.addMarker.bind(this);
     this.changeMidlJourneyType = this.changeMidlJourneyType.bind(this);
     this.setMidlRequest = this.setMidlRequest.bind(this);
+    this.meetTime = this.meetTime.bind(this);
   }
 
   changeMidlJourneyType(type) {
@@ -57,7 +59,8 @@ class App extends React.Component {
     if (this.state.markers !== nextState.markers ||
       this.state.findMidl !== nextState.findMidl ||
       this.state.midlMarker !== nextState.midlMarker ||
-      this.state.places !== nextState.places) {
+      this.state.places !== nextState.places ||
+      this.state.meetTime !== nextState.meetTime ) {
       return true
     } else {
       return false
@@ -73,6 +76,10 @@ class App extends React.Component {
         markers
       };
     });
+  }
+
+  meetTime(datetime){
+    this.setState({meetTime: datetime})
   }
 
   setMidlRequest(bol){
@@ -216,6 +223,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.meetTime)
     return (
       <div style={{height: "100%", minHeight: "100%"}}>
         <div
@@ -240,6 +248,7 @@ class App extends React.Component {
             findMidl={this.state.findMidl}
             setMidlRequest={this.setMidlRequest}
             journeyType={this.state.midLJourneyType}
+            meetTime={this.state.meetTime}
           />
           <MidlLocation
             markers={this.state.markers}
@@ -250,6 +259,7 @@ class App extends React.Component {
         </div>
         <div className="locationFormContainer">
           <LocationContainer
+            meetTime={this.meetTime}
             markers={this.state.markers}
             addMidlMarker={this.setMidlRequest}
             updateMarkers={this.updateMarkers}

@@ -271,7 +271,7 @@ h2 {
   outline:0
 }
 
-.myButton {
+.midlButton {
   position: relative;
   clear: both;
   -webkit-transition-duration: 0.2s;
@@ -299,10 +299,10 @@ h2 {
   text-align: center;
 }
 
-.myButton:hover {
+.midlButton:hover {
 }
 
-.myButton:active {
+.midlButton:active {
   position: relative;
   top: 1px;
   box-shadow: 0 0px #666;

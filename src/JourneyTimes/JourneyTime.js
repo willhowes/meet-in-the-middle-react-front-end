@@ -42,8 +42,18 @@ class JourneyTime extends React.Component {
   }
 
   requestBody(coords){
+    let customTime = this.props.meetTime
     let now = new Date()
     let formatted_date = now.toISOString()
+    console.log(formatted_date)
+
+    if (this.props.meetTime === '') {
+      formatted_date = now.toISOString()
+    } else {
+      formatted_date = now.toISOString()
+      console.log('NEW TIME')
+    }
+
     return ({
       "locations": [
         {
@@ -61,20 +71,30 @@ class JourneyTime extends React.Component {
           }
         }
       ],
-      "departure_searches": [
+      "arrival_searches": [
         {
-          "id": "route_search",
-          "departure_location_id": "Marker 1",
-          "arrival_location_ids": [
-            "Marker 2"
-          ],
+          "id": "Midl Search",
+          "departure_location_ids": ["Marker 1"],
+          "arrival_location_id": "Marker 2",
           "transportation": {
             "type": `${this.props.journeyType}`
           },
-          "departure_time": `${formatted_date}`,
+          "arrival_time": `${formatted_date}`,
           "properties": ["travel_time", "distance", "route"]
         }
-      ]
+      ],
+      // "departure_searches": [
+      //   {
+      //     "id": "route_search",
+      //     "departure_location_id": "Marker 1",
+      //     "arrival_location_ids": ["Marker 2"],
+      //     "transportation": {
+      //       "type": `${this.props.journeyType}`
+      //     },
+      //     "departure_time": `${formatted_date}`,
+      //     "properties": ["travel_time", "distance", "route"]
+      //   }
+      // ]
     })
   }
 
@@ -149,6 +169,12 @@ class JourneyTime extends React.Component {
   }
 
   requestRouteMidl() {
+    console.log(JSON.stringify(this.requestBody({
+        lat1: this.props.markers[0].position.lat,
+        lng1: this.props.markers[0].position.lng,
+        lat2: this.props.markers[1].position.lat,
+        lng2: this.props.markers[1].position.lng
+    })))
     fetch('https://api.traveltimeapp.com/v4/routes', {
       method: 'POST',
       headers: {

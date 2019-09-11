@@ -4,14 +4,20 @@ import LocationForm from "./LocationForm.js"
 import FindMidlButton from "../buttons/FindMidlButton.js"
 import TransportTypeSelector from "./TransportTypeSelector.js"
 import FadeIn from 'react-fade-in';
-import Datetime from 'react-datetime';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 class LocationContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      locationForms: 2
+      locationForms: 2,
     };
+    this.onEnterDate = this.onEnterDate.bind(this)
+  }
+
+  onEnterDate(event){
+    this.props.meetTime(event.target.value)
   }
 
   render() {
@@ -24,6 +30,9 @@ class LocationContainer extends React.Component {
       midlButton = null
     }
 
+    let today = new Date()
+    let formatted_now = new Date(today.getFullYear(), (today.getMonth()), today.getDate(), today.getHours() + 1, today.getMinutes());
+    let formatted_date = formatted_now.toISOString().slice(0, -8)
     return (
       <div style={{ margin: 10 }}>
         {Array(this.state.locationForms).fill().map(Math.random).map(function(item, i){
@@ -45,7 +54,25 @@ class LocationContainer extends React.Component {
               />
           }
         }, this)}
-        <TransportTypeSelector changeMidlJourneyType={this.props.changeMidlJourneyType} />
+        <form className={{
+          display: 'flex',
+          margin: 20,
+          flexWrap: 'wrap',
+        }} noValidate>
+          <TextField
+            id="datetime-local"
+            label="Meet-up time "
+            type="datetime-local"
+            defaultValue={formatted_date}
+            onChange={event => {
+              this.onEnterDate(event)
+            }}
+            style={{margin: 15}}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </form>        <TransportTypeSelector changeMidlJourneyType={this.props.changeMidlJourneyType} />
         {midlButton}
       </div>
     );

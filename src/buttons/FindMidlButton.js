@@ -8,7 +8,7 @@ class FindMidlButton extends React.Component {
       <input style={{ position: "relative", zIndex: 40, left: 115, bottom: 10 }}
         onClick={() => this.props.onClick(true)}
         id="find_midl"
-        className="myButton"
+        className="midlButton"
         type="submit"
         value="Midl"
       />
