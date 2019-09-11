@@ -1,10 +1,5 @@
 import React from "react";
 import JourneyTimes from './JourneyTimes'
-<<<<<<< HEAD
-import "../styles.css";
-import MidlLocation from "../midlLocation/MidlLocation";
-=======
->>>>>>> master
 
 class JourneyTime extends React.Component {
   constructor(props) {

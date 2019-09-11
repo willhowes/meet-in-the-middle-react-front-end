@@ -263,7 +263,8 @@ class Main extends React.Component {
   }
 
   render() {
-    console.log("RENDER CURRENT USER ID");
+    console.log("LOOKI HERE BOY")
+    console.log(this.state.midlArea);
     // console.log(this.props.currentUser.id);
     // USE THIS TO ACCESS HOME LOCATION OF USER FOR MARKER
     return (
@@ -293,6 +294,7 @@ class Main extends React.Component {
               midlLocation={this.state.midlLocation}
               places={this.state.places}
               setMidlRequest={this.setMidlRequest}
+              midlArea={this.state.midlArea}
             />
           </div>
         </div>
