@@ -7,6 +7,7 @@ describe("recommendations", () => {
     cy.get("#address_text_box2")
       .type("40 Commercial St, Spitalfields, London E1 6LP, UK").type('{enter}')
       cy.get("#find_midl").click()
-      cy.contains("ibis London City")
+      cy.get("#Restaurants").click()
+      cy.should("contain", "Boisdale of Bishopsgate")
   });
 });

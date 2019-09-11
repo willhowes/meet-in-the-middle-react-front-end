@@ -44,8 +44,8 @@ class MidlLocation extends React.Component {
           <div label='Bars'>
             <Bars setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
           </div>
-          <div label='Restaurants' id='1'>
-            <Restaurants setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          <div label='Restaurants' >
+            <Restaurants id="Restaurants" setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
           </div>
           <div label='Cafes'>
             <Cafes setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
