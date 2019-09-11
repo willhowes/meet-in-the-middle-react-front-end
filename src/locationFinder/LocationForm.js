@@ -1,14 +1,19 @@
 import React from "react";
 import Script from "react-load-script";
+import LocationFinder from "./LocationFinder";
 
 const google = (window.google = window.google ? window.google : {});
 
 class LocationForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      query: ""
+      query: props.currentUser ? props.currentUser.home_location : ""
     };
+
+    this.handleHomeSubmit = this.handleHomeSubmit.bind(this);
+    this.handleWorkSubmit = this.handleWorkSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.loadAutocomplete = this.loadAutocomplete.bind(this);
     this.getOptions = this.getOptions.bind(this);
@@ -16,6 +21,42 @@ class LocationForm extends React.Component {
 
   handleSubmit(event) {
     let address = this.state.query.split(" ").join("+");
+    let url =
+      "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+      address +
+      "+CA&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
+    fetch(url)
+      .then(json => json.json())
+      .then(response =>
+        this.props.updateMarkers(
+          response.results[0].geometry.location,
+          this.props.formNum
+        )
+      );
+  }
+
+  handleHomeSubmit(event) {
+    console.log(this.props.currentUser.home_location);
+    this.setState({ query: this.props.currentUser.home_location });
+    let address = this.props.currentUser.home_location.split(" ").join("+");
+    let url =
+      "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+      address +
+      "+CA&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
+    fetch(url)
+      .then(json => json.json())
+      .then(response =>
+        this.props.updateMarkers(
+          response.results[0].geometry.location,
+          this.props.formNum
+        )
+      );
+  }
+
+  handleWorkSubmit(event) {
+    console.log(this.props.currentUser.work_location);
+    this.setState({ query: this.props.currentUser.work_location });
+    let address = this.props.currentUser.work_location.split(" ").join("+");
     let url =
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
       address +
@@ -69,20 +110,20 @@ class LocationForm extends React.Component {
     }
   };
 
-  _onHomeLocationButtonClick(e) {
-    e.preventDefault();
-    this.setState({
-      query: this.props.currentUser.homeLocation
-    });
-  }
+  // _onHomeLocationButtonClick(e) {
+  //   e.preventDefault();
+  //   this.setState({
+  //     query: this.props.currentUser.home_location
+  //   });
+  // }
 
   render() {
-    console.log("CURRENT USER")
-    console.log(this.props.currentUser)
+    console.log("CURRENT USER");
+    console.log(this.props.currentUser);
     return (
-        <div className="slider">
+      <div className="slider">
         <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />
-          <p className="greeting">{this.props.greeting}</p>
+        <p className="greeting">{this.props.greeting}</p>
         <input
           id={`address_text_box${this.props.formNum + 1}`}
           className="address_text_box"
@@ -97,8 +138,7 @@ class LocationForm extends React.Component {
             this.nameInput = input;
           }}
         />
-        </div>
-
+      </div>
 
       // </div>
     );

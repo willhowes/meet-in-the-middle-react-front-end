@@ -5,6 +5,7 @@ import MapContainer from "./mapContainer/MapContainer";
 import LocationFinder from "./locationFinder/LocationFinder";
 import MidlLocation from "./midlLocation/MidlLocation";
 import JourneyTime from "./JourneyTimes/JourneyTime";
+import LocationForm from "./locationFinder/LocationForm";
 
 class Main extends React.Component {
   constructor(props) {
@@ -59,7 +60,8 @@ class Main extends React.Component {
       this.state.markers !== nextState.markers ||
       this.state.findMidl !== nextState.findMidl ||
       this.state.midlMarker !== nextState.midlMarker ||
-      this.state.places !== nextState.places
+      this.state.places !== nextState.places ||
+      this.props.currentUser !== nextProps.currentUser
     ) {
       return true;
     } else {
@@ -221,6 +223,8 @@ class Main extends React.Component {
   }
 
   render() {
+    console.log(this.props.currentUser);
+    // console.log(this.props.currentUser.homeLocation);
     return (
       <div>
         <div className="journeyTime">
@@ -235,13 +239,12 @@ class Main extends React.Component {
         </div>
         <div className="locationFormContainer">
           <LocationFinder
-            // THIS BELOW IS NOT WORKING...
-            // AddHomeLocationButton={this.addHomeLocation}
             markers={this.state.markers}
             addMidlMarker={this.setMidlRequest}
             updateMarkers={this.updateMarkers}
             reset={this.reset}
             changeMidlJourneyType={this.changeMidlJourneyType}
+            currentUser={this.props.currentUser}
           />
           <div>
             <MidlLocation
