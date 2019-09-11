@@ -10,7 +10,7 @@ export const App = () => {
     <>
       <div className="NavBarContainer">
         <NavBar
-          currentUser={currentUser} 
+          currentUser={currentUser}
           setCurrentUser={(user) => setCurrentUser(user)}
         />
       </div>
@@ -33,7 +33,7 @@ export const App = () => {
 //       <>
 //         <div className="NavBarContainer">
 //           <NavBar
-//             currentUser={this.state.currentUser} 
+//             currentUser={this.state.currentUser}
 //             setCurrentUser={(user) => this.setState({ currentUser: user})}
 //           />
 //         </div>
@@ -44,3 +44,5 @@ export const App = () => {
 //     )
 //   }
 // }
+
+export default App;
