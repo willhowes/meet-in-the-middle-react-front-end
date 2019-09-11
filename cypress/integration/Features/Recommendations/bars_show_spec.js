@@ -1,4 +1,4 @@
-describe("default bar recommendations", () => {
+describe("shows default bar recommendations", () => {
   it("Offers bar recommendations", () => {
     cy.visit("localhost:3000");
     cy.get("#address_text_box1")
