@@ -235,6 +235,8 @@ class Main extends React.Component {
         </div>
         <div className="locationFormContainer">
           <LocationFinder
+            // THIS BELOW IS NOT WORKING...
+            // AddHomeLocationButton={this.addHomeLocation}
             markers={this.state.markers}
             addMidlMarker={this.setMidlRequest}
             updateMarkers={this.updateMarkers}
