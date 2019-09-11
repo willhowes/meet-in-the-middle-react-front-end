@@ -12,11 +12,6 @@
   margin-right: 32px;
 }
 
-.journey-times {
-  font-family: "Roboto Condensed", sans-serif;
-  color: black;
-}
-
 a:link {
   color: black;
   text-decoration: none;
@@ -265,6 +260,8 @@ h2 {
   margin-top: 5px;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Roboto Condensed", sans-serif;
+  color: black;
 }
 
 .enterButton {
@@ -374,4 +371,13 @@ h2 {
 
 .mapContainer {
   margin-top: 102px;
+}
+
+@media only screen and (max-width: 695px) {
+  .journeyTime {
+    top: 150px;
+  }
+  .locationFormContainer {
+    top: 365px;
+  }
 }
