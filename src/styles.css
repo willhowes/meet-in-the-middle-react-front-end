@@ -239,14 +239,13 @@ h2 {
 
 .journeyTime {
   display: block;
+  top: 100px;
   right: 20px;
   padding: 0px;
   background-color: #ebf2ff;
   position: absolute;
+  z-index: 2;
   margin-top: 5px;
-  z-index: 1;
-  top: 430px;
-  left: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
