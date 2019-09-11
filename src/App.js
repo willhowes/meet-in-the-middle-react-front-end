@@ -5,6 +5,7 @@ import LocationFinder from "./locationFinder/LocationFinder";
 import MidlLocation from "./midlLocation/MidlLocation";
 import JourneyTime from "./JourneyTimes/JourneyTime";
 import "./styles.css";
+import NavBar from "./users/NavBar.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -128,7 +129,6 @@ class App extends React.Component {
       fetch(url)
       .then(res => res.json())
       .then(res => this.setState({places: this.categorisePlaces(res.results)}))
-      .then(res => console.log(this.state.places))
     }
   }
 
@@ -241,7 +241,7 @@ class App extends React.Component {
             />
           </div>
         </div>
-        <div>
+        <div className="mapContainer">
           <MapContainer
             mapCenterLat={this.state.mapCenterLat}
             mapCenterLng={this.state.mapCenterLng}
@@ -249,6 +249,13 @@ class App extends React.Component {
             midlMarker={this.state.midlMarker}
           />
         </div>
+        <div className="NavBarContainer">
+          <NavBar
+          />
+        </div>
+
+
+
       </div>
     );
   }

@@ -71,7 +71,6 @@ class LocationForm extends React.Component {
   };
 
   render() {
-    console.log("render LocationForm");
     return (
       <div className="slider">
         <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />

@@ -14,8 +14,6 @@ class MidlLocation extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    console.log(this.props.places)
-    console.log(nextProps.places)
     if (this.props.places !== nextProps.places) {
       return true
     } else {

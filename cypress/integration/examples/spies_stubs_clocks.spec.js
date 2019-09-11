@@ -25,7 +25,6 @@ context('Spies, Stubs, and Clock', () => {
        * @param x {any}
       */
       foo (x) {
-        console.log('obj.foo called with', x)
       },
     }
 
@@ -53,7 +52,6 @@ context('Spies, Stubs, and Clock', () => {
        * @param b {string}
       */
       foo (a, b) {
-        console.log('a', a, 'b', b)
       },
     }
 
