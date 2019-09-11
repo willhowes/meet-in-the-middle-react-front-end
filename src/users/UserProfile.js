@@ -2,7 +2,7 @@ import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
 import axios from "axios";
-import "./styles.css";
+import "../styles.css";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -34,12 +34,8 @@ class UserProfile extends React.Component {
     e.preventDefault();
     axios.post('https://meet-in-the-middle-backend-api.herokuapp.com/users', { user: this.state })
     .then(response => {
-      console.log("yay");
-    	console.log(response)
     })
     .catch(error => {
-      console.log("nooo");
-        console.log(error.response)
     });
   }
 

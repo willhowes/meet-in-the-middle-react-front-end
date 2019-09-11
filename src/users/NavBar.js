@@ -1,11 +1,6 @@
-/*global google*/
-
 import React from "react";
-import Script from "react-load-script";
-import PropTypes from "prop-types";
-import "./styles.css";
+import "../styles.css";
 import SignUp from "./SignUp";
-import UserProfile from "./UserProfile"
 import LogIn from "./LogIn";
 import LogOut from "./LogOut";
 
@@ -132,7 +127,7 @@ class NavBar extends React.Component {
             value="Log Out"
             style={{right: "160px"}}
           />
-          
+
           {this.state.showLogOut ?
             <LogOut updateLogInStatus={this.updateLogInStatus} /> :
             null
