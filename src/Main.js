@@ -221,9 +221,6 @@ class Main extends React.Component {
   }
 
   render() {
-    console.log("RENDER CURRENT USER ID");
-    // console.log(this.props.currentUser.id);
-    // USE THIS TO ACCESS HOME LOCATION OF USER FOR MARKER
     return (
       <div>
         <div className="journeyTime">

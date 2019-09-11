@@ -2,6 +2,7 @@ import React from "react";
 import LocationForm from "./LocationForm.js";
 import FindMidlButton from "../buttons/FindMidlButton.js";
 import TransportTypeSelector from "./TransportTypeSelector.js";
+import AddHomeLocationButton from "../buttons/AddHomeLocationButton.js"
 
 class LocationFinder extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class LocationFinder extends React.Component {
   render() {
     return (
       <div style={{ margin: 10 }}>
+      <AddHomeLocationButton onClick={this.props.addHomeLocation} />
         {Array(this.state.locationForms)
           .fill()
           .map(Math.random)

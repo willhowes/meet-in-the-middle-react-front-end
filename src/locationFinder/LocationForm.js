@@ -69,13 +69,20 @@ class LocationForm extends React.Component {
     }
   };
 
+  _onHomeLocationButtonClick(e) {
+    e.preventDefault();
+    this.setState({
+      query: this.props.currentUser.homeLocation
+    });
+  }
+
   render() {
+    console.log("CURRENT USER")
+    console.log(this.props.currentUser)
     return (
-      <div className="slider">
+        <div className="slider">
         <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />
-        <center>
           <p className="greeting">{this.props.greeting}</p>
-        </center>
         <input
           id={`address_text_box${this.props.formNum + 1}`}
           className="address_text_box"
@@ -90,7 +97,10 @@ class LocationForm extends React.Component {
             this.nameInput = input;
           }}
         />
-      </div>
+        </div>
+
+
+      // </div>
     );
   }
 }
