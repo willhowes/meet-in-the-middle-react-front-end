@@ -125,11 +125,47 @@ class App extends React.Component {
       let url =
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
         `${this.state.midlMarker[0].position.lat}, ${this.state.midlMarker[0].position.lng}` +
-        "&radius=500&type=restaurant&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4"
+        "&radius=500&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4"
       fetch(url)
       .then(res => res.json())
-      .then(res => this.setState({places: res.results}))
+      .then(res => this.setState({places: this.categorisePlaces(res.results)}))
     }
+  }
+
+  categorisePlaces(places){
+    let bars = []
+    let restaurants = []
+    let lodgings = []
+    let miscellaneous = []
+    let cafes = []
+    let museums = []
+
+      places.forEach(function(element){
+      if(element.types.includes("bar")){
+        bars.push(element)
+      } 
+      if(element.types.includes("restaurant")) {
+        restaurants.push(element)
+      } 
+      if(element.types.includes("lodging")){
+        lodgings.push(element)
+      } 
+      if(element.types.includes("cafe")){
+        cafes.push(element)
+      } 
+      if(element.types.includes("museum")){
+        museums.push(element)
+      } 
+      if(element.name !== "London"){
+        miscellaneous.push(element)
+      }
+      })
+
+      let arrays = [bars, restaurants, lodgings, cafes, museums]
+      arrays.forEach(function(array) {
+        miscellaneous = miscellaneous.filter(n => !array.includes(n))
+      })
+    return {bars: bars, restaurants: restaurants, lodgings: lodgings, cafes: cafes, museums: museums, miscellaneous: miscellaneous}
   }
 
   midlLocation() {
@@ -174,8 +210,6 @@ class App extends React.Component {
       return { opacity: 0 }
     }
   }
-
-
 
   render() {
     return (
