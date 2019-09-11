@@ -6,12 +6,16 @@ class JourneyTime extends React.Component {
     super(props);
     this.state = {
       route: '',
+      midlPointLatCoord: '',
+      midlPointLngCoord: '',
+      midlArea: '',
     };
     this.requestRouteMidl = this.requestRouteMidl.bind(this);
     this.requestBody = this.requestBody.bind(this);
     this.renderJourneyTime = this.renderJourneyTime.bind(this);
     this.middleOfRoute = this.middleOfRoute.bind(this);
     this.journeyType = this.journeyType.bind(this);
+
   }
 
   journeyType(){
@@ -107,7 +111,6 @@ class JourneyTime extends React.Component {
           timeSoFar += segment.travel_time
         }
       }, this)
-      console.log(middleRoute)
       console.log(journeySplitRatio)
       // creates a Midl Marker at the nearest stop in the middle segment
       this.props.addMidlMarkerJourneyTime(this._setMidlMarker(journeySplitRatio, middleRoute))
@@ -133,12 +136,59 @@ class JourneyTime extends React.Component {
     }
     console.log(index)
     // returns new middle marker at correct coordinate
+
+    this.setState({ midlPointLatCoord: middleRoute.coords[index].lat });
+    this.setState({ midlPointLngCoord: middleRoute.coords[index].lng });
+
+    this._getMidlLocation();
+
+
     return this._createMarker(
         "Midl",
         middleRoute.coords[index].lat,
         middleRoute.coords[index].lng
     )
+
   }
+
+  _getMidlLocation() {
+    console.log("calling the new method");
+    let midlCoordinates = "latlng=" + this.state.midlPointLatCoord + ","
+                            + this.state.midlPointLngCoord
+
+    let url = "https://maps.googleapis.com/maps/api/geocode/json?" +
+              midlCoordinates +
+              "&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
+
+    fetch(url)
+      .then(json => json.json())
+
+      .then(response => {
+        console.log("this is the response");
+        console.log(response.results[0]);
+        if (response.results[0].address_components[2].long_name === "London") {
+          this.setState( state => ({midlArea: response.results[0].address_components[1].long_name }));
+          console.log("this is the response");
+        } else if (response.results[0].address_components[1].long_name === "London") {
+            this.setState({midlArea: response.results[0].address_components[0].long_name });
+        } else {
+          this.setState({midlArea: response.results[0].address_components[2].long_name });
+        }
+        console.log(this.state.midlArea);
+      })
+
+      .then(response => this.props.updateMidlArea(this.state.midlArea))
+
+      .catch(error => {
+        console.log("booo");
+        console.log(error.response)
+      });
+
+  }
+
+
+
+
 
   _createMarker(name, lat, lng){
     return {
@@ -171,6 +221,8 @@ class JourneyTime extends React.Component {
   }
 
   renderJourneyTime() {
+    console.log("middle marker");
+    console.log(this.props.midlMarker);
     if (this.props.midlMarker[0].name === 'Midl') {
       return (
         <div>
@@ -188,6 +240,7 @@ class JourneyTime extends React.Component {
             journeyType={this.journeyType}
             num={"B"}
             />
+
         </div>
       );
     } else {

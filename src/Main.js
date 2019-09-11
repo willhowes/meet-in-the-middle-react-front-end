@@ -24,6 +24,7 @@ class Main extends React.Component {
           }
         }
       ],
+      midlArea: 'testing',
       places: [],
       findMidl: false,
       midLJourneyType: "public_transport"
@@ -80,6 +81,10 @@ class Main extends React.Component {
       };
     });
   }
+
+  updateMidlArea = (midlArea) => {
+    this.setState( {midlArea: midlArea});
+  };
 
   setMidlRequest(bol) {
     this.setState({ findMidl: bol });
@@ -163,19 +168,19 @@ class Main extends React.Component {
       places.forEach(function(element){
       if(element.types.includes("bar")){
         bars.push(element)
-      } 
+      }
       if(element.types.includes("restaurant")) {
         restaurants.push(element)
-      } 
+      }
       if(element.types.includes("lodging")){
         lodgings.push(element)
-      } 
+      }
       if(element.types.includes("cafe")){
         cafes.push(element)
-      } 
+      }
       if(element.types.includes("museum")){
         museums.push(element)
-      } 
+      }
       if(element.name !== "London"){
         miscellaneous.push(element)
       }
@@ -258,7 +263,8 @@ class Main extends React.Component {
   }
 
   render() {
-    console.log("RENDER CURRENT USER ID");
+    console.log("LOOKI HERE BOY")
+    console.log(this.state.midlArea);
     // console.log(this.props.currentUser.id);
     // USE THIS TO ACCESS HOME LOCATION OF USER FOR MARKER
     return (
@@ -271,6 +277,7 @@ class Main extends React.Component {
             findMidl={this.state.findMidl}
             setMidlRequest={this.setMidlRequest}
             journeyType={this.state.midLJourneyType}
+            updateMidlArea={this.updateMidlArea}
           />
         </div>
         <div className="locationFormContainer">
@@ -287,6 +294,7 @@ class Main extends React.Component {
               midlLocation={this.state.midlLocation}
               places={this.state.places}
               setMidlRequest={this.setMidlRequest}
+              midlArea={this.state.midlArea}
             />
           </div>
         </div>
