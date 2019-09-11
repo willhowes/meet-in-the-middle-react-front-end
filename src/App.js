@@ -156,7 +156,9 @@ class App extends React.Component {
       if(element.types.includes("museum")){
         museums.push(element)
       } 
+      if(element.name !== "London"){
         miscellaneous.push(element)
+      }
       })
 
       let arrays = [bars, restaurants, lodgings, cafes, museums]
