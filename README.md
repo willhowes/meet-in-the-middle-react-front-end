@@ -11,7 +11,8 @@
 
 ### To use the app:
 
-#### Set up the backend Rails API in a terminal:
+Locally:
+#### Set up the backend Rails API in a terminal:
 
  1. `git clone https://github.com/Timdavidcole/meet-in-the-middle-backend-api.git`  
  2. `bundle install`  
@@ -29,6 +30,10 @@
  6. `npm install react-load-script`
  7. `npm start`
  
+#### Deployed:
+
+ http://meet-in-the-middle-frontend.herokuapp.com/
+ 
  ### How to run the tests:
  
  #### Backend
@@ -37,3 +42,30 @@
  #### Front end
  1. `npm start`
  2. `npx open cypress`
+ 
+ ### Approach to the project:
+ 
+ 
+
+ ### Tech stack:
+ 
+ Rails API  
+ React  
+ PostgreSQL  
+ 
+ Cypress  
+ RSpec  
+ Jest  
+ Travis CI  
+ 
+ [![Build Status](https://travis-ci.org/riannemcc/meet-in-the-middle.svg?branch=master)](https://travis-ci.org/riannemcc/meet-in-the-middle)
+ 
+### Troubleshooting  
+
+Should you have any trouble running the app in your browser, run the following in your terminal which will open a new Chrome browser:  
+```open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security```  
+
+ 
+### Contribution  
+ If you would like to contribute to this project, please submit a pull request at our [github page](https://github.com/gennyallcroft). 
+ 
