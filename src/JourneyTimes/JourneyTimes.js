@@ -16,6 +16,8 @@ class JourneyTimes extends React.Component {
     this.getDirections = this.getDirections.bind(this)
     this.getJourneyType = this.getJourneyType.bind(this)
     this.getGoogleMapsCompatibleJourneyType = this.getGoogleMapsCompatibleJourneyType.bind(this)
+    this.getGoogleMapsCompatibleOrigin = this.getGoogleMapsCompatibleOrigin.bind(this)
+    this.getGoogleMapsCompatibleDestination = this.getGoogleMapsCompatibleDestination.bind(this)
   }
 
   componentDidMount(prevProps, prevState){
@@ -86,11 +88,21 @@ class JourneyTimes extends React.Component {
     }
   }
 
+  getGoogleMapsCompatibleOrigin() {
+    return this.props.marker.position.lat + ',' + this.props.marker.position.lng
+  }
+
+  getGoogleMapsCompatibleDestination() {
+    return this.props.midlMarker[0].position.lat + ',' + this.props.midlMarker[0].position.lng
+  }
+
   render() {
     if (this.state.route !== false) {
       return (
         <div>
-          <a href={`https://www.google.com/maps/dir/?api=1&origin=Space+Needle+Seattle+WA&destination=Pike+Place+Market+Seattle+WA&travelmode=${this.getGoogleMapsCompatibleJourneyType()}`}><p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 10}}>{this.getJourneyType()} time {this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}</p></a>
+          {console.log('LOOK HERE RITCHIE!!')}
+          {console.log(this.props.midlLocation)}
+          <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.getGoogleMapsCompatibleOrigin()}&destination=${this.getGoogleMapsCompatibleDestination()}&travelmode=${this.getGoogleMapsCompatibleJourneyType()}`}><p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 10}}>{this.getJourneyType()} time {this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}</p></a>
           <TransportTypeSelector num={this.props.num} 
           journeyType={this.props.journeyType} changeJourneyType={this.changeJourneyType}/>
         </div>
