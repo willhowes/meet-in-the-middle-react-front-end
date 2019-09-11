@@ -26,7 +26,7 @@ class Main extends React.Component {
       ],
       places: [],
       findMidl: false,
-      midLJourneyType: "public_transport",
+      midLJourneyType: "public_transport"
     };
     this.addMidlMarkerGeographic = this.addMidlMarkerGeographic.bind(this);
     this.addMidlMarkerJourneyTime = this.addMidlMarkerJourneyTime.bind(this);
@@ -222,7 +222,7 @@ class Main extends React.Component {
 
   render() {
     console.log("RENDER CURRENT USER ID");
-    console.log(this.props.currentUser.id);
+    // console.log(this.props.currentUser.id);
     // USE THIS TO ACCESS HOME LOCATION OF USER FOR MARKER
     return (
       <div>
@@ -267,7 +267,7 @@ class Main extends React.Component {
 }
 
 Main.propTypes = {
-  currentUser: PropTypes.object,
-}
+  currentUser: PropTypes.object
+};
 
 export default Main;

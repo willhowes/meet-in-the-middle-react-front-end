@@ -15,7 +15,7 @@ class UserProfile extends React.Component {
       password: "",
       homeLocation: this.props.currentUser.home_location || "",
       workLocation: this.props.currentUser.work_location || "",
-      showForm: true,
+      showForm: true
     };
 
     this.onChange = this.onChange.bind(this);
@@ -37,26 +37,28 @@ class UserProfile extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    // let data = new FormData();
-    // data.append("user[avatar]", e.target.avatar.files[0]);
-    // data.append("user[name]", this.state.name);
-    // data.append("user[email]", this.state.email);
-    // data.append("user[home_location]", this.state.homeLocation);
-    // data.append("user[work_location]", this.state.workLocation);
+    let data = new FormData();
+    data.append("user[avatar]", e.target.avatar.files[0]);
+    data.append("user[name]", this.state.name);
+    data.append("user[email]", this.state.email);
+    data.append("user[password]", this.state.password);
+    data.append("user[home_location]", this.state.homeLocation);
+    data.append("user[work_location]", this.state.workLocation);
 
-    const { name, email, password, homeLocation, workLocation } = this.state
+    const { name, email, password, homeLocation, workLocation } = this.state;
     axios({
       method: "put",
       url: `http://localhost:3001/users/${this.props.currentUser.id}`,
-      data: {
-        user: {
-          name,
-          email,
-          password,
-          "work_location": workLocation,
-          "home_location": homeLocation,
-        }
-      },
+      data: data,
+      // {
+      //   user: {
+      //     name,
+      //     email,
+      //     password,
+      //     "work_location": workLocation,
+      //     "home_location": homeLocation,
+      //   }
+      // },
       header: {
         Accept: "application/json",
         "Content-Type": "multipart/form-data"
@@ -66,14 +68,13 @@ class UserProfile extends React.Component {
         console.log("yay");
         this.setState({ showForm: false });
         console.log("success: ", response);
-        this.props.updateCurrentUser(response.data) 
+        this.props.updateCurrentUser(response.data);
       })
       .catch(error => {
         console.error("nooo");
         console.error(error.response);
       });
   }
-
 
   render() {
     return (
@@ -89,11 +90,8 @@ class UserProfile extends React.Component {
                 {" "}
                 <div className="signUpForm">
                   <img className="formLogo" src="midl-logo.png" />
-                  <div className="formHeading">
-                    Edit your account details
-                  </div>
-                  <div align="center">
-                  </div>
+                  <div className="formHeading">Edit your account details</div>
+                  <div align="center"></div>
                   <img className="signUpAvatar" src={this.state.avatar} />
                   <input
                     name="avatar"
@@ -121,7 +119,10 @@ class UserProfile extends React.Component {
                     value={this.state.email}
                     onChange={this.onChange}
                   />
-                  <div className="passwordInfo" > Password must be at least 6 letters </div>
+                  <div className="passwordInfo">
+                    {" "}
+                    Password must be at least 6 letters{" "}
+                  </div>
                   <input
                     className="formFillIn"
                     id="user_password"
@@ -132,15 +133,19 @@ class UserProfile extends React.Component {
                     onChange={this.onChange}
                   />
                   <div>
-                    <HomeLocation 
-                      homeLocation={this.state.homeLocation} 
-                      onHomeLocationChange={(location) => this.setState({ homeLocation: location })}  
+                    <HomeLocation
+                      homeLocation={this.state.homeLocation}
+                      onHomeLocationChange={location =>
+                        this.setState({ homeLocation: location })
+                      }
                     />
                   </div>
                   <div>
-                    <WorkLocation 
-                      workLocation={this.state.workLocation} 
-                      onWorkLocationChange={(location) => this.setState({ workLocation: location })}
+                    <WorkLocation
+                      workLocation={this.state.workLocation}
+                      onWorkLocationChange={location =>
+                        this.setState({ workLocation: location })
+                      }
                     />
                   </div>
 
@@ -154,7 +159,7 @@ class UserProfile extends React.Component {
               </center>
             </form>
           </div>
-        ): null}
+        ) : null}
       </div>
     );
   }
@@ -162,7 +167,7 @@ class UserProfile extends React.Component {
 
 UserProfile.propTypes = {
   currentUser: PropTypes.object.isRequired,
-  updateCurrentUser: PropTypes.func.isRequired,
-}
+  updateCurrentUser: PropTypes.func.isRequired
+};
 
 export default UserProfile;
