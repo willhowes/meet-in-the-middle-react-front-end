@@ -138,6 +138,8 @@ class LocationForm extends React.Component {
             this.nameInput = input;
           }}
         />
+        <button onClick={this.handleHomeSubmit}>Home</button>
+        <button onClick={this.handleWorkSubmit}>Work</button>
       </div>
 
       // </div>
