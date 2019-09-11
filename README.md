@@ -21,8 +21,8 @@ To use the app:
 
 In a separate terminal:
 
- `git clone https://github.com/Timdavidcole/meet-in-the-middle-backend-api.git`  
- `bundle install`  
- `rails db:create`  
- `rails db:migrate`  
- `rails s -p 3001`  
+ 1. `git clone https://github.com/Timdavidcole/meet-in-the-middle-backend-api.git`  
+ 2. `bundle install`  
+ 3. `rails db:create`  
+ 4. `rails db:migrate`  
+ 5. `rails s -p 3001`  
