@@ -15,7 +15,6 @@ class JourneyTime extends React.Component {
   }
 
   journeyType(){
-    console.log('journeyType run')
     if (this.props.journeyType === "public_transport") {
       return "transit"
     } else if (this.props.journeyType === "cycling") {
@@ -83,6 +82,7 @@ class JourneyTime extends React.Component {
     if (this.props.findMidl) {
       // creates many many holding variables
       let halfWay = this._getHalfWayTime()
+      console.log(halfWay)
       let journey = this.state.route.route.parts
       let middleRoute = []
       let timeSoFar = 0
@@ -107,6 +107,8 @@ class JourneyTime extends React.Component {
           timeSoFar += segment.travel_time
         }
       }, this)
+      console.log(middleRoute)
+      console.log(journeySplitRatio)
       // creates a Midl Marker at the nearest stop in the middle segment
       this.props.addMidlMarkerJourneyTime(this._setMidlMarker(journeySplitRatio, middleRoute))
       // sets journey times from each direction towards the Midl Marker (not very accurate!)
@@ -123,11 +125,13 @@ class JourneyTime extends React.Component {
     // roughly works out at which stop in the middle segment to set the middle marker
     let index = Math.round( (middleRoute.coords.length - 1) * journeySplitRatio )
     // rules out edge cases
+    console.log(index)
     if (journeySplitRatio < 0.5) {
       index = index === 0 ? 1 : index - 1
     } else {
-      index = (middleRoute.coords.length - 1) ? index - 1 : index
+      index = (index === middleRoute.coords.length - 1) ? index - 1 : index
     }
+    console.log(index)
     // returns new middle marker at correct coordinate
     return this._createMarker(
         "Midl",
@@ -147,12 +151,6 @@ class JourneyTime extends React.Component {
   }
 
   requestRouteMidl() {
-    console.log(this.requestBody({
-        lat1: this.props.markers[0].position.lat,
-        lng1: this.props.markers[0].position.lng,
-        lat2: this.props.markers[1].position.lat,
-        lng2: this.props.markers[1].position.lng
-    }))
     fetch('https://api.traveltimeapp.com/v4/routes', {
       method: 'POST',
       headers: {
@@ -170,7 +168,6 @@ class JourneyTime extends React.Component {
     }).then(json => json.json())
     .then(response => this.setState({ route: response.results[0].locations[0].properties[0] }))
     .then(test => this.middleOfRoute())
-    .then(test => console.log(this.state.route))
   }
 
   renderJourneyTime() {
@@ -199,7 +196,6 @@ class JourneyTime extends React.Component {
   }
 
   render() {
-    console.log('renderJourneyTime')
 
     return (
       this.renderJourneyTime()

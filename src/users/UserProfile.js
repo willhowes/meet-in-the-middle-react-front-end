@@ -1,21 +1,19 @@
 import React from "react";
+import Script from "react-load-script";
 import PropTypes from "prop-types";
 import axios from "axios";
-import HomeLocation from "./HomeLocation";
-import WorkLocation from "./WorkLocation";
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      avatar: null,
-      photo: "",
-      name: this.props.currentUser.name || "",
-      email: this.props.currentUser.email || "",
-      password: "",
-      homeLocation: this.props.currentUser.home_location || "",
-      workLocation: this.props.currentUser.work_location || "",
-      showForm: true
+    this.state =
+    {
+    isEditing: false,
+    user: this.props.user,
+		// "photo": "",
+    // "name": "",
+		// "email": "",
+		// "password": "",
     };
 
     this.onChange = this.onChange.bind(this);
@@ -23,12 +21,8 @@ class UserProfile extends React.Component {
     this.toggleEdit = this.toggleEdit.bind(this);
   }
 
-  fileChangedHandler = event => {
-    this.setState({ avatar: event.target.files[0] });
-  };
-
   toggleEdit() {
-    this.setState({ isEditing: !this.state.isEditing });
+    this.setState({isEditing: !this.state.isEditing})
   }
 
   onChange(e) {
@@ -37,137 +31,100 @@ class UserProfile extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    let data = new FormData();
-    data.append("user[avatar]", e.target.avatar.files[0]);
-    data.append("user[name]", this.state.name);
-    data.append("user[email]", this.state.email);
-    data.append("user[password]", this.state.password);
-    data.append("user[home_location]", this.state.homeLocation);
-    data.append("user[work_location]", this.state.workLocation);
-
-    const { name, email, password, homeLocation, workLocation } = this.state;
-    axios({
-      method: "put",
-      url: `http://localhost:3001/users/${this.props.currentUser.id}`,
-      data: data,
-      // {
-      //   user: {
-      //     name,
-      //     email,
-      //     password,
-      //     "work_location": workLocation,
-      //     "home_location": homeLocation,
-      //   }
-      // },
-      header: {
-        Accept: "application/json",
-        "Content-Type": "multipart/form-data"
-      }
+    axios.post('https://meet-in-the-middle-backend-api.herokuapp.com/users', { user: this.state })
+    .then(response => {
     })
-      .then(response => {
-        console.log("yay");
-        this.setState({ showForm: false });
-        console.log("success: ", response);
-        this.props.updateCurrentUser(response.data);
-      })
-      .catch(error => {
-        console.error("nooo");
-        console.error(error.response);
-      });
+    .catch(error => {
+    });
   }
 
+
   render() {
-    return (
-      <div>
-        {this.state.showForm ? (
-          <div className="signUpContainer">
-            <form
-              onSubmit={e => {
-                this.onSubmit(e);
+  return (
+    <div className="signUpContainer">
+      <form
+        onSubmit={e => {
+          this.onSubmit(e);
+        }}
+      >
+
+    <center> <div className="signUpForm">
+      <img className="formLogo" src="midl-logo.png" />
+        <div className="formHeading">
+          View and edit your account details
+        </div>
+
+        <div align="center">
+            <button
+              onClick={() => {
+                this.setState({ editing: true });
               }}
             >
-              <center>
-                {" "}
-                <div className="signUpForm">
-                  <img className="formLogo" src="midl-logo.png" />
-                  <div className="formHeading">Edit your account details</div>
-                  <div align="center"></div>
-                  <img className="signUpAvatar" src={this.state.avatar} />
-                  <input
-                    name="avatar"
-                    className="selectAvatar"
-                    type="file"
-                    onChange={this.fileChangedHandler}
-                  />
-                  <center>
-                    <input
-                      className="formFillIn"
-                      id="user_name"
-                      type="text"
-                      name="name"
-                      placeholder={"Name"}
-                      value={this.state.name}
-                      onChange={this.onChange}
-                    />
-                  </center>
-                  <input
-                    className="formFillIn"
-                    id="user_email"
-                    type="text"
-                    placeholder={"Email address"}
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.onChange}
-                  />
-                  <div className="passwordInfo">
-                    {" "}
-                    Password must be at least 6 letters{" "}
-                  </div>
-                  <input
-                    className="formFillIn"
-                    id="user_password"
-                    type="password"
-                    placeholder={"Password"}
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onChange}
-                  />
-                  <div>
-                    <HomeLocation
-                      homeLocation={this.state.homeLocation}
-                      onHomeLocationChange={location =>
-                        this.setState({ homeLocation: location })
-                      }
-                    />
-                  </div>
-                  <div>
-                    <WorkLocation
-                      workLocation={this.state.workLocation}
-                      onWorkLocationChange={location =>
-                        this.setState({ workLocation: location })
-                      }
-                    />
-                  </div>
-
-                  <input
-                    id="sign_up_button"
-                    className="enterButton"
-                    type="submit"
-                    value="Update"
-                  />
-                </div>{" "}
-              </center>
-            </form>
+              Edit
+            </button>
           </div>
-        ) : null}
+
+        <div className="formLabel">Name</div>
+        {this.state.editing ? (
+          <div className="userInfo">{this.state.name}</div>
+        ) : (
+          <input
+            type="text"
+            defaultValue={this.state.name}
+            className="formFillIn"
+            id="user_name"
+            type="text"
+            name="name"
+            onChange={this.onChange}
+          />
+        )}
+
+
+
+
+
+
+          <center><input
+            className="formFillIn"
+            id="user_name"
+            type="text"
+            name="name"
+            placeholder={"Name"}
+            value={this.state.name}
+            onChange={this.onChange}
+          /></center>
+            <input
+              className="formFillIn"
+              id="user_email"
+              type="text"
+              placeholder={"Email address"}
+              name="email"
+              value={this.state.email}
+              onChange={this.onChange}
+
+            />
+              <div className="passwordInfo" > Password must be at least 6 letters </div>
+              <input
+                className="formFillIn"
+                id="user_password"
+                type="password"
+                placeholder={"Password"}
+                name="password"
+                value={this.state.password}
+                onChange={this.onChange}
+              />
+
+              <input
+                id="sign_up_button"
+                className="enterButton"
+                type="submit"
+                value="Sign up"
+              />
+            </div> </center>
+        </form>
       </div>
     );
   }
 }
-
-UserProfile.propTypes = {
-  currentUser: PropTypes.object.isRequired,
-  updateCurrentUser: PropTypes.func.isRequired
-};
 
 export default UserProfile;

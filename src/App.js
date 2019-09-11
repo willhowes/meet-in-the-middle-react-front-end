@@ -21,28 +21,4 @@ export const App = () => {
   )
 }
 
-// export class App extends React.Component {
-//   constructor() {
-//     this.state = {
-//       currentUser: ""
-//     }
-//   }
-
-//   render() {
-//     return (
-//       <>
-//         <div className="NavBarContainer">
-//           <NavBar
-//             currentUser={this.state.currentUser}
-//             setCurrentUser={(user) => this.setState({ currentUser: user})}
-//           />
-//         </div>
-//         <div className="MainContainer">
-//           <Main currentUser={this.state.currentUser} />
-//         </div>
-//       </>
-//     )
-//   }
-// }
-
 export default App;
