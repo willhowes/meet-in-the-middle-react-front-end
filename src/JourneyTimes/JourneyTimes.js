@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles.css";
 import TransportTypeSelector from './TransportTypeSelector'
 
 

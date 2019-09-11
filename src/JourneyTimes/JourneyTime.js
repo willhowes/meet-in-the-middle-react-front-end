@@ -1,6 +1,5 @@
 import React from "react";
 import JourneyTimes from './JourneyTimes'
-import "../styles.css";
 
 class JourneyTime extends React.Component {
   constructor(props) {

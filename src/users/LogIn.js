@@ -88,7 +88,7 @@ class LogIn extends React.Component {
 
             </div>
         </center>
-        < /form>
+        </form>
       </div>
 
         :
