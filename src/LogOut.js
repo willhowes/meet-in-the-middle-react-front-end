@@ -15,21 +15,18 @@ class LogOut extends React.Component {
     showLogIn: false,
     loggedIn: false
     };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+
+    this._onSelectLogOut = this._onSelectLogOut.bind(this);
+    this._onSelectStayLoggedIn = this._onSelectStayLoggedIn.bind(this);
   }
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
 
-  onSubmit(e) {
+  _onSelectLogOut(e) {
     e.preventDefault();
-    console.log({session: this.state.showLogOut});
     axios.delete('http://localhost:3001/sessions/delete')
     .then(response => {
       console.log("user is logged out");
-      this.setState(state => ({showLogIn: false, loggedIn: false, showLogIn: false}));
+      this.setState(state => ({showLogIn: false, loggedIn: false, showLogOut: false}));
     }).then(response => this.props.updateLogInStatus())
     .catch(error => {
       console.log("did not log out");
@@ -37,10 +34,18 @@ class LogOut extends React.Component {
     });
   }
 
+  _onSelectStayLoggedIn(e) {
+    e.preventDefault();
+    console.log("stay logged in please");
+    this.setState(state => ({showLogIn: false, showLogOut: false}));
+  }
+
   render() {
   return (
 
     <div>
+
+    { this.state.showLogOut ?
 
 
     <div className="signUpContainer">
@@ -61,15 +66,27 @@ class LogOut extends React.Component {
               <input
                 id="log_in_submit"
                 className="enterButton"
-                type="submit"
                 value="Yes"
                 style={{top: "-32px"}}
+                onClick={this._onSelectLogOut}
+              />
+
+              <input
+                id="log_in_submit"
+                className="enterButton"
+                value="No"
+                style={{top: "-32px", left: "4px"}}
+                onClick={this._onSelectStayLoggedIn}
               />
 
             </div>
         </center>
         < /form>
       </div>
+
+      :
+      null
+    }
 
       </div>
 

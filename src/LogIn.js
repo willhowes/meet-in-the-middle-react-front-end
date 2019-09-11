@@ -12,7 +12,8 @@ class LogIn extends React.Component {
 		"email": "",
 		"password": "",
     showLogIn: true,
-    loggedIn: false
+    loggedIn: false,
+    showLogOut: false,
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -28,7 +29,7 @@ class LogIn extends React.Component {
     axios.post('http://localhost:3001/sessions', { session: this.state })
     .then(response => {
       console.log("user is logged in");
-      this.setState(state => ({showLogIn: false, loggedIn: true, showLogIn: false}));
+      this.setState(state => ({showLogIn: false, loggedIn: true, showLogIn: false, showLogOut: false}));
     }).then(response => this.props.updateLogInStatus())
     .catch(error => {
       console.log("did not log in");
