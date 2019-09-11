@@ -15,6 +15,7 @@ class JourneyTimes extends React.Component {
     this.changeJourneyType = this.changeJourneyType.bind(this)
     this.getDirections = this.getDirections.bind(this)
     this.getJourneyType = this.getJourneyType.bind(this)
+    this.getGoogleMapsCompatibleJourneyType = this.getGoogleMapsCompatibleJourneyType.bind(this)
   }
 
   componentDidMount(prevProps, prevState){
@@ -73,12 +74,25 @@ class JourneyTimes extends React.Component {
     }
   }
 
+  getGoogleMapsCompatibleJourneyType() {
+    if (this.state.journeyType === "public_transport" || this.state.journeyType === "transit") {
+      return "transit"
+    } else if (this.state.journeyType === "walking") {
+      return "walking"
+    } else if (this.state.journeyType === "bicycling" || this.state.journeyType === "cycling") {
+      return "bicycling"
+    } else {
+      return "driving"
+    }
+  }
+
   render() {
     if (this.state.route !== false) {
       return (
         <div>
-          <p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 10}} >{this.getJourneyType()} time {this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}</p>
-          <TransportTypeSelector num={this.props.num} journeyType={this.props.journeyType} changeJourneyType={this.changeJourneyType}/>
+          <a href={`https://www.google.com/maps/dir/?api=1&origin=Space+Needle+Seattle+WA&destination=Pike+Place+Market+Seattle+WA&travelmode=${this.getGoogleMapsCompatibleJourneyType()}`}><p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 10}}>{this.getJourneyType()} time {this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}</p></a>
+          <TransportTypeSelector num={this.props.num} 
+          journeyType={this.props.journeyType} changeJourneyType={this.changeJourneyType}/>
         </div>
       )
     } else {

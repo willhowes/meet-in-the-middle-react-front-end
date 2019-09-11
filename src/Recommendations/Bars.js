@@ -35,7 +35,7 @@ class Bars extends React.Component {
 }
 }
 const listStyle = {
-  color: 'orange',
+  color: 'gold',
   fontFamily: 'Roboto Condensed'
 }
 
