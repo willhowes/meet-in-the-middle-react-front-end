@@ -244,11 +244,11 @@ h2 {
 
 .midlLocationContainer {
   /* display: block; */
-  padding: 0px;
+  padding: 10px;
   background-color: #ebf2ff;
   position: absolute;
   z-index: 1;
-  margin-top: 15px;
+  margin-top: 10px;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   font-family: "Roboto Condensed", sans-serif;
@@ -258,7 +258,7 @@ h2 {
   display: block;
   top: 100px;
   right: 20px;
-  padding: 0px;
+  padding-bottom: 15px;
   background-color: #ebf2ff;
   position: absolute;
   z-index: 2;
