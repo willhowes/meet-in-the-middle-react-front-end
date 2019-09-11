@@ -23,6 +23,7 @@ class App extends React.Component {
           lng: ''
         }
       }],
+      midlArea: 'testing',
       places: [],
       findMidl: false,
       midLJourneyType: "public_transport"
@@ -39,11 +40,18 @@ class App extends React.Component {
     this.addMarker = this.addMarker.bind(this);
     this.changeMidlJourneyType = this.changeMidlJourneyType.bind(this);
     this.setMidlRequest = this.setMidlRequest.bind(this);
+    // this.updateMidlArea = this.updateMidlArea.bind(this);
   }
 
   changeMidlJourneyType(type) {
     this.setState({midLJourneyType: type})
   }
+
+
+  updateMidlArea = (midlArea) => {
+    this.setState( {midlArea: midlArea});
+  };
+
 
   updateMarkers(position, index) {
     if (this.state.markers[index] === undefined) {
@@ -203,6 +211,8 @@ class App extends React.Component {
   }
 
   render() {
+    console.log("midlArea state in the App");
+    console.log(this.state.midlArea);
     return (
       <div>
         <div className="journeyTime" >
@@ -213,6 +223,7 @@ class App extends React.Component {
             findMidl={this.state.findMidl}
             setMidlRequest={this.setMidlRequest}
             journeyType={this.state.midLJourneyType}
+            updateMidlArea={this.updateMidlArea}
           />
         </div>
         <div className="locationFormContainer">
@@ -225,6 +236,7 @@ class App extends React.Component {
           />
           <div >
             <MidlLocation
+              midlArea={this.state.midlArea}
               markers={this.state.markers}
               midlLocation={this.state.midlLocation}
               places={this.state.places}
