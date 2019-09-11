@@ -77,7 +77,7 @@ class JourneyTimes extends React.Component {
     if (this.state.route !== false) {
       return (
         <div>
-          <p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 10}} >{this.getJourneyType()} time {this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}</p>
+          <center><p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 5}} >{this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}<br></br>{this.getJourneyType()} time</p></center>
           <TransportTypeSelector num={this.props.num} journeyType={this.props.journeyType} changeJourneyType={this.changeJourneyType}/>
         </div>
       )

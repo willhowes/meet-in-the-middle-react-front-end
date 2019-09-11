@@ -4,8 +4,9 @@ import LocationForm from "./LocationForm.js"
 import FindMidlButton from "../buttons/FindMidlButton.js"
 import TransportTypeSelector from "./TransportTypeSelector.js"
 import FadeIn from 'react-fade-in';
+import Datetime from 'react-datetime';
 
-class LocationFinder extends React.Component {
+class LocationContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +25,7 @@ class LocationFinder extends React.Component {
     }
 
     return (
-      <div style={{ margin: 10, height: 250 }}>
+      <div style={{ margin: 10 }}>
         {Array(this.state.locationForms).fill().map(Math.random).map(function(item, i){
           if (i === 0) {
             return <LocationForm
@@ -51,4 +52,4 @@ class LocationFinder extends React.Component {
   }
 }
 
-export default LocationFinder;
+export default LocationContainer;

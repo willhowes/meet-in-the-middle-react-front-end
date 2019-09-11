@@ -58,13 +58,13 @@ class NavBar extends React.Component {
   render() {
     return (
       <div>
-        <form
-          // onSubmit={e => {
-          //   this.handleSubmit(query, e);
-          // }}
-        >
-        <img  alt="Hello World" className="logo" src="midl-logo.png" onClick={this._hidePopUps}   style={{cursor: "pointer"}}
-/>
+        <img
+          alt="Hello World"
+          className="logo"
+          src="midl-logo.png"
+          onClick={this._hidePopUps}
+          style={{cursor: "pointer"}}
+          />
         <input
           onClick={this._onSignUpButtonClick}
           id="sign_up_button"
@@ -76,22 +76,18 @@ class NavBar extends React.Component {
           <SignUp /> :
           null
         }
-
-
-
-            <input
-              onClick={this._onButtonClickLogIn}
-              id="log_in_button"
-              className="navBarButton"
-              type="submit"
-              value="Log In"
-              style={{right: "160px"}}
-            />
-            {this.state.showLogIn ?
-              <LogIn /> :
-              null
-            }
-          </form>
+        <input
+          onClick={this._onButtonClickLogIn}
+          id="log_in_button"
+          className="navBarButton"
+          type="submit"
+          value="Log In"
+          style={{right: "160px"}}
+        />
+        {this.state.showLogIn ?
+          <LogIn /> :
+          null
+        }
       </div>
     );
   }

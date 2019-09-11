@@ -1,7 +1,7 @@
 import React from "react";
 import update from "immutability-helper";
 import MapContainer from "./mapContainer/MapContainer";
-import LocationFinder from "./locationFinder/LocationFinder";
+import LocationContainer from "./locationFinder/LocationContainer";
 import MidlLocation from "./midlLocation/MidlLocation";
 import JourneyTime from "./JourneyTimes/JourneyTime";
 import "./styles.css";
@@ -202,10 +202,37 @@ class App extends React.Component {
     });
   }
 
+  style(){
+    if (this.state.midlMarker[0].name === "Midl") {
+      return {
+        visibility: "visible",
+        margin: "12px"
+      }
+    } else {
+      return {
+        visibility: "hidden"
+      }
+    }
+  }
+
   render() {
     return (
-      <div>
-        <div className="journeyTime" >
+      <div style={{height: "100%", minHeight: "100%"}}>
+        <div
+          style={{width: "100%", height: "90px"}}
+          className="NavBarContainer">
+          <NavBar
+            addSignUpForm={this.showSignUpForm}
+            addLogInForm={this.showLogInForm}
+          />
+        </div>
+        <MapContainer
+          mapCenterLat={this.state.mapCenterLat}
+          mapCenterLng={this.state.mapCenterLng}
+          markers={this.state.markers}
+          midlMarker={this.state.midlMarker}
+        />
+        <div style={this.style()} className="journeyTime" >
           <JourneyTime
             markers={this.state.markers}
             addMidlMarkerJourneyTime={this.addMidlMarkerJourneyTime}
@@ -214,36 +241,20 @@ class App extends React.Component {
             setMidlRequest={this.setMidlRequest}
             journeyType={this.state.midLJourneyType}
           />
-          <div >
-            <MidlLocation
-              markers={this.state.markers}
-              midlLocation={this.state.midlLocation}
-              places={this.state.places}
-              setMidlRequest={this.setMidlRequest}
-            />
-          </div>
+          <MidlLocation
+            markers={this.state.markers}
+            midlLocation={this.state.midlLocation}
+            places={this.state.places}
+            setMidlRequest={this.setMidlRequest}
+          />
         </div>
         <div className="locationFormContainer">
-          <LocationFinder
+          <LocationContainer
             markers={this.state.markers}
             addMidlMarker={this.setMidlRequest}
             updateMarkers={this.updateMarkers}
             reset={this.reset}
             changeMidlJourneyType={this.changeMidlJourneyType}
-          />
-        </div>
-        <div className="mapContainer">
-          <MapContainer
-            mapCenterLat={this.state.mapCenterLat}
-            mapCenterLng={this.state.mapCenterLng}
-            markers={this.state.markers}
-            midlMarker={this.state.midlMarker}
-          />
-        </div>
-        <div className="NavBarContainer">
-          <NavBar
-            addSignUpForm={this.showSignUpForm}
-            addLogInForm={this.showLogInForm}
           />
         </div>
       </div>
