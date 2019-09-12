@@ -24,7 +24,7 @@ class Main extends React.Component {
           }
         }
       ],
-      midlArea: "testing",
+      midlArea: "",
       places: [],
       findMidl: false,
       midLJourneyType: "public_transport",
