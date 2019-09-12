@@ -25,7 +25,10 @@
     "react-icons": "^3.7.0",
     "react-load-script": "0.0.6",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "react-dropzone": "^10.1.8",
+    "react-images-upload": "^1.2.7",
+    "superagent": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,6 +1,5 @@
 import React from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
-import "../styles.css";
 
 const google = (window.google = window.google ? window.google : {});
 

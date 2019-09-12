@@ -1,13 +1,15 @@
 import React from "react";
 import JourneyTimes from './JourneyTimes'
-import "../styles.css";
 
 class JourneyTime extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       route: '',
-      midlRoute: ''
+      midlRoute: '',
+      midlPointLatCoord: '',
+      midlPointLngCoord: '',
+      midlArea: '',
     };
     this.requestRouteMidl = this.requestRouteMidl.bind(this);
     this.requestBody = this.requestBody.bind(this);
@@ -148,11 +150,47 @@ class JourneyTime extends React.Component {
       index = (index === middleRoute.coords.length - 1) ? index - 1 : index
     }
     // returns new middle marker at correct coordinate
+
+    this.setState({ midlPointLatCoord: middleRoute.coords[index].lat });
+    this.setState({ midlPointLngCoord: middleRoute.coords[index].lng });
+
+    this._getMidlLocation();
+
+
     return this._createMarker(
         "Midl",
         middleRoute.coords[index].lat,
         middleRoute.coords[index].lng
     )
+
+  }
+
+  _getMidlLocation() {
+    let midlCoordinates = "latlng=" + this.state.midlPointLatCoord + ","
+                            + this.state.midlPointLngCoord
+
+    let url = "https://maps.googleapis.com/maps/api/geocode/json?" +
+              midlCoordinates +
+              "&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
+
+    fetch(url)
+      .then(json => json.json())
+
+      .then(response => {
+        if (response.results[0].address_components[2].long_name === "London") {
+          this.setState( state => ({midlArea: response.results[0].address_components[1].long_name }));
+        } else if (response.results[0].address_components[1].long_name === "London") {
+            this.setState({midlArea: response.results[0].address_components[0].long_name });
+        } else {
+          this.setState({midlArea: response.results[0].address_components[2].long_name });
+        }
+      })
+
+      .then(response => this.props.updateMidlArea(this.state.midlArea))
+
+      .catch(error => {
+        console.log(error.response)
+      });
   }
 
   _createMarker(name, lat, lng){
@@ -211,6 +249,7 @@ class JourneyTime extends React.Component {
             journeyType={this.journeyType}
             num={"B"}
             />
+
         </div>
       );
     } else {

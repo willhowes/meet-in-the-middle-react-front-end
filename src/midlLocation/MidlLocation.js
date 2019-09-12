@@ -1,5 +1,12 @@
 import React from "react";
-import MidlPlaces from "./MidlPlaces";
+import Tabs from '../tabs/Tabs'
+import Bars from "../Recommendations/Bars";
+import Restaurants from "../Recommendations/Restaurants";
+import Cafes from "../Recommendations/Cafes";
+import Lodgings from "../Recommendations/Lodgings";
+import Museums from "../Recommendations/Museums";
+import Miscellaneous from "../Recommendations/Miscellaneous";
+
 
 class MidlLocation extends React.Component {
   constructor(props) {
@@ -31,10 +38,32 @@ class MidlLocation extends React.Component {
     return (
       <div className="midlLocationContainer" id='midlLocation' style={this.style()}>
         <p style={{ margin: '10px' }} className="greeting" >
-          Your Midl point is: {this.props.midlLocation}
+          Your Midl point is: {this.props.midlArea}
+
         </p>
         <div style={{ margin: "10px", overflowY: "scroll", maxHeight:"250px" }}>
-          <MidlPlaces setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+
+        <Tabs>
+          <div label='Bars'>
+            <Bars setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          </div>
+          <div label='Restaurants' >
+            <Restaurants id="Restaurants" setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          </div>
+          <div label='Cafes'>
+            <Cafes setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          </div>
+          <div label='Hotels'>
+            <Lodgings setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          </div>
+          <div label='Museums'>
+            <Museums setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          </div>
+          <div label='Other'>
+            <Miscellaneous setMidlRequest={this.props.setMidlRequest} places={this.props.places} />
+          </div>
+        </Tabs>
+
         </div>
       </div>
     );

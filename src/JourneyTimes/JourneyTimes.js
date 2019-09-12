@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles.css";
 import TransportTypeSelector from './TransportTypeSelector'
 
 
@@ -15,6 +14,9 @@ class JourneyTimes extends React.Component {
     this.changeJourneyType = this.changeJourneyType.bind(this)
     this.getDirections = this.getDirections.bind(this)
     this.getJourneyType = this.getJourneyType.bind(this)
+    this.getGoogleMapsCompatibleJourneyType = this.getGoogleMapsCompatibleJourneyType.bind(this)
+    this.getGoogleMapsCompatibleOrigin = this.getGoogleMapsCompatibleOrigin.bind(this)
+    this.getGoogleMapsCompatibleDestination = this.getGoogleMapsCompatibleDestination.bind(this)
   }
 
   componentDidMount(prevProps, prevState){
@@ -74,13 +76,34 @@ class JourneyTimes extends React.Component {
     }
   }
 
+  getGoogleMapsCompatibleJourneyType() {
+    if (this.state.journeyType === "public_transport" || this.state.journeyType === "transit") {
+      return "transit"
+    } else if (this.state.journeyType === "walking") {
+      return "walking"
+    } else if (this.state.journeyType === "bicycling" || this.state.journeyType === "cycling") {
+      return "bicycling"
+    } else {
+      return "driving"
+    }
+  }
+
+  getGoogleMapsCompatibleOrigin() {
+    return this.props.marker.position.lat + ',' + this.props.marker.position.lng
+  }
+
+  getGoogleMapsCompatibleDestination() {
+    return this.props.midlMarker[0].position.lat + ',' + this.props.midlMarker[0].position.lng
+  }
+
   render() {
     if (this.state.route !== false) {
       console.log(this.state.route)
       return (
         <div>
-          <center><p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 5}} >{this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}<br></br>{this.getJourneyType()}</p></center>
-          <TransportTypeSelector num={this.props.num} journeyType={this.props.journeyType} changeJourneyType={this.changeJourneyType}/>
+          <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.getGoogleMapsCompatibleOrigin()}&destination=${this.getGoogleMapsCompatibleDestination()}&travelmode=${this.getGoogleMapsCompatibleJourneyType()}`}><p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 10}}>{this.getJourneyType()} time {this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}</p></a>
+          <TransportTypeSelector num={this.props.num}
+          journeyType={this.props.journeyType} changeJourneyType={this.changeJourneyType}/>
         </div>
       )
     } else {

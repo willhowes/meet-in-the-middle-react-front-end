@@ -1,6 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
-import "../styles.css";
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -9,7 +9,9 @@ class LogIn extends React.Component {
     {
 		"email": "",
 		"password": "",
-    showLogIn: true
+    showLogIn: true,
+    loggedIn: false,
+    showLogOut: false,
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -21,12 +23,18 @@ class LogIn extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    axios.post('http://localhost:3001/sessions', { session: this.state })
-    .then(response => {
-      this.setState(state => ({showLogIn: false}))
-    })
-    .catch(error => {
-    });
+    axios
+      .post("http://localhost:3001/sessions", { session: this.state })
+      .then(response => {
+        console.log("success: ", response)
+        this.setState({ showLogIn: false });
+        this.props.updateCurrentUser(response.data) 
+      })
+      .catch(error => {
+        console.log("nooo");
+        console.log(error.response);
+      });
+
   }
 
   render() {
@@ -47,7 +55,7 @@ class LogIn extends React.Component {
       >
 
         <center> <div className="signUpForm">
-          <img className="formLogo" src="midl-logo.png" alt="Hello World" />
+          <img className="formLogo" src="midl-logo.png" alt="Midl Logo" />
             <div className="formHeading">
               Log in to your meet in the midl account
             </div>
@@ -81,7 +89,7 @@ class LogIn extends React.Component {
 
             </div>
         </center>
-        < /form>
+        </form>
       </div>
 
         :
@@ -92,6 +100,10 @@ class LogIn extends React.Component {
 
     );
   }
+}
+
+LogIn.propTypes = {
+  updateCurrentUser: PropTypes.func.isRequired,
 }
 
 export default LogIn;

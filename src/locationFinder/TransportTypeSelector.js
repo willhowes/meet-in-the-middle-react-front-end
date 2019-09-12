@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles.css";
 import { FaWalking, FaSubway, FaCar } from 'react-icons/fa';
 import { IoMdBicycle } from "react-icons/io";
 
