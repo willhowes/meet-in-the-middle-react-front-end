@@ -42,6 +42,7 @@ class LocationContainer extends React.Component {
               placeholder={'Where are you?'}
               greeting={'First enter your location'}
               updateMarkers={this.props.updateMarkers}
+              currentUser={this.props.currentUser}
               />
           } else {
             return <LocationForm
@@ -50,6 +51,7 @@ class LocationContainer extends React.Component {
               placeholder={'Enter another location'}
               greeting={'Then enter another location'}
               updateMarkers={this.props.updateMarkers}
+              currentUser={this.props.currentUser}
               />
           }
         }, this)}
@@ -71,7 +73,8 @@ class LocationContainer extends React.Component {
               shrink: true,
             }}
           />
-        </form>        <TransportTypeSelector changeMidlJourneyType={this.props.changeMidlJourneyType} />
+        </form>
+        <TransportTypeSelector changeMidlJourneyType={this.props.changeMidlJourneyType} />
         {midlButton}
       </div>
     );

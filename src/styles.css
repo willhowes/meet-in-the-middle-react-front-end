@@ -5,7 +5,7 @@
   border: 2px solid;
   position: absolute;
   z-index: 1;
-  top: 200px;
+  top: 160px;
   left: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -231,11 +231,12 @@ h2 {
   border-radius: 20px;
   border: 2px solid;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 288px
 }
 
 .journeyTime {
   display: block;
-  top: 100px;
+  top: 150px;
   right: 20px;
   padding: 0px;
   background-color: white;
@@ -311,11 +312,13 @@ h2 {
   transform: translateY(5px);
 }
 .tab-list {
+  cursor: pointer;
   border-bottom: 1px solid #ccc;
   padding-left: 0;
 }
 
 .tab-list-item {
+  cursor: pointer;
   display: inline-block;
   list-style: none;
   margin-bottom: -1px;
@@ -323,6 +326,7 @@ h2 {
 }
 
 .tab-list-active {
+  cursor: pointer;
   background-color: white;
   border: solid #ccc;
   border-width: 1px 1px 0 1px;
