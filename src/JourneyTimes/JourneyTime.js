@@ -7,12 +7,14 @@ class JourneyTime extends React.Component {
     super(props);
     this.state = {
       route: '',
+      midlRoute: ''
     };
     this.requestRouteMidl = this.requestRouteMidl.bind(this);
     this.requestBody = this.requestBody.bind(this);
     this.renderJourneyTime = this.renderJourneyTime.bind(this);
     this.middleOfRoute = this.middleOfRoute.bind(this);
     this.journeyType = this.journeyType.bind(this);
+    this.setMidlRoute = this.setMidlRoute.bind(this);
   }
 
   journeyType(){
@@ -45,13 +47,11 @@ class JourneyTime extends React.Component {
     let customTime = this.props.meetTime
     let now = new Date()
     let formatted_date = now.toISOString()
-    console.log(formatted_date)
 
     if (this.props.meetTime === '') {
       formatted_date = now.toISOString()
     } else {
       formatted_date = now.toISOString()
-      console.log('NEW TIME')
     }
 
     return ({
@@ -114,7 +114,6 @@ class JourneyTime extends React.Component {
         if (halfWay <= 0 && middleRoute.length === 0) {
           // Picks the previous segment as the middle route
           middleRoute = journey[i-1]
-          console.log(middleRoute)
           // Sets the travel time for the end of previous segment
           travelTimeEndOfHalfWay = timeSoFar
           // Set the travel time for the beginning of previous segment
@@ -149,7 +148,6 @@ class JourneyTime extends React.Component {
     } else {
       index = (index === middleRoute.coords.length - 1) ? index - 1 : index
     }
-    console.log(middleRoute)
     // returns new middle marker at correct coordinate
     return this._createMarker(
         "Midl",
@@ -169,12 +167,6 @@ class JourneyTime extends React.Component {
   }
 
   requestRouteMidl() {
-    console.log(JSON.stringify(this.requestBody({
-        lat1: this.props.markers[0].position.lat,
-        lng1: this.props.markers[0].position.lng,
-        lat2: this.props.markers[1].position.lat,
-        lng2: this.props.markers[1].position.lng
-    })))
     fetch('https://api.traveltimeapp.com/v4/routes', {
       method: 'POST',
       headers: {
@@ -194,11 +186,18 @@ class JourneyTime extends React.Component {
     .then(test => this.middleOfRoute())
   }
 
+  setMidlRoute(midlRoute){
+    this.setState({
+      midlRoute: midlRoute
+    })
+  }
+
   renderJourneyTime() {
     if (this.props.midlMarker[0].name === 'Midl') {
       return (
         <div>
           <JourneyTimes
+            setMidlRoute={this.setMidlRoute}
             setMidlRequest={this.props.setMidlRequest}
             marker={this.props.markers[0]}
             midlMarker={this.props.midlMarker}
@@ -206,6 +205,7 @@ class JourneyTime extends React.Component {
             num={"A"}
             />
           <JourneyTimes
+            setMidlRoute={this.setMidlRoute}
             setMidlRequest={this.props.setMidlRequest}
             marker={this.props.markers[1]}
             midlMarker={this.props.midlMarker}

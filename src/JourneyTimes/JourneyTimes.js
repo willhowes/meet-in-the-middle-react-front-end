@@ -58,6 +58,7 @@ class JourneyTimes extends React.Component {
         method: 'GET'
       }).then(json => json.json())
       .then(response => this.setState({route: response}))
+      .then(this.props.setMidlRoute)
     }
   }
 
@@ -75,9 +76,11 @@ class JourneyTimes extends React.Component {
 
   render() {
     if (this.state.route !== false) {
+      console.log(this.state.route)
       return (
         <div>
-          <center><p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 5}} >{this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}<br></br>{this.getJourneyType()} time</p></center>
+          <center><p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 5}} >{this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}<br></br>{this.getJourneyType()}
+            <br></br>Arrival Time: {this.state.route.routes[0].legs[0].arrival_time.text}</p></center>
           <TransportTypeSelector num={this.props.num} journeyType={this.props.journeyType} changeJourneyType={this.changeJourneyType}/>
         </div>
       )

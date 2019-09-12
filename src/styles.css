@@ -133,7 +133,7 @@ h2 {
   background-color: #f3cad0;
   width: 101%;
   height: 100vh;
-  z-index: 2;
+  z-index: 10000;
   left: 0px;
   text-align: center;
 }
@@ -274,9 +274,9 @@ h2 {
 .midlButton {
   position: relative;
   clear: both;
-  -webkit-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.4s;
   /* Safari */
-  transition-duration: 0.2s;
+  transition-duration: 0.4s;
   cursor: pointer;
   outline:0;
   box-shadow: inset 0px 1px 0px 0px #dcecfb;
@@ -300,15 +300,16 @@ h2 {
 }
 
 .midlButton:hover {
+  width: 80px;
+  height: 80px;
 }
 
 .midlButton:active {
   position: relative;
-  top: 1px;
   box-shadow: 0 0px #666;
   border-color: #2196F3;
   color: #2196F3;
-  transform: translateY(3px);
+  transform: translateY(5px);
 }
 
 .navBarButton {

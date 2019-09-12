@@ -223,7 +223,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.meetTime)
     return (
       <div style={{height: "100%", minHeight: "100%"}}>
         <div
