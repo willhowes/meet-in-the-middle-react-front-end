@@ -23,7 +23,6 @@ class SignUp extends React.Component {
 
 
 fileChangedHandler = event => {
-  // console.log(event.target.files[0]);
   this.setState({ avatar: event.target.files[0] })
 }
 
@@ -55,10 +54,10 @@ fileChangedHandler = event => {
         })
     .then(response => {
       this.setState(state => ({showSignUp: false}))
-    	console.log(response)
     })
     .catch(error => {
-        console.log(error.response)
+      console.log("axios.catch(error) below);
+      console.log(error.response)
     });
   }
 

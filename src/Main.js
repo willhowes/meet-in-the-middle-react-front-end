@@ -153,7 +153,6 @@ class Main extends React.Component {
       fetch(url)
         .then(res => res.json())
         .then(res => this.setState({ places: this.categorisePlaces(res.results) }))
-        .then(res => console.log(this.state.places));
     }
   }
 
@@ -263,9 +262,6 @@ class Main extends React.Component {
   }
 
   render() {
-    console.log("LOOKI HERE BOY")
-    console.log(this.state.midlArea);
-    // console.log(this.props.currentUser.id);
     // USE THIS TO ACCESS HOME LOCATION OF USER FOR MARKER
     return (
       <div>

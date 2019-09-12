@@ -24,15 +24,11 @@ class LogIn extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log({session: this.state.showLogIn});
     axios.post('http://localhost:3001/sessions', { session: this.state })
     .then(response => {
-      console.log("user is logged in");
       this.setState(state => ({showLogIn: false, loggedIn: true, showLogIn: false, showLogOut: false}));
     }).then(response => this.props.updateLogInStatus())
     .catch(error => {
-      console.log("did not log in");
-      console.log(error.response)
     });
   }
 

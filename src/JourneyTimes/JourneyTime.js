@@ -86,7 +86,6 @@ class JourneyTime extends React.Component {
     if (this.props.findMidl) {
       // creates many many holding variables
       let halfWay = this._getHalfWayTime()
-      console.log(halfWay)
       let journey = this.state.route.route.parts
       let middleRoute = []
       let timeSoFar = 0
@@ -111,7 +110,6 @@ class JourneyTime extends React.Component {
           timeSoFar += segment.travel_time
         }
       }, this)
-      console.log(journeySplitRatio)
       // creates a Midl Marker at the nearest stop in the middle segment
       this.props.addMidlMarkerJourneyTime(this._setMidlMarker(journeySplitRatio, middleRoute))
       // sets journey times from each direction towards the Midl Marker (not very accurate!)
@@ -128,13 +126,11 @@ class JourneyTime extends React.Component {
     // roughly works out at which stop in the middle segment to set the middle marker
     let index = Math.round( (middleRoute.coords.length - 1) * journeySplitRatio )
     // rules out edge cases
-    console.log(index)
     if (journeySplitRatio < 0.5) {
       index = index === 0 ? 1 : index - 1
     } else {
       index = (index === middleRoute.coords.length - 1) ? index - 1 : index
     }
-    console.log(index)
     // returns new middle marker at correct coordinate
 
     this.setState({ midlPointLatCoord: middleRoute.coords[index].lat });
@@ -152,7 +148,6 @@ class JourneyTime extends React.Component {
   }
 
   _getMidlLocation() {
-    console.log("calling the new method");
     let midlCoordinates = "latlng=" + this.state.midlPointLatCoord + ","
                             + this.state.midlPointLngCoord
 
@@ -164,23 +159,19 @@ class JourneyTime extends React.Component {
       .then(json => json.json())
 
       .then(response => {
-        console.log("this is the response");
-        console.log(response.results[0]);
         if (response.results[0].address_components[2].long_name === "London") {
           this.setState( state => ({midlArea: response.results[0].address_components[1].long_name }));
-          console.log("this is the response");
         } else if (response.results[0].address_components[1].long_name === "London") {
             this.setState({midlArea: response.results[0].address_components[0].long_name });
         } else {
           this.setState({midlArea: response.results[0].address_components[2].long_name });
         }
-        console.log(this.state.midlArea);
       })
 
       .then(response => this.props.updateMidlArea(this.state.midlArea))
 
       .catch(error => {
-        console.log("booo");
+        console.log("fetch(url).catch(error) below);
         console.log(error.response)
       });
 
@@ -221,8 +212,6 @@ class JourneyTime extends React.Component {
   }
 
   renderJourneyTime() {
-    console.log("middle marker");
-    console.log(this.props.midlMarker);
     if (this.props.midlMarker[0].name === 'Midl') {
       return (
         <div>

@@ -35,8 +35,6 @@ class MidlLocation extends React.Component {
   }
 
   render() {
-    console.log("the middle area in midllocation coponent");
-    console.log(this.props.midlArea);
     return (
       <div className="midlLocationContainer" id='midlLocation' style={this.style()}>
         <p style={{ margin: '10px' }} className="greeting" >
