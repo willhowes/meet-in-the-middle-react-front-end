@@ -99,8 +99,6 @@ class JourneyTimes extends React.Component {
     if (this.state.route !== false) {
       return (
         <div>
-          {console.log('LOOK HERE RITCHIE!!')}
-          {console.log(this.props.midlLocation)}
           <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.getGoogleMapsCompatibleOrigin()}&destination=${this.getGoogleMapsCompatibleDestination()}&travelmode=${this.getGoogleMapsCompatibleJourneyType()}`}><p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 10}}>{this.getJourneyType()} time {this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}</p></a>
           <TransportTypeSelector num={this.props.num} 
           journeyType={this.props.journeyType} changeJourneyType={this.changeJourneyType}/>

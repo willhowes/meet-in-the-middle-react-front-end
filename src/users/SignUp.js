@@ -53,6 +53,7 @@ class SignUp extends React.Component {
         console.error({ user: this.state });
         console.error(error.response);
       });
+
   }
 
 

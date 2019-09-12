@@ -24,18 +24,14 @@ class LogOut extends React.Component {
     e.preventDefault();
     axios.delete('http://localhost:3001/sessions/delete')
     .then(response => {
-      console.log("user is logged out");
       this.setState(state => ({showLogIn: false, loggedIn: false, showLogOut: false}));
     }).then(response => this.props.updateLogInStatus())
     .catch(error => {
-      console.log("did not log out");
-      console.log(error.response)
     });
   }
 
   _onSelectStayLoggedIn(e) {
     e.preventDefault();
-    console.log("stay logged in please");
     this.setState(state => ({showLogIn: false, showLogOut: false}));
   }
 

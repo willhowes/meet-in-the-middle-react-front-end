@@ -154,7 +154,6 @@ class Main extends React.Component {
       fetch(url)
         .then(res => res.json())
         .then(res => this.setState({ places: this.categorisePlaces(res.results) }))
-        .then(res => console.log(this.state.places));
     }
   }
 
@@ -264,6 +263,7 @@ class Main extends React.Component {
   }
 
   render() {
+
     return (
       <div>
         <div className="journeyTime">

@@ -6,8 +6,6 @@ import ListGroupItem from 'react-bootstrap/ListGroupItem';
 class Museums extends React.Component {
 
   render() {
-    console.log('HERE!!!!!!!!!')
-    console.log(this.props.places.museums)
     if (this.props.places !== undefined) {
       this.props.setMidlRequest(false)
     }
