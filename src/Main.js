@@ -268,7 +268,7 @@ class Main extends React.Component {
     if (this.state.midlMarker[0].name === 'Midl') {
       return ({
         visibility: "visible"
-      };
+      })
     } else {
       return {
         visibility: "hidden"

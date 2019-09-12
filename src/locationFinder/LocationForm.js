@@ -131,7 +131,7 @@ class LocationForm extends React.Component {
       <div className="slider">
         <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />
         <div >
-          <span style={{width: "180px", display: 'inline-block'}}className="greeting">{this.props.greeting}</span>
+          <span style={{width: "180px", margin: 5, display: 'inline-block'}}className="greeting">{this.props.greeting}</span>
           {this.favouritesButtons()}
         </div>
         <input

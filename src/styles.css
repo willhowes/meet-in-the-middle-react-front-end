@@ -364,6 +364,8 @@ h2 {
   width: 73px;
   top: 2px;
   cursor: pointer;
+  object-fit: cover;
+  object-position: 0 0;
 }
 
 .navBarButton:hover {
@@ -381,7 +383,7 @@ h2 {
 }
 
 .homeWorkButtons{
-  margin: 7px;
+  margin: 5px;
   padding: 5px;
   outline: none;
   border: none;

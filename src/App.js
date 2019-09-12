@@ -3,9 +3,7 @@ import "./styles.css";
 import NavBar from "./users/NavBar";
 import Main from "./Main";
 
-// Function component instead of Class component
-
-export class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props)
       this.state = {
@@ -30,3 +28,5 @@ export class App extends React.Component {
     )
   }
 }
+
+export default App;
