@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import HomeLocation from "./HomeLocation";
 import WorkLocation from "./WorkLocation";
+import SignUpAvatar from "./SignUpAvatar";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -30,6 +31,10 @@ class UserProfile extends React.Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  fileChangedHandler = event => {
+    this.setState({ avatar: event.target.files[0] });
+  };
 
   onSubmit(e) {
     e.preventDefault();
@@ -75,10 +80,11 @@ class UserProfile extends React.Component {
               <center>
                 {" "}
                 <div className="signUpForm">
-                  <img className="formLogo" src="midl-logo.png" />
+                  <img className="formLogo" src="midl-logo.png" alt="Midl Logo" />
                   <div className="formHeading">Edit your account details</div>
-                  <div align="center"></div>
-                  <img className="signUpAvatar" src={this.state.avatar} />
+                  
+                  {<SignUpAvatar avatarBlob={this.state.avatar} avatarPath={this.props.currentUser.avatar_path} />}
+                  
                   <input
                     name="avatar"
                     className="selectAvatar"

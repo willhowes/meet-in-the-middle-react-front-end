@@ -55,7 +55,7 @@ class NavBar extends React.Component {
   render() {
     return (
       <div>
-        <img className="logo" src="midl-logo.png" onClick={this._hidePopUps} />
+        <img className="logo" src="midl-logo.png" onClick={this._hidePopUps} alt="Midl Logo" />
         <button
           onClick={this._onSignUpButtonClick}
           id="sign_up_button"

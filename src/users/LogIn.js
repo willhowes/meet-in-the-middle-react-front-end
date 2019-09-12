@@ -28,7 +28,7 @@ class LogIn extends React.Component {
       .then(response => {
         console.log("success: ", response)
         this.setState({ showLogIn: false });
-        this.props.updateCurrentUser(response.data.user) 
+        this.props.updateCurrentUser(response.data) 
       })
       .catch(error => {
         console.log("nooo");
@@ -54,7 +54,7 @@ class LogIn extends React.Component {
       >
 
         <center> <div className="signUpForm">
-          <img className="formLogo" src="midl-logo.png" />
+          <img className="formLogo" src="midl-logo.png" alt="Midl Logo" />
             <div className="formHeading">
               Log in to your meet in the midl account
             </div>
