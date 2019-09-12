@@ -171,7 +171,6 @@ class JourneyTime extends React.Component {
       .then(response => this.props.updateMidlArea(this.state.midlArea))
 
       .catch(error => {
-        console.log("fetch(url).catch(error) below)";
         console.log(error.response)
       });
 
