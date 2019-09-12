@@ -56,7 +56,7 @@ fileChangedHandler = event => {
       this.setState(state => ({showSignUp: false}))
     })
     .catch(error => {
-      console.log("axios.catch(error) below);
+      console.log("axios.catch(error) below)";
       console.log(error.response)
     });
   }
