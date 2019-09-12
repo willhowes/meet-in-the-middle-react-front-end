@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import SignUp from "./SignUp";
 import UserProfile from "./UserProfile";
 import LogIn from "./LogIn";
+import LogOut from "./LogOut";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -10,11 +11,13 @@ class NavBar extends React.Component {
     this.state = {
       showUserProfile: false,
       showSignUp: false,
-      showLogIn: false
+      showLogIn: false,
+      showLogOut: false
     };
     this._onProfileButtonClick = this._onProfileButtonClick.bind(this);
     this._onSignUpButtonClick = this._onSignUpButtonClick.bind(this);
     this._onButtonClickLogIn = this._onButtonClickLogIn.bind(this);
+    this._onButtonClickLogOut = this._onButtonClickLogOut.bind(this);
     this._hidePopUps = this._hidePopUps.bind(this);
   }
 
@@ -45,6 +48,15 @@ class NavBar extends React.Component {
     }));
   }
 
+  _onButtonClickLogOut(e) {
+    e.preventDefault();
+    this.setState(state => ({
+      showLogOut: !state.showLogOut,
+      showLogIn: false,
+      showUserProfile: false
+    }));
+  }
+
   _hidePopUps(e) {
     e.preventDefault();
     this.setState(state => ({ showSignUp: false }));
@@ -55,16 +67,38 @@ class NavBar extends React.Component {
   render() {
     return (
       <div>
-        <img className="logo" src="midl-logo.png" onClick={this._hidePopUps} alt="Midl Logo" />
+        <img
+          className="logo"
+          src="midl-logo.png"
+          onClick={this._hidePopUps}
+          alt="Midl Logo"
+        />
+        {!this.props.currentUser ? (
+          <button
+            onClick={this._onSignUpButtonClick}
+            id="sign_up_button"
+            className="navBarButton"
+            style={{ right: "160px" }}
+          >
+            Sign up
+          </button>
+        ) : null}
+        {this.state.showSignUp ? (
+          <SignUp updateCurrentUser={this.props.setCurrentUser} />
+        ) : null}
+
         <button
-          onClick={this._onSignUpButtonClick}
-          id="sign_up_button"
+          onClick={this._onButtonClickLogIn}
+          id="log_in_button"
           className="navBarButton"
-          style={{ right: "160px" }}
+          style={{ right: "300px" }}
         >
-          Sign up
+          Log In
         </button>
-        {this.state.showSignUp ? <SignUp updateCurrentUser={this.props.setCurrentUser}/> : null}
+        {this.state.showLogIn ? (
+          <LogIn updateCurrentUser={this.props.setCurrentUser} />
+        ) : null}
+
         {this.props.currentUser && this.props.currentUser.id ? (
           <>
             <button
@@ -79,20 +113,21 @@ class NavBar extends React.Component {
                 currentUser={this.props.currentUser}
                 updateCurrentUser={this.props.setCurrentUser}
               />
-             ) : null}
+            ) : null}
+
+            <button
+              onClick={this._onButtonClickLogOut}
+              id="log_out_button"
+              className="navBarButton"
+              style={{ right: "300px" }}
+            >
+              Log Out
+            </button>
+            {this.state.showLogOut ? (
+              <LogOut updateCurrentUser={this.props.setCurrentUser} />
+            ) : null}
           </>
         ) : null}
-
-
-        <button
-          onClick={this._onButtonClickLogIn}
-          id="log_in_button"
-          className="navBarButton"
-          style={{ right: "300px" }}
-        >
-          Log In
-        </button>
-        {this.state.showLogIn ? <LogIn updateCurrentUser={this.props.setCurrentUser} /> : null}
       </div>
     );
   }
@@ -101,7 +136,7 @@ class NavBar extends React.Component {
 // Defines the types of the expected props passed into the component
 NavBar.propTypes = {
   currentUser: PropTypes.object,
-  setCurrentUser: PropTypes.func.isRequired,
-}
+  setCurrentUser: PropTypes.func.isRequired
+};
 
 export default NavBar;
