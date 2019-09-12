@@ -6,6 +6,7 @@ class JourneyTime extends React.Component {
     super(props);
     this.state = {
       route: '',
+      midlRoute: '',
       midlPointLatCoord: '',
       midlPointLngCoord: '',
       midlArea: '',
@@ -15,7 +16,7 @@ class JourneyTime extends React.Component {
     this.renderJourneyTime = this.renderJourneyTime.bind(this);
     this.middleOfRoute = this.middleOfRoute.bind(this);
     this.journeyType = this.journeyType.bind(this);
-
+    this.setMidlRoute = this.setMidlRoute.bind(this);
   }
 
   journeyType(){
@@ -47,6 +48,13 @@ class JourneyTime extends React.Component {
   requestBody(coords){
     let now = new Date()
     let formatted_date = now.toISOString()
+
+    if (this.props.meetTime === '') {
+      formatted_date = now.toISOString()
+    } else {
+      formatted_date = now.toISOString()
+    }
+
     return ({
       "locations": [
         {
@@ -64,20 +72,30 @@ class JourneyTime extends React.Component {
           }
         }
       ],
-      "departure_searches": [
+      "arrival_searches": [
         {
-          "id": "route_search",
-          "departure_location_id": "Marker 1",
-          "arrival_location_ids": [
-            "Marker 2"
-          ],
+          "id": "Midl Search",
+          "departure_location_ids": ["Marker 1"],
+          "arrival_location_id": "Marker 2",
           "transportation": {
             "type": `${this.props.journeyType}`
           },
-          "departure_time": `${formatted_date}`,
+          "arrival_time": `${formatted_date}`,
           "properties": ["travel_time", "distance", "route"]
         }
-      ]
+      ],
+      // "departure_searches": [
+      //   {
+      //     "id": "route_search",
+      //     "departure_location_id": "Marker 1",
+      //     "arrival_location_ids": ["Marker 2"],
+      //     "transportation": {
+      //       "type": `${this.props.journeyType}`
+      //     },
+      //     "departure_time": `${formatted_date}`,
+      //     "properties": ["travel_time", "distance", "route"]
+      //   }
+      // ]
     })
   }
 
@@ -173,12 +191,7 @@ class JourneyTime extends React.Component {
       .catch(error => {
         console.log(error.response)
       });
-
   }
-
-
-
-
 
   _createMarker(name, lat, lng){
     return {
@@ -210,11 +223,18 @@ class JourneyTime extends React.Component {
     .then(test => this.middleOfRoute())
   }
 
+  setMidlRoute(midlRoute){
+    this.setState({
+      midlRoute: midlRoute
+    })
+  }
+
   renderJourneyTime() {
     if (this.props.midlMarker[0].name === 'Midl') {
       return (
         <div>
           <JourneyTimes
+            setMidlRoute={this.setMidlRoute}
             setMidlRequest={this.props.setMidlRequest}
             marker={this.props.markers[0]}
             midlMarker={this.props.midlMarker}
@@ -222,6 +242,7 @@ class JourneyTime extends React.Component {
             num={"A"}
             />
           <JourneyTimes
+            setMidlRoute={this.setMidlRoute}
             setMidlRequest={this.props.setMidlRequest}
             marker={this.props.markers[1]}
             midlMarker={this.props.midlMarker}

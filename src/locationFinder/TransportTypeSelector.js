@@ -10,10 +10,10 @@ class TransportTypeSelector extends React.Component {
 
   render() {
     return (
-      <div style={{ margin: 10, position:"relative"}}>
+      <div style={{position:"relative", bottom: 4, left: 10, marginBottom: 50}}>
         <form>
           <label className="container">
-            <input style={{margin:"3px"}} type="radio" name="radio"/>
+            <input type="radio" name="radio"/>
             <span
               id="public_transport_Button_Midl"
               onClick={() => this.props.changeMidlJourneyType("public_transport")}
@@ -24,7 +24,7 @@ class TransportTypeSelector extends React.Component {
             </span>
           </label>
           <label className="container">
-            <input style={{margin:"3px"}} type="radio" name="radio"/>
+            <input type="radio" name="radio"/>
             <span
               id="walking_Button_Midl"
               onClick={()=>this.props.changeMidlJourneyType("walking")}
@@ -35,7 +35,7 @@ class TransportTypeSelector extends React.Component {
             </span>
           </label>
           <label className="container">
-            <input style={{margin:"3px"}} type="radio" name="radio"/>
+            <input type="radio" name="radio"/>
             <span
               id="driving_Button_Midl"
               onClick={() => this.props.changeMidlJourneyType("driving")}
@@ -46,7 +46,7 @@ class TransportTypeSelector extends React.Component {
             </span>
           </label>
           <label className="container">
-            <input style={{margin:"3px"}} type="radio" name="radio"/>
+            <input type="radio" name="radio"/>
             <span
               id="cycling_Button_Midl"
               onClick={() => this.props.changeMidlJourneyType("cycling")}

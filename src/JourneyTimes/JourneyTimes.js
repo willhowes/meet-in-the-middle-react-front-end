@@ -60,6 +60,7 @@ class JourneyTimes extends React.Component {
         method: 'GET'
       }).then(json => json.json())
       .then(response => this.setState({route: response}))
+      .then(this.props.setMidlRoute)
     }
   }
 
@@ -97,10 +98,11 @@ class JourneyTimes extends React.Component {
 
   render() {
     if (this.state.route !== false) {
+      console.log(this.state.route)
       return (
         <div>
           <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.getGoogleMapsCompatibleOrigin()}&destination=${this.getGoogleMapsCompatibleDestination()}&travelmode=${this.getGoogleMapsCompatibleJourneyType()}`}><p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 10}}>{this.getJourneyType()} time {this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}</p></a>
-          <TransportTypeSelector num={this.props.num} 
+          <TransportTypeSelector num={this.props.num}
           journeyType={this.props.journeyType} changeJourneyType={this.changeJourneyType}/>
         </div>
       )
