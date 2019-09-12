@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import update from "immutability-helper";
 import MapContainer from "./mapContainer/MapContainer";
-import LocationFinder from "./locationFinder/LocationFinder";
+import LocationContainer from "./locationFinder/LocationContainer";
 import MidlLocation from "./midlLocation/MidlLocation";
 import JourneyTime from "./JourneyTimes/JourneyTime";
 
@@ -42,7 +42,9 @@ class Main extends React.Component {
     this.changeMidlJourneyType = this.changeMidlJourneyType.bind(this);
     this.setMidlRequest = this.setMidlRequest.bind(this);
     this.meetTime = this.meetTime.bind(this);
+    this.isHidden = this.isHidden.bind(this);
   }
+
 
   changeMidlJourneyType(type) {
     this.setState({ midLJourneyType: type });
@@ -255,26 +257,22 @@ class Main extends React.Component {
     });
   }
 
+  isHidden(){
+    if (this.state.midlMarker[0].name == 'Midl') {
+      return ({
+        visibility: "visible"
+      });
+    } else {
+      return ({
+        visibility: "hidden"
+      })
+    }
+  }
+
   render() {
 
     return (
-      <div style={{height: "100%", minHeight: "100%"}}>
-        <div
-          style={{width: "100%", height: "90px"}}
-          className="journeyTime"
-          >
-          <JourneyTime
-            markers={this.state.markers}
-            addMidlMarkerJourneyTime={this.addMidlMarkerJourneyTime}
-            midlMarker={this.state.midlMarker}
-            findMidl={this.state.findMidl}
-            setMidlRequest={this.setMidlRequest}
-            journeyType={this.state.midLJourneyType}
-            updateMidlArea={this.updateMidlArea}
-            meetTime={this.state.meetTime}
-
-          />
-        </div>
+      <div>
         <div className="locationFormContainer">
           <LocationContainer
             markers={this.state.markers}
@@ -284,6 +282,7 @@ class Main extends React.Component {
             changeMidlJourneyType={this.changeMidlJourneyType}
             currentUser={this.props.currentUser}
           />
+      </div>
           <div>
             <MidlLocation
               markers={this.state.markers}
@@ -293,7 +292,22 @@ class Main extends React.Component {
               midlArea={this.state.midlArea}
             />
           </div>
-        </div>
+          <div
+            style={this.isHidden()}
+            className="journeyTime"
+            >
+            <JourneyTime
+              markers={this.state.markers}
+              addMidlMarkerJourneyTime={this.addMidlMarkerJourneyTime}
+              midlMarker={this.state.midlMarker}
+              findMidl={this.state.findMidl}
+              setMidlRequest={this.setMidlRequest}
+              journeyType={this.state.midLJourneyType}
+              updateMidlArea={this.updateMidlArea}
+              meetTime={this.state.meetTime}
+
+            />
+          </div>
         <div className="mapContainer">
           <MapContainer
             mapCenterLat={this.state.mapCenterLat}
