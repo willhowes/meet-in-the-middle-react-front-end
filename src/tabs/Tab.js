@@ -31,6 +31,7 @@ class Tab extends Component {
     return (
       <li
         className={className}
+        style={{ fontFamily: 'Roboto Condensed'}}
         onClick={onClick}
       >
         {label}

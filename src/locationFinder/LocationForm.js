@@ -117,8 +117,8 @@ class LocationForm extends React.Component {
       return null
     } else {
       return (
-        <div><button onClick={this.handleHomeSubmit}>Home</button>
-        <button onClick={this.handleWorkSubmit}>Work</button></div>
+        <div><button className="homeWorkButtons" onClick={this.handleHomeSubmit}>Home</button>
+        <button className="homeWorkButtons" onClick={this.handleWorkSubmit}>Work</button></div>
       )
     }
   }
@@ -130,8 +130,8 @@ class LocationForm extends React.Component {
     return (
       <div className="slider">
         <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />
-        <div>
-          <p className="greeting">{this.props.greeting}</p>
+        <div >
+          <span style={{width: "180px", display: 'inline-block'}}className="greeting">{this.props.greeting}</span>
           {this.favouritesButtons()}
         </div>
         <input

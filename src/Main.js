@@ -281,6 +281,7 @@ class Main extends React.Component {
             reset={this.reset}
             changeMidlJourneyType={this.changeMidlJourneyType}
             currentUser={this.props.currentUser}
+            meetTime={this.meetTime}
           />
       </div>
         <div
@@ -295,7 +296,7 @@ class Main extends React.Component {
             setMidlRequest={this.setMidlRequest}
             journeyType={this.state.midLJourneyType}
             updateMidlArea={this.updateMidlArea}
-            meetTime={this.state.meetTime}
+            meetTime={this.meetTime}
           />
         <div>
             <MidlLocation
