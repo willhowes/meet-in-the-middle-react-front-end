@@ -24,11 +24,11 @@ class Main extends React.Component {
           }
         }
       ],
-      midlArea: 'testing',
+      midlArea: "testing",
       places: [],
       findMidl: false,
       midLJourneyType: "public_transport",
-      meetTime: ''
+      meetTime: ""
     };
     this.addMidlMarkerGeographic = this.addMidlMarkerGeographic.bind(this);
     this.addMidlMarkerJourneyTime = this.addMidlMarkerJourneyTime.bind(this);
@@ -44,7 +44,6 @@ class Main extends React.Component {
     this.meetTime = this.meetTime.bind(this);
     this.isHidden = this.isHidden.bind(this);
   }
-
 
   changeMidlJourneyType(type) {
     this.setState({ midLJourneyType: type });
@@ -87,12 +86,12 @@ class Main extends React.Component {
     });
   }
 
-  meetTime(datetime){
-    this.setState({meetTime: datetime})
+  meetTime(datetime) {
+    this.setState({ meetTime: datetime });
   }
 
-  updateMidlArea = (midlArea) => {
-    this.setState( {midlArea: midlArea});
+  updateMidlArea = midlArea => {
+    this.setState({ midlArea: midlArea });
   };
 
   setMidlRequest(bol) {
@@ -161,46 +160,54 @@ class Main extends React.Component {
         "&radius=500&type=restaurant&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4";
       fetch(url)
         .then(res => res.json())
-        .then(res => this.setState({ places: this.categorisePlaces(res.results) }))
+        .then(res =>
+          this.setState({ places: this.categorisePlaces(res.results) })
+        );
     }
   }
 
-  categorisePlaces(places){
-    let bars = []
-    let restaurants = []
-    let lodgings = []
-    let miscellaneous = []
-    let cafes = []
-    let museums = []
+  categorisePlaces(places) {
+    let bars = [];
+    let restaurants = [];
+    let lodgings = [];
+    let miscellaneous = [];
+    let cafes = [];
+    let museums = [];
 
-      places.forEach(function(element){
-      if(element.types.includes("bar")){
-        bars.push(element)
+    places.forEach(function(element) {
+      if (element.types.includes("bar")) {
+        bars.push(element);
       }
-      if(element.types.includes("restaurant")) {
-        restaurants.push(element)
+      if (element.types.includes("restaurant")) {
+        restaurants.push(element);
       }
-      if(element.types.includes("lodging")){
-        lodgings.push(element)
+      if (element.types.includes("lodging")) {
+        lodgings.push(element);
       }
-      if(element.types.includes("cafe")){
-        cafes.push(element)
+      if (element.types.includes("cafe")) {
+        cafes.push(element);
       }
-      if(element.types.includes("museum")){
-        museums.push(element)
+      if (element.types.includes("museum")) {
+        museums.push(element);
       }
-      if(element.name !== "London"){
-        miscellaneous.push(element)
+      if (element.name !== "London") {
+        miscellaneous.push(element);
       }
-      })
+    });
 
-      let arrays = [bars, restaurants, lodgings, cafes, museums]
-      arrays.forEach(function(array) {
-        miscellaneous = miscellaneous.filter(n => !array.includes(n))
-      })
-    return {bars: bars, restaurants: restaurants, lodgings: lodgings, cafes: cafes, museums: museums, miscellaneous: miscellaneous}
+    let arrays = [bars, restaurants, lodgings, cafes, museums];
+    arrays.forEach(function(array) {
+      miscellaneous = miscellaneous.filter(n => !array.includes(n));
+    });
+    return {
+      bars: bars,
+      restaurants: restaurants,
+      lodgings: lodgings,
+      cafes: cafes,
+      museums: museums,
+      miscellaneous: miscellaneous
+    };
   }
-
 
   midlLocation() {
     return `lat: ${this.findXMidl()}, lng: ${this.findYMidl()}`;
@@ -261,16 +268,15 @@ class Main extends React.Component {
     if (this.state.midlMarker[0].name === 'Midl') {
       return ({
         visibility: "visible"
-      });
+      };
     } else {
-      return ({
+      return {
         visibility: "hidden"
-      })
+      };
     }
   }
 
   render() {
-    console.log()
     return (
       <div>
         <div className="locationFormContainer">

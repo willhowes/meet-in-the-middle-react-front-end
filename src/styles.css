@@ -9,7 +9,7 @@
   left: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .container {
@@ -78,8 +78,8 @@
 
 .greeting {
   margin-left: "10px";
-  font-family: 'Roboto Condensed', sans-serif;
-  padding: "5px"
+  font-family: "Roboto Condensed", sans-serif;
+  padding: "5px";
 }
 
 .transportButton {
@@ -88,7 +88,7 @@
 
 h2 {
   padding: 5px;
-  margin: 0px
+  margin: 0px;
 }
 
 .slider {
@@ -115,18 +115,18 @@ h2 {
 
 .NavBarContainer {
   top: 0px;
- position: absolute;
- width: 100%;
- height: 99px;
- right: 0px;
- border-bottom: 3px solid black;
+  position: absolute;
+  width: 100%;
+  height: 99px;
+  right: 0px;
+  border-bottom: 3px solid black;
 }
 
 .logo {
   height: 73px;
   position: absolute;
   left: 27px;
-  top: 14px
+  top: 14px;
 }
 
 .signUpContainer {
@@ -278,7 +278,7 @@ h2 {
   /* Safari */
   transition-duration: 0.4s;
   cursor: pointer;
-  outline:0;
+  outline: 0;
   box-shadow: inset 0px 1px 0px 0px #dcecfb;
   background-color: black;
   -moz-border-radius: 6px;
@@ -288,7 +288,7 @@ h2 {
   display: inline-block;
   cursor: pointer;
   color: #ffffff;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: 26px;
   font-weight: bold;
   color: #f3cad0;
@@ -307,8 +307,8 @@ h2 {
 .midlButton:active {
   position: relative;
   box-shadow: 0 0px #666;
-  border-color: #2196F3;
-  color: #2196F3;
+  border-color: #2196f3;
+  color: #2196f3;
   transform: translateY(5px);
 }
 .tab-list {
@@ -353,8 +353,21 @@ h2 {
   cursor: pointer;
 }
 
+.profileAvatar {
+  padding: 10px;
+  outline: none;
+  border: none;
+  position: absolute;
+  right: 6px;
+  border-radius: 50%;
+  height: 73px;
+  width: 73px;
+  top: 2px;
+  cursor: pointer;
+}
+
 .navBarButton:hover {
-  background-color: #ffebf8
+  background-color: #ffebf8;
 }
 
 .navBarButton:active {
@@ -364,7 +377,7 @@ h2 {
 }
 
 .mapContainer {
-  margin-top: 102px
+  margin-top: 102px;
 }
 
 .homeWorkButtons{

@@ -4,6 +4,7 @@ import axios from "axios";
 import HomeLocation from "./HomeLocation";
 import WorkLocation from "./WorkLocation";
 import SignUpAvatar from "./SignUpAvatar";
+import ProfileAvatar from "./ProfileAvatar";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class UserProfile extends React.Component {
   }
 
   toggleEdit() {
-    this.setState({isEditing: !this.state.isEditing})
+    this.setState({ isEditing: !this.state.isEditing });
   }
 
   onChange(e) {
@@ -80,11 +81,22 @@ class UserProfile extends React.Component {
               <center>
                 {" "}
                 <div className="signUpForm">
-                  <img className="formLogo" src="midl-logo.png" alt="Midl Logo" />
+                  <img
+                    className="formLogo"
+                    src="midl-logo.png"
+                    alt="Midl Logo"
+                  />
                   <div className="formHeading">Edit your account details</div>
-                  
-                  {<SignUpAvatar avatarBlob={this.state.avatar} avatarPath={this.props.currentUser.avatar_path} />}
-                  
+
+                  <div className="signUpAvatar">
+                    {
+                      <SignUpAvatar
+                        avatarBlob={this.state.avatar}
+                        avatarPath={this.props.currentUser.avatar_path}
+                      />
+                    }
+                  </div>
+
                   <input
                     name="avatar"
                     className="selectAvatar"

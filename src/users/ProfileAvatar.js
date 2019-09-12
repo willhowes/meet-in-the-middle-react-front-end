@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 
 const API_ENDPOINT = "http://localhost:3001";
 
-const SignUpAvatar = ({ avatarBlob, avatarPath }) => {
+const ProfileAvatar = ({ avatarBlob, avatarPath }) => {
   let avatarImage = null;
 
   if (avatarBlob) {
     // if `avatarBlob` (i.e. inputting a new file) create url from blob
     avatarImage = (
       <img
-        className="signUpAvatar"
+        className="profileAvatar"
         src={window.URL.createObjectURL(avatarBlob)}
         alt="Current user's avatar"
       />
@@ -19,7 +19,7 @@ const SignUpAvatar = ({ avatarBlob, avatarPath }) => {
     // else if user has `avatarPath` use that to preview stored image from backend API
     avatarImage = (
       <img
-        className="signUpAvatar"
+        className="profileAvatar"
         src={`${API_ENDPOINT}${avatarPath}`}
         alt="Current user's avatar"
       />
@@ -29,9 +29,9 @@ const SignUpAvatar = ({ avatarBlob, avatarPath }) => {
   return <div style={{ textAlign: "center" }}>{avatarImage}</div>;
 };
 
-SignUpAvatar.propTypes = {
+ProfileAvatar.propTypes = {
   avatarBlob: PropTypes.object,
   avatarPath: PropTypes.string
 };
 
-export default SignUpAvatar;
+export default ProfileAvatar;
