@@ -44,7 +44,6 @@ class JourneyTime extends React.Component {
   }
 
   requestBody(coords){
-    let customTime = this.props.meetTime
     let now = new Date()
     let formatted_date = now.toISOString()
 

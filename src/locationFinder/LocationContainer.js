@@ -4,7 +4,6 @@ import LocationForm from "./LocationForm.js"
 import FindMidlButton from "../buttons/FindMidlButton.js"
 import TransportTypeSelector from "./TransportTypeSelector.js"
 import FadeIn from 'react-fade-in';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
 class LocationContainer extends React.Component {
