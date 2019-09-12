@@ -28,7 +28,8 @@ class NavBar extends React.Component {
     this.setState(state => ({
       showUserProfile: !state.showUserProfile,
       showLogIn: false,
-      showSignUp: false
+      showSignUp: false,
+      showLogOut: false
     }));
   }
 
@@ -37,7 +38,8 @@ class NavBar extends React.Component {
     this.setState(state => ({
       showLogIn: !state.showLogIn,
       showSignUp: false,
-      showUserProfile: false
+      showUserProfile: false,
+      showLogOut: false
     }));
   }
 
@@ -46,7 +48,8 @@ class NavBar extends React.Component {
     this.setState(state => ({
       showSignUp: !state.showSignUp,
       showLogIn: false,
-      showUserProfile: false
+      showUserProfile: false,
+      showLogOut: false
     }));
   }
 
