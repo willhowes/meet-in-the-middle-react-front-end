@@ -4,7 +4,6 @@ import SignUp from "./SignUp";
 import UserProfile from "./UserProfile";
 import LogIn from "./LogIn";
 import LogOut from "./LogOut";
-import SignUpAvatar from "./SignUpAvatar";
 import ProfileAvatar from "./ProfileAvatar";
 
 class NavBar extends React.Component {
@@ -79,7 +78,7 @@ class NavBar extends React.Component {
           onClick={this._hidePopUps}
           alt="Midl Logo"
         />
-        {!this.props.currentUser ? (
+      {this.props.currentUser.name === '' ? (
           <button
             onClick={this._onSignUpButtonClick}
             id="sign_up_button"

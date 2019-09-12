@@ -264,11 +264,11 @@ class Main extends React.Component {
     });
   }
 
-  isHidden() {
-    if (this.state.midlMarker[0].name == "Midl") {
-      return {
+  isHidden(){
+    if (this.state.midlMarker[0].name === 'Midl') {
+      return ({
         visibility: "visible"
-      };
+      })
     } else {
       return {
         visibility: "hidden"
@@ -287,18 +287,13 @@ class Main extends React.Component {
             reset={this.reset}
             changeMidlJourneyType={this.changeMidlJourneyType}
             currentUser={this.props.currentUser}
+            meetTime={this.meetTime}
           />
-        </div>
-        <div>
-          <MidlLocation
-            markers={this.state.markers}
-            midlLocation={this.state.midlLocation}
-            places={this.state.places}
-            setMidlRequest={this.setMidlRequest}
-            midlArea={this.state.midlArea}
-          />
-        </div>
-        <div style={this.isHidden()} className="journeyTime">
+      </div>
+        <div
+          style={this.isHidden()}
+          className="journeyTime"
+          >
           <JourneyTime
             markers={this.state.markers}
             addMidlMarkerJourneyTime={this.addMidlMarkerJourneyTime}
@@ -307,18 +302,28 @@ class Main extends React.Component {
             setMidlRequest={this.setMidlRequest}
             journeyType={this.state.midLJourneyType}
             updateMidlArea={this.updateMidlArea}
-            meetTime={this.state.meetTime}
+            meetTime={this.meetTime}
           />
+        <div>
+            <MidlLocation
+              markers={this.state.markers}
+              midlLocation={this.state.midlLocation}
+              places={this.state.places}
+              setMidlRequest={this.setMidlRequest}
+              midlArea={this.state.midlArea}
+            />
+          </div>
         </div>
-        <div className="mapContainer">
-          <MapContainer
-            mapCenterLat={this.state.mapCenterLat}
-            mapCenterLng={this.state.mapCenterLng}
-            markers={this.state.markers}
-            midlMarker={this.state.midlMarker}
-          />
-        </div>
+      <div className="mapContainer">
+        <MapContainer
+          mapCenterLat={this.state.mapCenterLat}
+          mapCenterLng={this.state.mapCenterLng}
+          markers={this.state.markers}
+          midlMarker={this.state.midlMarker}
+          currentUser={this.props.currentUser}
+        />
       </div>
+    </div>
     );
   }
 }

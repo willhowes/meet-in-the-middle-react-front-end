@@ -14,7 +14,7 @@ class TransportTypeSelector extends React.Component {
 
   render() {
     return (
-      <div style={{ margin: 10, position:"relative", bottom:"32px", right:"20px"  }}>
+      <div style={{ margin: 20, marginTop: 30, position:"relative", bottom:"32px", right:"20px"  }}>
         <form>
           <label onClick={this.handleClick} className="container">
             <input style={{margin:"3px"}} type="radio" name="radio"/>

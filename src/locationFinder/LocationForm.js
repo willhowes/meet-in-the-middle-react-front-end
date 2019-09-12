@@ -8,7 +8,7 @@ class LocationForm extends React.Component {
     super(props);
 
     this.state = {
-      query: props.currentUser ? props.currentUser.home_location : ""
+      query: ''
     };
 
     this.handleHomeSubmit = this.handleHomeSubmit.bind(this);
@@ -16,6 +16,7 @@ class LocationForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.loadAutocomplete = this.loadAutocomplete.bind(this);
     this.getOptions = this.getOptions.bind(this);
+    this.favouritesButtons = this.favouritesButtons.bind(this);
   }
 
   handleSubmit(event) {
@@ -35,7 +36,6 @@ class LocationForm extends React.Component {
   }
 
   handleHomeSubmit(event) {
-    console.log(this.props.currentUser.home_location);
     this.setState({ query: this.props.currentUser.home_location });
     let address = this.props.currentUser.home_location.split(" ").join("+");
     let url =
@@ -53,7 +53,6 @@ class LocationForm extends React.Component {
   }
 
   handleWorkSubmit(event) {
-    console.log(this.props.currentUser.work_location);
     this.setState({ query: this.props.currentUser.work_location });
     let address = this.props.currentUser.work_location.split(" ").join("+");
     let url =
@@ -109,12 +108,25 @@ class LocationForm extends React.Component {
     }
   };
 
+  favouritesButtons(){
+    if (this.props.currentUser.name === '' || this.props.currentUser === null) {
+      return null
+    } else {
+      return (
+        <div><button className="homeWorkButtons" onClick={this.handleHomeSubmit}>Home</button>
+        <button className="homeWorkButtons" onClick={this.handleWorkSubmit}>Work</button></div>
+      )
+    }
+  }
+
   render() {
-    console.log("CURRENT USER", this.props.currentUser);
     return (
       <div className="slider">
         <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />
-        <p className="greeting">{this.props.greeting}</p>
+        <div >
+          <span style={{width: "180px", margin: 5, display: 'inline-block'}}className="greeting">{this.props.greeting}</span>
+          {this.favouritesButtons()}
+        </div>
         <input
           id={`address_text_box${this.props.formNum + 1}`}
           className="address_text_box"
@@ -129,8 +141,6 @@ class LocationForm extends React.Component {
             this.nameInput = input;
           }}
         />
-        <button onClick={this.handleHomeSubmit}>Home</button>
-        <button onClick={this.handleWorkSubmit}>Work</button>
       </div>
     );
   }

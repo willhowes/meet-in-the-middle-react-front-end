@@ -44,42 +44,32 @@ class LocationContainer extends React.Component {
     let formatted_date = formatted_now.toISOString().slice(0, -8);
     return (
       <div style={{ margin: 10 }}>
-        {Array(this.state.locationForms)
-          .fill()
-          .map(Math.random)
-          .map(function(item, i) {
-            if (i === 0) {
-              return (
-                <LocationForm
-                  key={i}
-                  formNum={i}
-                  placeholder={"Where are you?"}
-                  greeting={"First enter your location"}
-                  updateMarkers={this.props.updateMarkers}
-                  currentUser={this.props.currentUser}
-                />
-              );
-            } else {
-              return (
-                <LocationForm
-                  key={i}
-                  formNum={i}
-                  placeholder={"Enter another location"}
-                  greeting={"Then enter another location"}
-                  updateMarkers={this.props.updateMarkers}
-                  currentUser={this.props.currentUser}
-                />
-              );
-            }
-          }, this)}
-        <form
-          className={{
-            display: "flex",
-            margin: 20,
-            flexWrap: "wrap"
-          }}
-          noValidate
-        >
+        {Array(this.state.locationForms).fill().map(Math.random).map(function(item, i){
+          if (i === 0) {
+            return <LocationForm
+              key={i}
+              formNum={i}
+              placeholder={'Where are you?'}
+              greeting={'First enter your location'}
+              updateMarkers={this.props.updateMarkers}
+              currentUser={this.props.currentUser}
+              />
+          } else {
+            return <LocationForm
+              key={i}
+              formNum={i}
+              placeholder={'Enter another location'}
+              greeting={'Then enter another location'}
+              updateMarkers={this.props.updateMarkers}
+              currentUser={this.props.currentUser}
+              />
+          }
+        }, this)}
+        <form className={{
+          display: 'flex',
+          margin: 20,
+          flexWrap: 'wrap',
+        }} noValidate>
           <TextField
             id="datetime-local"
             label="Meet-up time "
@@ -93,10 +83,8 @@ class LocationContainer extends React.Component {
               shrink: true
             }}
           />
-        </form>{" "}
-        <TransportTypeSelector
-          changeMidlJourneyType={this.props.changeMidlJourneyType}
-        />
+        </form>
+        <TransportTypeSelector changeMidlJourneyType={this.props.changeMidlJourneyType} />
         {midlButton}
       </div>
     );

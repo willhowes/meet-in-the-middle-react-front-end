@@ -4,7 +4,6 @@ import axios from "axios";
 import HomeLocation from "./HomeLocation";
 import WorkLocation from "./WorkLocation";
 import SignUpAvatar from "./SignUpAvatar";
-import ProfileAvatar from "./ProfileAvatar";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -57,9 +56,7 @@ class UserProfile extends React.Component {
       }
     })
       .then(response => {
-        console.log("yay");
-        this.setState({ showForm: false });
-        console.log("success: ", response);
+        this.setState({ showForm:   false });
         this.props.updateCurrentUser(response.data);
       })
       .catch(error => {

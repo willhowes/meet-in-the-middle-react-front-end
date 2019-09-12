@@ -5,7 +5,7 @@
   border: 2px solid;
   position: absolute;
   z-index: 1;
-  top: 200px;
+  top: 160px;
   left: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -224,6 +224,8 @@ h2 {
 .midlLocationContainer {
   /* display: block; */
   padding: 0px;
+  font-family: "Roboto Condensed", sans-serif;
+
   background-color: white;
   position: absolute;
   z-index: 1;
@@ -231,11 +233,12 @@ h2 {
   border-radius: 20px;
   border: 2px solid;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 288px
 }
 
 .journeyTime {
   display: block;
-  top: 100px;
+  top: 150px;
   right: 20px;
   padding: 0px;
   background-color: white;
@@ -311,11 +314,16 @@ h2 {
   transform: translateY(5px);
 }
 .tab-list {
+  font-family: 'Roboto Condensed';
+  cursor: pointer;
   border-bottom: 1px solid #ccc;
   padding-left: 0;
 }
 
 .tab-list-item {
+  font-family: 'Roboto Condensed';
+
+  cursor: pointer;
   display: inline-block;
   list-style: none;
   margin-bottom: -1px;
@@ -323,6 +331,8 @@ h2 {
 }
 
 .tab-list-active {
+  font-family: 'Roboto Condensed';
+  cursor: pointer;
   background-color: white;
   border: solid #ccc;
   border-width: 1px 1px 0 1px;
@@ -356,6 +366,8 @@ h2 {
   width: 73px;
   top: 2px;
   cursor: pointer;
+  object-fit: cover;
+  object-position: 0 0;
 }
 
 .navBarButton:hover {
@@ -370,4 +382,29 @@ h2 {
 
 .mapContainer {
   margin-top: 102px;
+}
+
+.homeWorkButtons{
+  margin: 5px;
+  padding: 5px;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  font-family: "Roboto Condensed", sans-serif;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  -webkit-transition-duration: 0.2s;
+  /* Safari */
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.homeWorkButtons:hover {
+  background-color: #ffebf8;
+}
+
+.homeWorkButtons:active {
+  background-color: #ebc3dd;
+  transform: translateY(2px);
+  box-shadow: 0 0px #666;
 }

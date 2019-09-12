@@ -98,12 +98,29 @@ class JourneyTimes extends React.Component {
 
   render() {
     if (this.state.route !== false) {
-      console.log(this.state.route)
       return (
         <div>
-          <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.getGoogleMapsCompatibleOrigin()}&destination=${this.getGoogleMapsCompatibleDestination()}&travelmode=${this.getGoogleMapsCompatibleJourneyType()}`}><p id={`journeyTimeDisplay${this.props.num}`}style={{padding: 10}}>{this.getJourneyType()} time {this.props.num} -> Midl = {this.state.route.routes[0].legs[0].duration.text}</p></a>
-          <TransportTypeSelector num={this.props.num}
-          journeyType={this.props.journeyType} changeJourneyType={this.changeJourneyType}/>
+          <center>
+          <div style={{ fontFamily: 'Roboto Condensed', margin: 10}}>
+            <span
+              id={`journeyTimeDisplay${this.props.num}`}>
+              {this.props.num} -> Midl
+            </span>
+            <br></br>
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&origin=${this.getGoogleMapsCompatibleOrigin()}&destination=${this.getGoogleMapsCompatibleDestination()}&travelmode=${this.getGoogleMapsCompatibleJourneyType()}`}>
+              <span
+              id={`journeyTimeDisplay${this.props.num}`}>
+              {this.getJourneyType()} - {this.state.route.routes[0].legs[0].duration.text}
+              </span>
+            </a>
+          </div>
+        </center>
+          <TransportTypeSelector
+            num={this.props.num}
+            journeyType={this.props.journeyType}
+            changeJourneyType={this.changeJourneyType}
+          />
         </div>
       )
     } else {
