@@ -4,6 +4,8 @@ import SignUp from "./SignUp";
 import UserProfile from "./UserProfile";
 import LogIn from "./LogIn";
 import LogOut from "./LogOut";
+import SignUpAvatar from "./SignUpAvatar";
+import ProfileAvatar from "./ProfileAvatar";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -62,6 +64,7 @@ class NavBar extends React.Component {
     this.setState(state => ({ showSignUp: false }));
     this.setState(state => ({ showUserProfile: false }));
     this.setState(state => ({ showLogIn: false }));
+    this.setState(state => ({ showLogOut: false }));
   }
 
   render() {
@@ -78,7 +81,7 @@ class NavBar extends React.Component {
             onClick={this._onSignUpButtonClick}
             id="sign_up_button"
             className="navBarButton"
-            style={{ right: "160px" }}
+            style={{ right: "16px" }}
           >
             Sign up
           </button>
@@ -91,7 +94,7 @@ class NavBar extends React.Component {
           onClick={this._onButtonClickLogIn}
           id="log_in_button"
           className="navBarButton"
-          style={{ right: "300px" }}
+          style={{ right: "124px" }}
         >
           Log In
         </button>
@@ -104,9 +107,14 @@ class NavBar extends React.Component {
             <button
               onClick={this._onProfileButtonClick}
               id="profile_button"
-              className="navBarButton"
+              className="profileAvatar"
             >
-              Profile
+              {
+                <ProfileAvatar
+                  avatarBlob={this.state.avatar}
+                  avatarPath={this.props.currentUser.avatar_path}
+                />
+              }
             </button>
             {this.state.showUserProfile ? (
               <UserProfile
@@ -119,7 +127,7 @@ class NavBar extends React.Component {
               onClick={this._onButtonClickLogOut}
               id="log_out_button"
               className="navBarButton"
-              style={{ right: "300px" }}
+              style={{ right: "124px" }}
             >
               Log Out
             </button>
