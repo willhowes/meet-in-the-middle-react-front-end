@@ -316,6 +316,7 @@ class Main extends React.Component {
             mapCenterLng={this.state.mapCenterLng}
             markers={this.state.markers}
             midlMarker={this.state.midlMarker}
+            currentUser={this.props.currentUser}
           />
         </div>
       </div>

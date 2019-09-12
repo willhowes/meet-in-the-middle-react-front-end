@@ -6,10 +6,17 @@ const google = (window.google = window.google ? window.google : {});
 export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      icon: ""
+    };
     this.placeMarker = this.placeMarker.bind(this);
     this.getBounds = this.getBounds.bind(this);
     this.getCenter = this.getCenter.bind(this);
+    this.setIcon = this.setIcon.bind(this);
+  }
+
+  setIcon() {
+    this.setState(state => ({ icon: this.props.currentUser.avatar }));
   }
 
   placeMarker(marker, i = 0) {
@@ -22,6 +29,8 @@ export class MapContainer extends React.Component {
           lat: marker.position.lat,
           lng: marker.position.lng
         }}
+        {...this.props.currentUser && this.props.currentUser.id ? (
+        icon={this.setIcon()}) : null }
       ></Marker>
     );
   }
@@ -55,28 +64,28 @@ export class MapContainer extends React.Component {
 
   render() {
     return (
-        <Map
-          google={google}
-          style={{height: "87%"}}
-          zoom={18}
-          initialCenter={{
-            lat: this.props.mapCenterLat,
-            lng: this.props.mapCenterLng
-          }}
-          center={this.getCenter()}
-          bounds={this.props.markers.length > 0 ? this.getBounds() : undefined}
-          options={{
-            zoomControl: true,
-            mapTypeControl: false,
-            scaleControl: true,
-            streetViewControl: false,
-            rotateControl: false,
-            fullscreenControl: false
-          }}
-        >
-          {this.props.markers.map(this.placeMarker)}
-          {this.props.midlMarker.map(this.placeMarker)}
-        </Map>
+      <Map
+        google={google}
+        style={{ height: "87%" }}
+        zoom={18}
+        initialCenter={{
+          lat: this.props.mapCenterLat,
+          lng: this.props.mapCenterLng
+        }}
+        center={this.getCenter()}
+        bounds={this.props.markers.length > 0 ? this.getBounds() : undefined}
+        options={{
+          zoomControl: true,
+          mapTypeControl: false,
+          scaleControl: true,
+          streetViewControl: false,
+          rotateControl: false,
+          fullscreenControl: false
+        }}
+      >
+        {this.props.markers.map(this.placeMarker)}
+        {this.props.midlMarker.map(this.placeMarker)}
+      </Map>
     );
   }
 }
