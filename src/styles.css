@@ -224,6 +224,8 @@ h2 {
 .midlLocationContainer {
   /* display: block; */
   padding: 0px;
+  font-family: "Roboto Condensed", sans-serif;
+
   background-color: white;
   position: absolute;
   z-index: 1;

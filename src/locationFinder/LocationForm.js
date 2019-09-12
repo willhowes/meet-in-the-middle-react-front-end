@@ -36,7 +36,6 @@ class LocationForm extends React.Component {
   }
 
   handleHomeSubmit(event) {
-    console.log(this.props.currentUser.home_location);
     this.setState({ query: this.props.currentUser.home_location });
     let address = this.props.currentUser.home_location.split(" ").join("+");
     let url =
@@ -54,7 +53,6 @@ class LocationForm extends React.Component {
   }
 
   handleWorkSubmit(event) {
-    console.log(this.props.currentUser.work_location);
     this.setState({ query: this.props.currentUser.work_location });
     let address = this.props.currentUser.work_location.split(" ").join("+");
     let url =
@@ -111,9 +109,7 @@ class LocationForm extends React.Component {
   };
 
   favouritesButtons(){
-    console.log(this.props.currentUser)
-
-    if (this.props.currentUser === '') {
+    if (this.props.currentUser.name === '' || this.props.currentUser === null) {
       return null
     } else {
       return (
@@ -124,9 +120,6 @@ class LocationForm extends React.Component {
   }
 
   render() {
-    console.log(this.state.query)
-    console.log(this.props.currentUser)
-    console.log("CURRENT USER", this.props.currentUser);
     return (
       <div className="slider">
         <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />

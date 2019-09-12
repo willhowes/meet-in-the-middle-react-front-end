@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles.css";
 import NavBar from "./users/NavBar";
 import Main from "./Main";
@@ -7,12 +7,11 @@ class App extends React.Component {
   constructor(props) {
     super(props)
       this.state = {
-        currentUser: ''
+        currentUser: { name: ''}
       }
     }
 
   render() {
-    console.log(this.state.currentUser)
     return (
       <>
         <div className="NavBarContainer">

@@ -13,7 +13,38 @@ export class MapContainer extends React.Component {
   }
 
   placeMarker(marker, i = 0) {
-    return (
+    if (marker.name === "Midl") {
+      return (
+        <Marker
+          key={i}
+          title={marker.name}
+          name={marker.name}
+          position={{
+            lat: marker.position.lat,
+            lng: marker.position.lng
+          }}
+          icon={{
+            url: "https://i.ibb.co/SxTWgzc/riannelogo3.png",
+            scaledSize: new google.maps.Size(32,32)}
+          }
+        ></Marker>
+      )
+    } else if (i === 0) {
+      return (<Marker
+        key={i}
+        title={marker.name}
+        name={marker.name}
+        position={{
+          lat: marker.position.lat,
+          lng: marker.position.lng
+        }}
+        icon={{
+          url: "https://i.ibb.co/72QrcpH/location.png",
+          scaledSize: new google.maps.Size(32,32)}
+        }
+      ></Marker>)
+  } else {
+      return (
       <Marker
         key={i}
         title={marker.name}
@@ -22,8 +53,12 @@ export class MapContainer extends React.Component {
           lat: marker.position.lat,
           lng: marker.position.lng
         }}
+        icon={{
+          url: "https://i.ibb.co/9N03WvJ/location-1.png",
+          scaledSize: new google.maps.Size(32,32)}
+        }
       ></Marker>
-    );
+    )}
   }
 
   getBounds() {

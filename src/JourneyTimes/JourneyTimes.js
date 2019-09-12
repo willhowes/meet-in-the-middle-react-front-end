@@ -98,7 +98,6 @@ class JourneyTimes extends React.Component {
 
   render() {
     if (this.state.route !== false) {
-      console.log(this.state.route)
       return (
         <div>
           <center>

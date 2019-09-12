@@ -1,6 +1,4 @@
 import React from "react";
-import Script from "react-load-script";
-import PropTypes from "prop-types";
 import axios from "axios";
 
 class LogOut extends React.Component {
@@ -20,7 +18,6 @@ class LogOut extends React.Component {
 
   _onSelectLogOut(e) {
     e.preventDefault();
-    console.log("here i am");
     axios
       .delete("http://localhost:3001/sessions/delete")
       .then(response => {
@@ -30,8 +27,7 @@ class LogOut extends React.Component {
           showLogOut: false
         }));
       })
-      .then(response => this.props.updateCurrentUser(null))
-      .then(response => console.log(response.data))
+      .then(response => this.props.updateCurrentUser({ name: ''}))
       .catch(error => {});
   }
 
@@ -53,7 +49,7 @@ class LogOut extends React.Component {
               <center>
                 {" "}
                 <div className="signUpForm">
-                  <img className="formLogo" src="midl-logo.png" />
+                  <img alt="hello world" className="formLogo" src="midl-logo.png" />
                   <div className="formHeading">
                     Are you sure you would like to log out?
                   </div>
