@@ -60,7 +60,8 @@ class Main extends React.Component {
       this.state.markers !== nextState.markers ||
       this.state.findMidl !== nextState.findMidl ||
       this.state.midlMarker !== nextState.midlMarker ||
-      this.state.places !== nextState.places
+      this.state.places !== nextState.places ||
+      this.props.currentUser !== nextProps.currentUser
     ) {
       return true;
     } else {
@@ -262,7 +263,7 @@ class Main extends React.Component {
   }
 
   render() {
-    // USE THIS TO ACCESS HOME LOCATION OF USER FOR MARKER
+
     return (
       <div>
         <div className="journeyTime">
@@ -283,6 +284,7 @@ class Main extends React.Component {
             updateMarkers={this.updateMarkers}
             reset={this.reset}
             changeMidlJourneyType={this.changeMidlJourneyType}
+            currentUser={this.props.currentUser}
           />
           <div>
             <MidlLocation

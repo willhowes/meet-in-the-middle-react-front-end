@@ -162,7 +162,6 @@ h2 {
 }
 
 .formFillIn {
-  top: -11px;
   position: relative;
   border-radius: 10px;
   height: 35px;
@@ -186,8 +185,6 @@ h2 {
   height: 130px;
   margin: 10px;
   position: relative;
-  top: -30px;
-  left: 101px;
 }
 
 .selectAvatar {

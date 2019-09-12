@@ -76,7 +76,7 @@ class LogOut extends React.Component {
 
             </div>
         </center>
-        < /form>
+        </form>
       </div>
 
       :

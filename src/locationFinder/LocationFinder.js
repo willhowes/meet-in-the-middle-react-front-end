@@ -2,6 +2,7 @@ import React from "react";
 import LocationForm from "./LocationForm.js";
 import FindMidlButton from "../buttons/FindMidlButton.js";
 import TransportTypeSelector from "./TransportTypeSelector.js";
+import PropTypes from "prop-types";
 
 class LocationFinder extends React.Component {
   constructor(props) {
@@ -9,10 +10,6 @@ class LocationFinder extends React.Component {
     this.state = {
       locationForms: 2
     };
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
   }
 
   render() {
@@ -30,6 +27,7 @@ class LocationFinder extends React.Component {
                   placeholder={"Where are you?"}
                   greeting={"First enter your location"}
                   updateMarkers={this.props.updateMarkers}
+                  currentUser={this.props.currentUser}
                 />
               );
             } else {
@@ -40,6 +38,7 @@ class LocationFinder extends React.Component {
                   placeholder={"Enter another location"}
                   greeting={"Then enter another location"}
                   updateMarkers={this.props.updateMarkers}
+                  currentUser={this.props.currentUser}
                 />
               );
             }
@@ -52,5 +51,9 @@ class LocationFinder extends React.Component {
     );
   }
 }
+
+LocationFinder.propTypes = {
+  currentUser: PropTypes.object
+};
 
 export default LocationFinder;
