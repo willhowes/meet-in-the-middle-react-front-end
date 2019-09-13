@@ -49,7 +49,7 @@ class JourneyTimes extends React.Component {
   getUrl(){
     let origin = "origin=" + this.props.marker.position.lat + ',' + this.props.marker.position.lng
     let destination = "&destination=" + this.props.midlMarker[0].position.lat + ',' + this.props.midlMarker[0].position.lng
-    let key = "&key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4"
+    let key = "&key=AIzaSyCAtlUmx3Wezl2aIkYlidgxT__4S7mKbMc"
     let mode = `&mode=${this.state.journeyType}`
     return "https://maps.googleapis.com/maps/api/directions/json?" + origin + destination + key + mode
   }

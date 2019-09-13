@@ -24,7 +24,7 @@ class LocationForm extends React.Component {
     let url =
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
       address +
-      "+CA&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
+      "+CA&key=AIzaSyCAtlUmx3Wezl2aIkYlidgxT__4S7mKbMc";
     fetch(url)
       .then(json => json.json())
       .then(response =>
@@ -41,7 +41,7 @@ class LocationForm extends React.Component {
     let url =
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
       address +
-      "+CA&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
+      "+CA&key=AIzaSyCAtlUmx3Wezl2aIkYlidgxT__4S7mKbMc";
     fetch(url)
       .then(json => json.json())
       .then(response =>
@@ -58,7 +58,7 @@ class LocationForm extends React.Component {
     let url =
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
       address +
-      "+CA&key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg";
+      "+CA&key=AIzaSyCAtlUmx3Wezl2aIkYlidgxT__4S7mKbMc";
     fetch(url)
       .then(json => json.json())
       .then(response =>
