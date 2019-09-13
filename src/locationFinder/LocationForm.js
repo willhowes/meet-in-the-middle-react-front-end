@@ -109,7 +109,7 @@ class LocationForm extends React.Component {
   };
 
   favouritesButtons(){
-    if (this.props.currentUser.name === '' || this.props.currentUser === null) {
+    if (this.props.currentUser.name === '' || this.props.currentUser === null || this.props.currentUser.home_location === null || this.props.currentUser.work_location === null ) {
       return null
     } else {
       return (

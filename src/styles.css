@@ -367,7 +367,7 @@ h2 {
   top: 2px;
   cursor: pointer;
   object-fit: cover;
-  object-position: 0 0;
+  object-position: 0 50%;
 }
 
 .navBarButton:hover {
