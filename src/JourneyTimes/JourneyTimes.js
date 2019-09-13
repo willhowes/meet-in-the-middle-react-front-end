@@ -108,7 +108,7 @@ class JourneyTimes extends React.Component {
             </span>
             <br></br>
             <a
-              href={`https://www.google.com/maps/dir/?api=1&origin=${this.getGoogleMapsCompatibleOrigin()}&destination=${this.getGoogleMapsCompatibleDestination()}&travelmode=${this.getGoogleMapsCompatibleJourneyType()}`}>
+              href={`https://www.google.com/maps/dir/?api=1&origin=${this.getGoogleMapsCompatibleOrigin()}&destination=${this.getGoogleMapsCompatibleDestination()}&travelmode=${this.getGoogleMapsCompatibleJourneyType()}`} target="_blank">
               <span
               id={`journeyTimeDisplay${this.props.num}`}>
               {this.getJourneyType()} - {this.state.route.routes[0].legs[0].duration.text}

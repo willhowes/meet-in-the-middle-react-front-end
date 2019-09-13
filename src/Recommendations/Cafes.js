@@ -15,7 +15,7 @@ class Cafes extends React.Component {
         return <div key={i}>
                   <Card style={{ width: '18rem' }}>
                     <Card.Body>
-                      <Card.Title><Card.Link style={linkStyle} href={`https://www.google.com/search?q=${place.name}+${place.vicinity}`}>{place.name}</Card.Link></Card.Title>
+                      <Card.Title><Card.Link style={linkStyle} href={`https://www.google.com/search?q=${place.name}+${place.vicinity}`} target="_blank">{place.name}</Card.Link></Card.Title>
                     </Card.Body>
                     <ListGroup className="list-group-flush">
                       <ListGroupItem style={listStyle}>{`${place.rating} ${'★'.repeat(Math.round(place.rating))} (${place.user_ratings_total})`}</ListGroupItem>
