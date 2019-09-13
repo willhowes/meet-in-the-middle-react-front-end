@@ -109,7 +109,7 @@ class LocationForm extends React.Component {
   };
 
   favouritesButtons(){
-    if (this.props.currentUser.name === '' || this.props.currentUser === null) {
+    if (this.props.currentUser.name === '' || this.props.currentUser === null || this.props.currentUser.home_location === null || this.props.currentUser.work_location === null ) {
       return null
     } else {
       return (
@@ -120,6 +120,7 @@ class LocationForm extends React.Component {
   }
 
   render() {
+    console.log(this.props.currentUser)
     return (
       <div className="slider">
         <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyDkqVxDDu_TzV8SORSyM1rXVNP7qQfAGHg&libraries=places" />

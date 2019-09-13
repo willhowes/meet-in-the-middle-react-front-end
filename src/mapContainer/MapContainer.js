@@ -64,8 +64,12 @@ export class MapContainer extends React.Component {
   getBounds() {
     if (this.props.markers.length > 1) {
       var points = this.props.markers.map(function(marker, i) {
-        return { lat: marker.position.lat, lng: marker.position.lng };
-      });
+        if (marker.position.lat > this.props.markers[i+1]) {
+          return { lat: (marker.position.lat), lng: marker.position.lng * 0.4};
+        } else {
+          return { lat: (marker.position.lat), lng: marker.position.lng * 1.3};
+        }
+      }, this);
       var bounds = new this.props.google.maps.LatLngBounds();
       for (var i = 0; i < points.length; i++) {
         bounds.extend(points[i]);
@@ -93,7 +97,7 @@ export class MapContainer extends React.Component {
         <Map
           google={google}
           style={{height: "87%"}}
-          zoom={18}
+          zoom={12}
           initialCenter={{
             lat: this.props.mapCenterLat,
             lng: this.props.mapCenterLng
