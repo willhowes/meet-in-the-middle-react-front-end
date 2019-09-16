@@ -27,10 +27,7 @@ Locally:
  1. `git clone git@github.com:gennyallcroft/meet-in-the-middle-react-front-end.git`
  2. `cd meet-in-the-middle-react-front=end`
  3. `npm install`
- 4. `npm install --save google-maps-react`
- 5. `npm install --save form-data`
- 6. `npm install react-load-script`
- 7. `npm start`
+ 4. `npm start`
  
 #### Deployed:
 
