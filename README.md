@@ -31,7 +31,7 @@ Locally:
  
 #### Deployed:
 
- https://desolate-temple-24825.herokuapp.com/
+ https://tbmidl.herokuapp.com/
  
  ### How to run the tests:
  
