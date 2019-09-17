@@ -16,7 +16,7 @@
 Locally:
 #### Set up the backend Rails API in a terminal:
 
- 1. `git clone https://github.com/Timdavidcole/meet-in-the-middle-backend-api.git`  
+ 1. `git clone https://github.com/TBrockster/meet-in-the-middle-backend-api.git`  
  2. `bundle install`  
  3. `rails db:create`  
  4. `rails db:migrate`  
@@ -24,7 +24,7 @@ Locally:
  
  #### Set up the React front end:
  
- 1. `git clone git@github.com:gennyallcroft/meet-in-the-middle-react-front-end.git`
+ 1. `git clone git@github.com:TBrockster/meet-in-the-middle-react-front-end.git`
  2. `cd meet-in-the-middle-react-front=end`
  3. `npm install`
  4. `npm start`

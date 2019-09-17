@@ -171,7 +171,7 @@ class JourneyTime extends React.Component {
 
     let url = "https://maps.googleapis.com/maps/api/geocode/json?" +
               midlCoordinates +
-              "&key=AIzaSyCAtlUmx3Wezl2aIkYlidgxT__4S7mKbMc";
+              "&key=AIzaSyBcYmwLI8U0f8L_oCPzHAPkaT02q0P-4kk";
 
     fetch(url)
       .then(json => json.json())
