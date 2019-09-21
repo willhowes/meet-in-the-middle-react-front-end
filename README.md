@@ -5,7 +5,7 @@
 
 ### A [Makers](makers.tech) final project ft. Rianne, Genny, Richie, Tim, Toby and Will
 
-[![Build Status](https://travis-ci.com/tbrockster/meet-in-the-middle-react-front-end.svg?branch=master)](https://travis-ci.com/tbrockster/meet-in-the-middle-react-front-end)
+[![Build Status](https://travis-ci.com/willhowes/meet-in-the-middle-react-front-end.svg?branch=master)](https://travis-ci.com/willhowes/meet-in-the-middle-react-front-end)
 
 #### An app which allows the user to select the location of themself and a friend, then calculates a middle point between them to meet up based on their respective commute times and makes recommendations as to bars, restaurants and other attractions to visit.
 
@@ -21,49 +21,48 @@ Locally:
  3. `rails db:create`  
  4. `rails db:migrate`  
  5. `rails s -p 3001`  
- 
+
  #### Set up the React front end:
- 
- 1. `git clone git@github.com:TBrockster/meet-in-the-middle-react-front-end.git`
+
+ 1. `git clone git@github.com:willhowes/meet-in-the-middle-react-front-end.git`
  2. `cd meet-in-the-middle-react-front=end`
  3. `npm install`
  4. `npm start`
- 
+
 #### Deployed:
 
  https://tbmidl.herokuapp.com/
- 
+
  ### How to run the tests:
- 
+
  #### Backend
  1. `RSpec`
- 
+
  #### Front end
  1. `npm start`
  2. `npx open cypress`
- 
+
  ### Approach to the project:
- 
- 
+
+
 
  ### Tech stack:
- 
+
  Rails API  
  React  
  PostgreSQL  
- 
+
  Cypress  
  RSpec  
  Jest  
  Travis CI  
 
- 
+
 ### Troubleshooting  
 
 Should you have any trouble running the app in your browser, run the following in your terminal which will open a new Chrome browser:  
 ```open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security```  
 
- 
+
 ### Contribution  
- If you would like to contribute to this project, please submit a pull request at our [github page](https://github.com/gennyallcroft). 
- 
+ If you would like to contribute to this project, please submit a pull request at our [github page](https://github.com/willhowes).
