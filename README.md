@@ -31,7 +31,7 @@ Locally:
 
 #### Deployed:
 
- https://tbmidl.herokuapp.com/
+https://whowes-meet-in-the-midl.herokuapp.com/
 
  ### How to run the tests:
 
