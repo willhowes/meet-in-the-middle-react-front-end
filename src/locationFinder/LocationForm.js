@@ -24,7 +24,7 @@ class LocationForm extends React.Component {
     let url =
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
       address +
-      "+CA&key=AIzaSyBcYmwLI8U0f8L_oCPzHAPkaT02q0P-4kk";
+      "+CA&key=AIzaSyBtfqMF3gKW4w70BGZRfg3NfsXakHOSS9A";
     fetch(url)
       .then(json => json.json())
       .then(response =>
@@ -41,7 +41,7 @@ class LocationForm extends React.Component {
     let url =
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
       address +
-      "+CA&key=AIzaSyBcYmwLI8U0f8L_oCPzHAPkaT02q0P-4kk";
+      "+CA&key=AIzaSyBtfqMF3gKW4w70BGZRfg3NfsXakHOSS9A";
     fetch(url)
       .then(json => json.json())
       .then(response =>
@@ -58,7 +58,7 @@ class LocationForm extends React.Component {
     let url =
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
       address +
-      "+CA&key=AIzaSyBcYmwLI8U0f8L_oCPzHAPkaT02q0P-4kk";
+      "+CA&key=AIzaSyBtfqMF3gKW4w70BGZRfg3NfsXakHOSS9A";
     fetch(url)
       .then(json => json.json())
       .then(response =>
@@ -122,7 +122,7 @@ class LocationForm extends React.Component {
   render() {
     return (
       <div className="slider">
-        <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyBcYmwLI8U0f8L_oCPzHAPkaT02q0P-4kk&libraries=places" />
+        <Script url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyBtfqMF3gKW4w70BGZRfg3NfsXakHOSS9A&libraries=places" />
         <div >
           <span style={{width: "180px", margin: 5, display: 'inline-block'}}className="greeting">{this.props.greeting}</span>
           {this.favouritesButtons()}
