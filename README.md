@@ -16,7 +16,7 @@
 Locally:
 #### Set up the backend Rails API in a terminal:
 
- 1. `git clone https://github.com/TBrockster/meet-in-the-middle-backend-api.git`  
+ 1. `git clone git@github.com:willhowes/meet-in-the-middle-backend-api.git`  
  2. `bundle install`  
  3. `rails db:create`  
  4. `rails db:migrate`  
